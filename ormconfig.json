@@ -1,0 +1,25 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "root",
+  "password": "1234",
+  "database": "fub",
+  "synchronize": false,
+  "logging": true,
+  "logger": "file",
+  "entities": [
+    "src/modules/**/infra/typeorm/entities/*.ts"
+  ],
+  "migrations": [
+    "src/shared/infra/typeorm/migration/*.ts"
+  ],
+  "subscribers": [
+    "src/subscriber/**/*.ts"
+  ],
+  "cli": {
+    "entitiesDir": "src/modules/**/infra/typeorm/entities/*.ts",
+    "migrationsDir": "src/shared/infra/typeorm/migration/",
+    "subscribersDir": "src/subscriber"
+  }
+}
