@@ -11,6 +11,7 @@
   "author": "Matheus Dantas Ricardo, Vinicius Simizu, Vinicius Bortolloti",
   "license": "ISC",
   "dependencies": {
+    "@types/prettier": "^2.4.4",
     "celebrate": "^15.0.0",
     "express": "^4.17.1",
     "mysql": "^2.14.1",
