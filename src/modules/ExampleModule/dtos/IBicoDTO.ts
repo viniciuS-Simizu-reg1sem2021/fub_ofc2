@@ -1,4 +1,4 @@
-import { UsuarioEntity } from '../infra/typeorm/entities/UsuarioEntity'
+import UsuarioEntity from '../infra/typeorm/entities/UsuarioEntity'
 
 export default interface IBicoDTO {
   pk_id: string

@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn } from "typeorm";
 import IBicoDTO from "../../../dtos/IBicoDTO";
-import { InteressadoEntity } from './InteressadoEntity'
-import { UsuarioEntity } from './UsuarioEntity'
+import InteressadoEntity from './InteressadoEntity'
+import UsuarioEntity from './UsuarioEntity'
 
 
 @Entity({ name: "tb_bico" })

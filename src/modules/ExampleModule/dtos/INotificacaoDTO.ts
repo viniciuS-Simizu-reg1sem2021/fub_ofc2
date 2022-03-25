@@ -1,4 +1,4 @@
-import { UsuarioEntity } from '../infra/typeorm/entities/UsuarioEntity'
+import UsuarioEntity from '../infra/typeorm/entities/UsuarioEntity'
 
 export default interface INotificacaoDTO {
   fk_id_destinatario: UsuarioEntity

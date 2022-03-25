@@ -1,7 +1,7 @@
 import { Entity, ManyToOne } from "typeorm"
 import IInteressadoDTO from "../../../dtos/IInteressadoDTO"
-import { UsuarioEntity } from './UsuarioEntity'
-import { BicoEntity } from './BicoEntity'
+import UsuarioEntity from './UsuarioEntity'
+import BicoEntity from './BicoEntity'
 
 @Entity({ name: "tb_interesse" })
 export default class InteressadoEntity implements IInteressadoDTO {

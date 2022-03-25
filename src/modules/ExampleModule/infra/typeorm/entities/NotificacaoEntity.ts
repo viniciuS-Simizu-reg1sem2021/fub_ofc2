@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
 import INotificacaoDTO from "../../../dtos/INotificacaoDTO"
-import { UsuarioEntity } from './UsuarioEntity'
+import UsuarioEntity from './UsuarioEntity'
 
 
 @Entity({ name: "tb_notificacao" })

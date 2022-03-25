@@ -1,8 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import IUsuarioDTO from "../../../dtos/IUsuarioDTO";
-import { InteressadoEntity } from './InteressadoEntity'
-import { BicoEntity } from './BicoEntity'
-import { NotificacaoEntity } from './NotificacaoEntity'
+import InteressadoEntity from './InteressadoEntity'
+import BicoEntity from './BicoEntity'
+import NotificacaoEntity from './NotificacaoEntity'
 
 export type GeneroUsuario = "homem" | "mulher"
 
