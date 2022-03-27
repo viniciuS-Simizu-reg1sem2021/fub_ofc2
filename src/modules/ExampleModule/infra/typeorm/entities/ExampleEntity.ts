@@ -1,7 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import IExampleDTO from "../../../dtos/IExampleDTO";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({ name: "tb_example" })
+@Entity("tb_example")
 export default class ExampleEntity implements IExampleDTO {
   @PrimaryGeneratedColumn({ name: "id" })
   id: number;

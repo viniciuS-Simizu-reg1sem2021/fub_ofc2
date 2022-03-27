@@ -1,7 +1,7 @@
 import express from "express";
-import { createConnection } from "typeorm";
 import { errors } from "celebrate";
 import { mainRouter } from "./routes";
+import { createConnection } from "typeorm";
 
 const app = express();
 
