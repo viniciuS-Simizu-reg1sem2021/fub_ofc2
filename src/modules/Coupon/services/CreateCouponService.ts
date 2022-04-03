@@ -1,7 +1,7 @@
-import { inject, injectable } from "tsyringe";
-import CouponRepository from "../infra/typeorm/repositories/CouponRepository";
-import ICouponDTO from "../dtos/ICouponDTO";
-import CouponEntity from "../infra/typeorm/entities/CouponEntity";
+import { inject, injectable } from 'tsyringe'
+import CouponRepository from '../infra/typeorm/repositories/CouponRepository'
+import ICouponDTO from '../dtos/ICouponDTO'
+import CouponEntity from '../infra/typeorm/entities/CouponEntity'
 
 @injectable()
 export default class CreateCouponService {
@@ -10,6 +10,6 @@ export default class CreateCouponService {
   ) {}
 
   public async execute(data: ICouponDTO): Promise<CouponEntity> {
-    return this.couponRepository.create(data);
+    return this.couponRepository.create(data)
   }
 }

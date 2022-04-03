@@ -1,6 +1,6 @@
-import { inject, injectable } from "tsyringe";
-import CouponRepository from "../infra/typeorm/repositories/CouponRepository";
-import CouponEntity from "../infra/typeorm/entities/CouponEntity";
+import { inject, injectable } from 'tsyringe'
+import CouponRepository from '../infra/typeorm/repositories/CouponRepository'
+import CouponEntity from '../infra/typeorm/entities/CouponEntity'
 
 @injectable()
 export default class FindCouponService {
@@ -9,6 +9,6 @@ export default class FindCouponService {
   ) {}
 
   public async execute(id: number): Promise<CouponEntity | undefined> {
-    return this.couponRepository.find(id);
+    return this.couponRepository.find(id)
   }
 }

@@ -1,8 +1,8 @@
-import IDefaultStatusContractDTO from "../../../dtos/IDefaultStatusContractDTO";
+import IDefaultStatusContractDTO from '../../../dtos/IDefaultStatusContractDTO'
 
 export default class DefaultStatusContractEntity
   implements IDefaultStatusContractDTO
 {
-  id?: number;
-  defaultStatusContract: string;
+  id?: number
+  defaultStatusContract: string
 }

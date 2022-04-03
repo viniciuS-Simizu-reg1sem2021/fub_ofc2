@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \\\"Error: no test specified\\\" && exit 1",
     "build": "rimraf ./build && tsc",
-    "dev:server": "ts-node-dev -r tsconfig-paths/register --transpile-only --trace-warnings --inspect --ignore-watch node_modules src/shared/infra/http/server.ts"
+    "dev:server": "ts-node-dev -r tsconfig-paths/register --transpile-only --trace-warnings --inspect --ignore-watch node_modules src/shared/infra/http/server.ts",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "author": "Matheus Dantas Ricardo, Vinicius Simizu, Vinicius Bortolloti",
   "license": "ISC",
@@ -24,8 +25,8 @@
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/node": "^8.0.29",
-    "@typescript-eslint/eslint-plugin": "^5.16.0",
-    "@typescript-eslint/parser": "^5.16.0",
+    "@typescript-eslint/eslint-plugin": "^5.17.0",
+    "@typescript-eslint/parser": "^5.17.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.11.0",
     "eslint-config-airbnb-base": "^15.0.0",
