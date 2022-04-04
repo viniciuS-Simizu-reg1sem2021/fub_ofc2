@@ -1,25 +1,25 @@
 import { container, injectable } from 'tsyringe'
-import IExampleDTO from '../../../dtos/IExampleDTO'
+import IContractDTO from '../../../dtos/IContractDTO'
 import { NextFunction, Request, Response } from 'express'
-import ListExampleService from '../../../services/ListExampleService'
-import FindExampleService from '../../../services/FindExampleService'
-import CreateExampleService from '../../../services/CreateExampleService'
-import UpdateExampleService from '../../../services/UpdateExampleService'
-import DeleteExampleService from '../../../services/DeleteExampleService'
+import ListContractService from '../../../services/ListContractService'
+import FindContractService from '../../../services/FindContractService'
+import CreateContractService from '../../../services/CreateContractService'
+import UpdateContractService from '../../../services/UpdateContractService'
+import DeleteContractService from '../../../services/DeleteContractService'
 
 @injectable()
-export default class ExampleController {
+export default class ContractController {
   public async create(
     request: Request,
     response: Response,
     next: NextFunction
   ): Promise<void> {
     try {
+      const service = container.resolve(CreateContractService)
+
       const data = request.body
 
-      const service = container.resolve(CreateExampleService)
-
-      response.json(await service.execute(data as IExampleDTO))
+      response.json(await service.execute(data as IContractDTO))
     } catch (err) {
       next(err)
     }
@@ -31,7 +31,7 @@ export default class ExampleController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(ListExampleService)
+      const service = container.resolve(ListContractService)
 
       response.json(await service.execute())
     } catch (err) {
@@ -45,7 +45,7 @@ export default class ExampleController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(FindExampleService)
+      const service = container.resolve(FindContractService)
 
       const { id } = request.params
 
@@ -61,12 +61,12 @@ export default class ExampleController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(UpdateExampleService)
+      const service = container.resolve(UpdateContractService)
 
       const { id } = request.params
       const data = request.body
 
-      response.json(await service.execute(Number(id), data as IExampleDTO))
+      response.json(await service.execute(Number(id), data as IContractDTO))
     } catch (err) {
       next(err)
     }
@@ -78,7 +78,7 @@ export default class ExampleController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(DeleteExampleService)
+      const service = container.resolve(DeleteContractService)
 
       const { id } = request.params
 
