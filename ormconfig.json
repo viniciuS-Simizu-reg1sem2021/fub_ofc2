@@ -3,7 +3,7 @@
   "host": "localhost",
   "port": 3306,
   "username": "root",
-  "password": "1234",
+  "password": "ademiroMDR",
   "database": "doing_a_beak",
   "synchronize": false,
   "logging": true,
@@ -12,14 +12,14 @@
     "src/modules/**/infra/typeorm/entities/*.ts"
   ],
   "migrations": [
-    "src/shared/infra/typeorm/migration/*.ts"
+    "src/shared/infra/typeorm/migrations/*.ts"
   ],
   "subscribers": [
     "src/subscriber/**/*.ts"
   ],
   "cli": {
     "entitiesDir": "src/modules/**/infra/typeorm/entities/*.ts",
-    "migrationsDir": "src/shared/infra/typeorm/migration/",
+    "migrationsDir": "src/shared/infra/typeorm/migrations/",
     "subscribersDir": "src/subscriber"
   }
 }
