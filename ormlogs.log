@@ -10,3 +10,27 @@
 [2022-04-05T16:49:09.018Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity`
 [2022-04-05T16:49:12.659Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity`
 [2022-04-05T16:51:14.793Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity` WHERE `ExampleEntity`.`id` IN (?) -- PARAMETERS: [1]
+[2022-04-06T09:57:17.910Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity`
+[2022-04-06T09:57:33.310Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity`
+[2022-04-06T09:57:43.158Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity` WHERE `ExampleEntity`.`id` IN (?) -- PARAMETERS: [1]
+[2022-04-07T16:27:45.560Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity`
+[2022-04-07T16:27:49.410Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity` WHERE `ExampleEntity`.`id` IN (?) -- PARAMETERS: [1]
+[2022-04-07T16:28:53.782Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity` WHERE `ExampleEntity`.`id` IN (?) -- PARAMETERS: [1]
+[2022-04-07T16:30:34.058Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity`
+[2022-04-07T16:30:40.055Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity` WHERE `ExampleEntity`.`id` IN (?) -- PARAMETERS: [1]
+[2022-04-07T16:31:25.291Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity`
+[2022-04-07T16:31:29.248Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity` WHERE `ExampleEntity`.`id` IN (?) -- PARAMETERS: [1]
+[2022-04-07T16:32:47.885Z][QUERY]: START TRANSACTION
+[2022-04-07T16:32:47.891Z][QUERY]: INSERT INTO `tb_example`(`id`, `curso`, `name`) VALUES (DEFAULT, ?, ?) -- PARAMETERS: ["informatica","teste"]
+[2022-04-07T16:32:47.898Z][QUERY]: COMMIT
+[2022-04-07T16:32:55.787Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity`
+[2022-04-07T16:36:13.761Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity`
+[2022-04-07T16:36:33.143Z][QUERY]: UPDATE `tb_example` SET `curso` = ? WHERE `id` IN (?) -- PARAMETERS: ["edificacoes",1]
+[2022-04-07T16:36:37.986Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity` WHERE `ExampleEntity`.`id` IN (?) -- PARAMETERS: [1]
+[2022-04-07T16:36:43.458Z][QUERY]: DELETE FROM `tb_example` WHERE `id` IN (?) -- PARAMETERS: [1]
+[2022-04-07T16:36:46.974Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity` WHERE `ExampleEntity`.`id` IN (?) -- PARAMETERS: [1]
+[2022-04-07T16:36:48.136Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity`
+[2022-04-07T16:37:05.844Z][QUERY]: START TRANSACTION
+[2022-04-07T16:37:05.850Z][QUERY]: INSERT INTO `tb_example`(`id`, `curso`, `name`) VALUES (DEFAULT, ?, ?) -- PARAMETERS: ["edificacoes","theDantas"]
+[2022-04-07T16:37:05.857Z][QUERY]: COMMIT
+[2022-04-07T16:37:11.883Z][QUERY]: SELECT `ExampleEntity`.`id` AS `ExampleEntity_id`, `ExampleEntity`.`curso` AS `ExampleEntity_curso`, `ExampleEntity`.`name` AS `ExampleEntity_name` FROM `tb_example` `ExampleEntity`

@@ -2,10 +2,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
 import IUserDTO from '../../../dtos/IUserDTO'
+import DefaultCategoryEntity from '@modules/DefaultCategory/infra/typeorm/entities/DefaultCategoryEntity'
+import { JoinTable } from 'typeorm/browser'
+import DefaultRatingEntity from '@modules/DefaultRating/infra/typeorm/entities/DefaultRatingEntity'
 
 @Entity('users')
 export default class UserEntity implements IUserDTO {
@@ -23,6 +27,37 @@ export default class UserEntity implements IUserDTO {
 
   @Column({ name: 'balance' })
   balance: number
+
+  // @Column({ name: 'image_path' })
+  // imagePath: string
+
+  @ManyToMany(() => DefaultCategoryEntity)
+  @JoinTable({
+    name: 'aux_user_default_categories',
+    joinColumn: {
+      name: 'id_user',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'id_default_category',
+      referencedColumnName: 'id',
+    },
+  })
+  categories: DefaultCategoryEntity[]
+
+  @ManyToMany(() => DefaultRatingEntity)
+  @JoinTable({
+    name: 'aux_user_default_rating',
+    joinColumn: {
+      name: 'id_user',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'id_default_rating',
+      referencedColumnName: 'id',
+    },
+  })
+  ratings: DefaultRatingEntity[]
 
   @Column({ name: 'street' })
   street: string

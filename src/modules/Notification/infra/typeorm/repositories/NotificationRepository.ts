@@ -9,6 +9,6 @@ export default class NotificationRepository extends BaseRepository<
   NotificationEntity
 > {
   constructor() {
-    super()
+    super(NotificationEntity)
   }
 }

@@ -18,15 +18,15 @@ export default class NotificationEntity implements INotificationDTO {
 
   @ManyToOne(() => UserEntity)
   @JoinColumn({ referencedColumnName: 'id', name: 'id_employee' })
-  employee: Partial<IUserDTO>
+  employee: IUserDTO
 
   @ManyToOne(() => UserEntity)
   @JoinColumn({ referencedColumnName: 'id', name: 'id_employer' })
-  employer: Partial<IUserDTO>
+  employer: IUserDTO
 
   @ManyToOne(() => ContractEntity)
   @JoinColumn({ referencedColumnName: 'id', name: 'id_contract' })
-  contract: Partial<IContractDTO>
+  contract: IContractDTO
 
   @Column({ name: 'content' })
   content: string

@@ -3,8 +3,8 @@ import IContractDTO from '../../Contract/dtos/IContractDTO'
 
 export default interface INotificationDTO {
   id?: number
-  employee: Partial<IUserDTO>
-  employer: Partial<IUserDTO>
-  contract: Partial<IContractDTO>
+  employee: IUserDTO
+  employer: IUserDTO
+  contract: IContractDTO
   content: string
 }

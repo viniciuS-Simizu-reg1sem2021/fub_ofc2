@@ -2,7 +2,7 @@ import IDefaultRatingDTO from '../../DefaultRating/dtos/IDefaultRatingDTO'
 
 export default interface ICouponDTO {
   id?: number
-  ratingId: Partial<IDefaultRatingDTO>
+  ratingId: IDefaultRatingDTO
   value: number
   deadline: Date
   createdAt: Date

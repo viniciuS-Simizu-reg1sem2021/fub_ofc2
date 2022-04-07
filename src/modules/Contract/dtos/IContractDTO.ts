@@ -3,9 +3,9 @@ import IDefaultStatusContractDTO from '../../DefaultStatusContract/dtos/IDefault
 
 export default interface IContractDTO {
   id?: number
-  employee: Partial<IUserDTO>
-  employer: Partial<IUserDTO>
-  statusContract: Partial<IDefaultStatusContractDTO>
+  employee: IUserDTO
+  employer: IUserDTO
+  statusContract: IDefaultStatusContractDTO
   title: string
   description: string
   createdAt: Date

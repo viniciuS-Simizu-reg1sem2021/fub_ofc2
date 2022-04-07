@@ -9,6 +9,6 @@ export default class UserRepository extends BaseRepository<
   UserEntity
 > {
   constructor() {
-    super()
+    super(UserEntity)
   }
 }

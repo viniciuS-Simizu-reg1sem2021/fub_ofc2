@@ -17,7 +17,7 @@ export default class CouponEntity implements ICouponDTO {
 
   @ManyToOne(() => DefaultRatingEntity)
   @JoinColumn({ referencedColumnName: 'id', name: 'id_rating' })
-  ratingId: Partial<DefaultRatingEntity>
+  ratingId: DefaultRatingEntity
 
   @Column({ name: 'value' })
   value: number

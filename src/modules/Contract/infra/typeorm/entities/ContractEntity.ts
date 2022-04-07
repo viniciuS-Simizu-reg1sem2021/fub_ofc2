@@ -8,9 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
-import IUserDTO from '../../../../User/dtos/IUserDTO'
 import IContractDTO from '../../../dtos/IContractDTO'
-import IDefaultStatusContractDTO from '../../../../DefaultStatusContract/dtos/IDefaultStatusContractDTO'
 import UserEntity from '@modules/User/infra/typeorm/entities/UserEntity'
 import DefaultStatusContractEntity from '@modules/DefaultStatusContract/infra/typeorm/entities/DefaultStatusContractEntity'
 
@@ -21,18 +19,18 @@ export default class ContractEntity implements IContractDTO {
 
   @OneToOne(() => UserEntity)
   @JoinColumn({ referencedColumnName: 'id', name: 'id_employee' })
-  employee: Partial<IUserDTO>
+  employee: UserEntity
 
   @OneToOne(() => UserEntity)
   @JoinColumn({ referencedColumnName: 'id', name: 'id_employer' })
-  employer: Partial<IUserDTO>
+  employer: UserEntity
 
   @ManyToOne(() => DefaultStatusContractEntity)
   @JoinColumn({
     referencedColumnName: 'id',
     name: 'id_default_status_contract',
   })
-  statusContract: Partial<IDefaultStatusContractDTO>
+  statusContract: DefaultStatusContractEntity
 
   @Column({ name: 'title' })
   title: string

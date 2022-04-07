@@ -9,6 +9,6 @@ export default class CouponRepository extends BaseRepository<
   CouponEntity
 > {
   constructor() {
-    super()
+    super(CouponEntity)
   }
 }

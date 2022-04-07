@@ -9,6 +9,6 @@ export default class ContractRepository extends BaseRepository<
   ContractEntity
 > {
   constructor() {
-    super()
+    super(ContractEntity)
   }
 }
