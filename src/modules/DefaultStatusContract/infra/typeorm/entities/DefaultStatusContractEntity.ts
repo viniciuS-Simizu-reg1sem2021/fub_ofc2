@@ -9,5 +9,5 @@ export default class DefaultStatusContractEntity
   id?: number
 
   @Column({ name: 'status_contract' })
-  defaultStatusContract: string
+  statusContract: string
 }

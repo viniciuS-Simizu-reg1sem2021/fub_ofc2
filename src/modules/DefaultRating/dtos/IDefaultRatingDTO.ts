@@ -1,4 +1,4 @@
 export default interface IDefaultRatingDTO {
   id?: number
-  defaultRating: string
+  rating: string
 }

@@ -19,6 +19,9 @@ export default class UserEntity implements IUserDTO {
   @Column({ name: 'email' })
   email: string
 
+  @Column({ name: 'password' })
+  password: string
+
   @Column({ name: 'username' })
   username: string
 
@@ -28,12 +31,12 @@ export default class UserEntity implements IUserDTO {
   @Column({ name: 'balance' })
   balance: number
 
-  // @Column({ name: 'image_path' })
-  // imagePath: string
+  @Column({ name: 'image_path' })
+  imagePath: string
 
   @ManyToMany(() => DefaultCategoryEntity)
   @JoinTable({
-    name: 'aux_user_default_categories',
+    name: 'aux_users_default_categories',
     joinColumn: {
       name: 'id_user',
       referencedColumnName: 'id',
@@ -47,7 +50,7 @@ export default class UserEntity implements IUserDTO {
 
   @ManyToMany(() => DefaultRatingEntity)
   @JoinTable({
-    name: 'aux_user_default_rating',
+    name: 'aux_users_default_rating',
     joinColumn: {
       name: 'id_user',
       referencedColumnName: 'id',

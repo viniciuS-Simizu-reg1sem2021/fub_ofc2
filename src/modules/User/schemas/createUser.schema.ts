@@ -2,6 +2,7 @@ import { Joi } from 'celebrate'
 
 const createUserSchema = Joi.object({
   email: Joi.string().required(),
+  password: Joi.string().required(),
   username: Joi.string().required(),
   phone: Joi.string().required(),
   balance: Joi.number().default(0),

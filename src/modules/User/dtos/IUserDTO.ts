@@ -4,11 +4,11 @@ import IDefaultRatingDTO from '@modules/DefaultRating/dtos/IDefaultRatingDTO'
 export default interface IUserDTO {
   id?: number
   email: string
-  // password: string // TODO: verificar se a password é armanezada ou não no db
+  password: string
   username: string
   phone: string
   balance: number
-  // imagePath: string
+  imagePath: string
   categories: IDefaultCategoryDTO[]
   ratings: IDefaultRatingDTO[]
   street: string
