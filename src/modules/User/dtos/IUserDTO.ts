@@ -16,4 +16,5 @@ export default interface IUserDTO {
   state: string
   createdAt: Date
   updatedAt: Date
+  deletedAt: Date
 }

@@ -16,7 +16,7 @@
     "celebrate": "^15.0.0",
     "express": "^4.17.3",
     "mysql": "^2.18.1",
-    "reflect-metadata": "^0.1.10",
+    "reflect-metadata": "^0.1.13",
     "tsc-node": "^0.0.3",
     "tsconfig-paths": "^3.11.0",
     "tsyringe": "^4.6.0",

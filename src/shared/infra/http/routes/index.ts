@@ -2,13 +2,13 @@ import { Router } from 'express'
 import userRoutes from '../../../../modules/User/infra/http/routes/user.routes'
 import couponRoutes from '../../../../modules/Coupon/infra/http/routes/coupon.routes'
 import contractRoutes from '../../../../modules/Contract/infra/http/routes/contract.routes'
-import exampleRoutes from '../../../../modules/ExampleModule/infra/http/routes/example.routes'
+import notificationRoutes from '@modules/Notification/infra/http/routes/notification.routes'
 
 const mainRouter = Router()
 
-mainRouter.use('/contract', contractRoutes)
+mainRouter.use('/notification', notificationRoutes)
 
-mainRouter.use('/example', exampleRoutes)
+mainRouter.use('/contract', contractRoutes)
 
 mainRouter.use('/coupon', couponRoutes)
 

@@ -17,7 +17,7 @@ export default abstract class BaseRepository<Interface, Entity>
   }
 
   async delete(id: number): Promise<void> {
-    await this.repository.delete(id)
+    await this.repository.softDelete(id)
   }
 
   async find(id: number): Promise<Entity | undefined> {
@@ -25,7 +25,7 @@ export default abstract class BaseRepository<Interface, Entity>
   }
 
   async list(): Promise<Entity[]> {
-    return this.repository.find()
+    return this.repository.find({ loadRelationIds: true })
   }
 
   async update(id: number, data: Interface): Promise<UpdateResult> {

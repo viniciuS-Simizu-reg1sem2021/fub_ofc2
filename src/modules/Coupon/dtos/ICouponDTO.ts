@@ -6,5 +6,6 @@ export default interface ICouponDTO {
   value: number
   deadline: Date
   createdAt: Date
-  UpdatedAt: Date
+  updatedAt: Date
+  deletedAt: Date
 }

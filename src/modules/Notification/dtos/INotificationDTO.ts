@@ -7,4 +7,7 @@ export default interface INotificationDTO {
   employer: IUserDTO
   contract: IContractDTO
   content: string
+  createdAt: Date
+  updatedAt: Date
+  deletedAt: Date
 }

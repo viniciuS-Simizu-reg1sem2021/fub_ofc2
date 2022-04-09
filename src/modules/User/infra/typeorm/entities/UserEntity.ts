@@ -5,11 +5,12 @@ import {
   ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  JoinTable,
+  DeleteDateColumn,
 } from 'typeorm'
 import IUserDTO from '../../../dtos/IUserDTO'
-import DefaultCategoryEntity from '@modules/DefaultCategory/infra/typeorm/entities/DefaultCategoryEntity'
-import { JoinTable } from 'typeorm/browser'
-import DefaultRatingEntity from '@modules/DefaultRating/infra/typeorm/entities/DefaultRatingEntity'
+import DefaultCategoryEntity from '../../../../DefaultCategory/infra/typeorm/entities/DefaultCategoryEntity'
+import DefaultRatingEntity from '../../../../DefaultRating/infra/typeorm/entities/DefaultRatingEntity'
 
 @Entity('users')
 export default class UserEntity implements IUserDTO {
@@ -71,9 +72,12 @@ export default class UserEntity implements IUserDTO {
   @Column({ name: 'state' })
   state: string
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date
+
+  @DeleteDateColumn({ name: 'deleted_at' })
+  deletedAt: Date
 }

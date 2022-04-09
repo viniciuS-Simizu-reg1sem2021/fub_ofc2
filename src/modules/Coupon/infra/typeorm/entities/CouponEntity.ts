@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   JoinColumn,
   Entity,
+  DeleteDateColumn,
 } from 'typeorm'
 import ICouponDTO from '../../../dtos/ICouponDTO'
 import DefaultRatingEntity from '../../../../DefaultRating/infra/typeorm/entities/DefaultRatingEntity'
@@ -25,9 +26,12 @@ export default class CouponEntity implements ICouponDTO {
   @Column({ name: 'deadline' })
   deadline: Date
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date
 
-  @UpdateDateColumn()
-  UpdatedAt: Date
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date
+
+  @DeleteDateColumn({ name: 'deleted_at' })
+  deletedAt: Date
 }

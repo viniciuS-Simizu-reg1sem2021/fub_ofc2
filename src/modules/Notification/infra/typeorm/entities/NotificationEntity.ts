@@ -1,9 +1,12 @@
 import {
   Column,
+  CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm'
 import IUserDTO from '../../../../User/dtos/IUserDTO'
 import INotificationDTO from '../../../dtos/INotificationDTO'
@@ -30,4 +33,13 @@ export default class NotificationEntity implements INotificationDTO {
 
   @Column({ name: 'content' })
   content: string
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date
+
+  @DeleteDateColumn({ name: 'deleted_at' })
+  deletedAt: Date
 }

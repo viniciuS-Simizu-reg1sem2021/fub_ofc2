@@ -10,4 +10,5 @@ export default interface IContractDTO {
   description: string
   createdAt: Date
   updatedAt: Date
+  deletedAt: Date
 }
