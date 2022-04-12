@@ -6,7 +6,6 @@ const createUserSchema = Joi.object({
   username: Joi.string().required(),
   phone: Joi.string().required(),
   balance: Joi.number().default(0),
-  imagePath: Joi.string().optional(),
   categories: Joi.array()
     .items(Joi.object({ id: Joi.number().required() }))
     .min(1),

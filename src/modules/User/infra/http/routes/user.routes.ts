@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import uploads from '@config/upload'
 import { celebrate, Segments } from 'celebrate'
 import UserController from '../controllers/UserController'
 import createUserSchema from '../../../schemas/createUser.schema'
@@ -9,6 +10,7 @@ const userController = new UserController()
 
 userRouter.post(
   '',
+  uploads.single('profilePicture'),
   [celebrate({ [Segments.BODY]: createUserSchema }, { abortEarly: false })],
   userController.create
 )
@@ -19,6 +21,7 @@ userRouter.get('/:id', userController.find)
 
 userRouter.put(
   '/:id',
+  uploads.single('profilePicture'),
   [celebrate({ [Segments.BODY]: updateUserSchema }, { abortEarly: false })],
   userController.update
 )
