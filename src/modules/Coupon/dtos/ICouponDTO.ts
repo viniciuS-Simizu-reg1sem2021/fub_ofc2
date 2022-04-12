@@ -1,10 +1,11 @@
-import IDefaultRatingDTO from "../../DefaultRating/dtos/IDefaultRatingDTO";
+import IDefaultRatingDTO from '../../DefaultRating/dtos/IDefaultRatingDTO'
 
 export default interface ICouponDTO {
-  id?: number;
-  ratingId: Partial<IDefaultRatingDTO>;
-  value: number;
-  deadline: Date;
-  createdAt: Date;
-  UpdatedAt: Date;
+  id?: number
+  ratingId: IDefaultRatingDTO
+  value: number
+  deadline: Date
+  createdAt: Date
+  updatedAt: Date
+  deletedAt: Date
 }

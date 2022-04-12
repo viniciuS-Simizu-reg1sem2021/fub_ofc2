@@ -1,4 +1,4 @@
 export default interface IDefaultStatusContractDTO {
-  id?: number;
-  defaultStatusContract: string;
+  id?: number
+  statusContract: string
 }

@@ -1,7 +1,7 @@
-import { inject, injectable } from "tsyringe";
-import CouponRepository from "../infra/typeorm/repositories/CouponRepository";
-import ICouponDTO from "../dtos/ICouponDTO";
-import { UpdateResult } from "typeorm";
+import { inject, injectable } from 'tsyringe'
+import CouponRepository from '../infra/typeorm/repositories/CouponRepository'
+import ICouponDTO from '../dtos/ICouponDTO'
+import { UpdateResult } from 'typeorm'
 
 @injectable()
 export default class UpdateCouponService {
@@ -10,6 +10,6 @@ export default class UpdateCouponService {
   ) {}
 
   public async execute(id: number, data: ICouponDTO): Promise<UpdateResult> {
-    return this.couponRepository.update(id, data);
+    return this.couponRepository.update(id, data)
   }
 }

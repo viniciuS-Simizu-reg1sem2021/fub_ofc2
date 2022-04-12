@@ -1,8 +1,17 @@
-import { Router } from "express";
-import exampleRoutes from "../../../../modules/ExampleModule/infra/http/routes/example.routes";
+import { Router } from 'express'
+import userRoutes from '../../../../modules/User/infra/http/routes/user.routes'
+import couponRoutes from '../../../../modules/Coupon/infra/http/routes/coupon.routes'
+import contractRoutes from '../../../../modules/Contract/infra/http/routes/contract.routes'
+import notificationRoutes from '@modules/Notification/infra/http/routes/notification.routes'
 
-const mainRouter = Router();
+const mainRouter = Router()
 
-mainRouter.use("/example", exampleRoutes);
+mainRouter.use('/notification', notificationRoutes)
 
-export { mainRouter };
+mainRouter.use('/contract', contractRoutes)
+
+mainRouter.use('/coupon', couponRoutes)
+
+mainRouter.use('/user', userRoutes)
+
+export { mainRouter }

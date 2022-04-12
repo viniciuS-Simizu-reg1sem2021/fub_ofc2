@@ -1,5 +1,5 @@
-import { inject, injectable } from "tsyringe";
-import CouponRepository from "../infra/typeorm/repositories/CouponRepository";
+import { inject, injectable } from 'tsyringe'
+import CouponRepository from '../infra/typeorm/repositories/CouponRepository'
 
 @injectable()
 export default class DeleteCouponService {
@@ -8,6 +8,6 @@ export default class DeleteCouponService {
   ) {}
 
   public async execute(id: number): Promise<void> {
-    await this.couponRepository.delete(id);
+    await this.couponRepository.delete(id)
   }
 }
