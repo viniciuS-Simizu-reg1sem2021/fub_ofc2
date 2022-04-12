@@ -39,6 +39,9 @@ export default class ContractEntity implements IContractDTO {
   @Column({ name: 'description' })
   description: string
 
+  @Column({ name: 'is_paid' })
+  isPaid: boolean
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date
 

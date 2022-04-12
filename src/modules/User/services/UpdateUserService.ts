@@ -7,7 +7,18 @@ import UserRepository from '../infra/typeorm/repositories/UserRepository'
 export default class UpdateUserService {
   constructor(@inject(UserRepository) private userRepository: UserRepository) {}
 
-  public async execute(id: number, data: IUserDTO): Promise<UpdateResult> {
+  public async execute(
+    id: number,
+    data: IUserDTO,
+    img?: Express.Multer.File
+  ): Promise<UpdateResult> {
+    if (img) {
+      return this.userRepository.update(id, {
+        ...data,
+        imagePath: `${img.destination}${img.filename}`,
+      })
+    }
+
     return this.userRepository.update(id, data)
   }
 }

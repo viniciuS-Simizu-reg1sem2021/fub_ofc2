@@ -8,6 +8,7 @@ export default interface IContractDTO {
   statusContract: IDefaultStatusContractDTO
   title: string
   description: string
+  isPaid: boolean
   createdAt: Date
   updatedAt: Date
   deletedAt: Date

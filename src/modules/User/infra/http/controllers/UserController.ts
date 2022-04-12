@@ -18,8 +18,9 @@ export default class UserController {
       const service = container.resolve(CreateUserService)
 
       const data = request.body
+      const img = request.file
 
-      response.json(await service.execute(data as IUserDTO))
+      response.json(await service.execute(data as IUserDTO, img))
     } catch (err) {
       next(err)
     }
@@ -65,8 +66,9 @@ export default class UserController {
 
       const { id } = request.params
       const data = request.body
+      const img = request.file
 
-      response.json(await service.execute(Number(id), data as IUserDTO))
+      response.json(await service.execute(Number(id), data as IUserDTO, img))
     } catch (err) {
       next(err)
     }
