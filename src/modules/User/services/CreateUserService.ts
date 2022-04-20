@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 
+import { IUserDTO } from '@modules/User/dtos/IUserDTO';
 import { IUserRepository } from '@modules/User/repositories/IUserRepository';
 import { IEncoderProvider } from '@shared/providers/EncoderProvider/IEncoderProvider';
-import { IUserDTO } from '@modules/User/dtos/IUserDTO';
 
 @injectable()
 export class CreateUserService {

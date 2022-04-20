@@ -1,27 +1,28 @@
-import { Router } from 'express'
-import { celebrate, Segments } from 'celebrate'
-import CouponController from '../controllers/CouponController'
-import createCouponSchema from '../../../schemas/createCoupon.schema'
-import updateCouponSchema from '../../../schemas/updateCoupon.schema'
+import { Router } from 'express';
+import { celebrate, Segments } from 'celebrate';
 
-const couponRouter = Router()
-const couponController = new CouponController()
+import { createCouponSchema } from '@modules/Coupon/schemas/createCoupon.schema';
+import { updateCouponSchema } from '@modules/Coupon/schemas/updateCoupon.schema';
+import { CouponController } from '@modules/Coupon/infra/http/controllers/CouponController';
 
-couponRouter.post('', [
+const couponRoutes = Router();
+const couponController = new CouponController();
+
+couponRoutes.post('', [
   celebrate({ [Segments.BODY]: createCouponSchema }, { abortEarly: false }),
   couponController.create,
-])
+]);
 
-couponRouter.get('', couponController.list)
+couponRoutes.get('', couponController.list);
 
-couponRouter.get('/:id', couponController.find)
+couponRoutes.get('/:id', couponController.find);
 
-couponRouter.put(
+couponRoutes.put(
   '/:id',
   [celebrate({ [Segments.BODY]: updateCouponSchema }, { abortEarly: false })],
   couponController.update
-)
+);
 
-couponRouter.delete('/:id', couponController.delete)
+couponRoutes.delete('/:id', couponController.delete);
 
-export default couponRouter
+export { couponRoutes };

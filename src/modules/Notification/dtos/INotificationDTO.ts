@@ -1,13 +1,10 @@
-import { IUserDTO } from '../../User/dtos/IUserDTO';
-import IContractDTO from '../../Contract/dtos/IContractDTO';
+import { IBaseDTO } from '@shared/dtos/IBaseDTO';
+import { IUserDTO } from '@modules/User/dtos/IUserDTO';
+import { IContractDTO } from '@modules/Contract/dtos/IContractDTO';
 
-export default interface INotificationDTO {
-  id?: number;
+export interface INotificationDTO extends IBaseDTO {
   employee: IUserDTO;
   employer: IUserDTO;
   contract: IContractDTO;
   content: string;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt: Date;
 }

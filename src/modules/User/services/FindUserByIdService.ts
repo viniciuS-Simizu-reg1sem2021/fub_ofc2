@@ -4,7 +4,7 @@ import { IUserDTO } from '@modules/User/dtos/IUserDTO';
 import { IUserRepository } from '@modules/User/repositories/IUserRepository';
 
 @injectable()
-export class FindUserService {
+export class FindUserByIdService {
   constructor(
     @inject('UserRepository')
     private userRepository: IUserRepository

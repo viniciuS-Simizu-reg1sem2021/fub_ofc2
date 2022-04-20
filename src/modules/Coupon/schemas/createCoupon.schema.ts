@@ -1,8 +1,8 @@
-import { Joi } from 'celebrate'
+import { Joi } from 'celebrate';
 
 const createCouponSchema = Joi.object({
   value: Joi.number().required(),
   deadline: Joi.date().required(),
-})
+});
 
-export default createCouponSchema
+export { createCouponSchema };

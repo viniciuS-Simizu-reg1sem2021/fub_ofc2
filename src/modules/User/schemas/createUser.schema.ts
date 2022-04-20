@@ -1,4 +1,4 @@
-import { Joi } from 'celebrate'
+import { Joi } from 'celebrate';
 
 const createUserSchema = Joi.object({
   email: Joi.string().required(),
@@ -12,6 +12,6 @@ const createUserSchema = Joi.object({
   street: Joi.string().required(),
   district: Joi.string().required(),
   state: Joi.string().required(),
-})
+});
 
-export default createUserSchema
+export { createUserSchema };

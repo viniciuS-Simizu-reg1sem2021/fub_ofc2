@@ -1,4 +1,4 @@
-import { Joi } from 'celebrate'
+import { Joi } from 'celebrate';
 
 const createContractSchema = Joi.object({
   title: Joi.string().required(),
@@ -6,6 +6,6 @@ const createContractSchema = Joi.object({
   // TODO: REMOVER FUTURAMENTE
   employer: Joi.object({ id: Joi.number().required() }).required(),
   statusContract: Joi.object({ id: Joi.number().required() }).required(),
-})
+});
 
-export default createContractSchema
+export { createContractSchema };

@@ -1,8 +1,9 @@
 import { inject, injectable } from 'tsyringe';
+
 import { IUserRepository } from '@modules/User/repositories/IUserRepository';
 
 @injectable()
-export class DeleteUserService {
+export class SoftDeleteUserService {
   constructor(
     @inject('UserRepository')
     private userRepository: IUserRepository

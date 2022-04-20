@@ -1,4 +1,4 @@
-import { Joi } from 'celebrate'
+import { Joi } from 'celebrate';
 
 const updateUserSchema = Joi.object({
   phone: Joi.string().optional(),
@@ -9,6 +9,6 @@ const updateUserSchema = Joi.object({
   street: Joi.string().optional(),
   district: Joi.string().optional(),
   state: Joi.string().optional(),
-})
+});
 
-export default updateUserSchema
+export { updateUserSchema };

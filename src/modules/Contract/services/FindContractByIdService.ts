@@ -4,13 +4,19 @@ import { IContractDTO } from '@modules/Contract/dtos/IContractDTO';
 import { IContractRepository } from '@modules/Contract/repositories/IContractRepository';
 
 @injectable()
-export class CreateContractService {
+export class FindContractByIdService {
   constructor(
     @inject('ContractRepository')
     private contractRepository: IContractRepository
   ) {}
 
-  public async execute(data: IContractDTO): Promise<void> {
-    await this.contractRepository.create(data);
+  public async execute(id: number): Promise<IContractDTO> {
+    const contract = await this.contractRepository.findById(id);
+
+    if (!contract) {
+      throw new Error('Contract does not exist');
+    }
+
+    return contract;
   }
 }

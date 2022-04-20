@@ -1,14 +1,16 @@
-import { inject, injectable } from 'tsyringe'
-import CouponRepository from '../infra/typeorm/repositories/CouponRepository'
-import CouponEntity from '../infra/typeorm/entities/CouponEntity'
+import { inject, injectable } from 'tsyringe';
+
+import { ICouponDTO } from '@modules/Coupon/dtos/ICouponDTO';
+import { ICouponRepository } from '@modules/Coupon/repositories/ICouponRepository';
 
 @injectable()
-export default class ListCouponService {
+export class ListCouponService {
   constructor(
-    @inject(CouponRepository) private couponRepository: CouponRepository
+    @inject('CouponRepository')
+    private couponRepository: ICouponRepository
   ) {}
 
-  public async execute(): Promise<CouponEntity[]> {
-    return this.couponRepository.list()
+  public async execute(): Promise<ICouponDTO[]> {
+    return this.couponRepository.list();
   }
 }

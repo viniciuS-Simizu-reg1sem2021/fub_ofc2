@@ -1,28 +1,29 @@
-import { Router } from 'express'
-import { celebrate, Segments } from 'celebrate'
-import ContractController from '../controllers/ContractController'
-import updateContractSchema from '../../../schemas/updateContract.schema'
-import createContractSchema from '../../../schemas/createContract.schema'
+import { Router } from 'express';
+import { celebrate, Segments } from 'celebrate';
 
-const contractRouter = Router()
-const contractController = new ContractController()
+import { createContractSchema } from '@modules/Contract/schemas/createContract.schema';
+import { updateContractSchema } from '@modules/Contract/schemas/updateContract.schema';
+import { ContractController } from '@modules/Contract/infra/http/controllers/ContractController';
 
-contractRouter.post(
+const contractRoutes = Router();
+const contractController = new ContractController();
+
+contractRoutes.post(
   '',
   [celebrate({ [Segments.BODY]: createContractSchema }, { abortEarly: false })],
   contractController.create
-)
+);
 
-contractRouter.get('', contractController.list)
+contractRoutes.get('', contractController.list);
 
-contractRouter.get('/:id', contractController.find)
+contractRoutes.get('/:id', contractController.find);
 
-contractRouter.put(
+contractRoutes.put(
   '/:id',
   [celebrate({ [Segments.BODY]: updateContractSchema }, { abortEarly: false })],
   contractController.update
-)
+);
 
-contractRouter.delete('/:id', contractController.delete)
+contractRoutes.delete('/:id', contractController.delete);
 
-export default contractRouter
+export { contractRoutes };

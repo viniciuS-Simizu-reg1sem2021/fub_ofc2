@@ -1,27 +1,27 @@
-import { container, injectable } from 'tsyringe'
-import ICouponDTO from '../../../dtos/ICouponDTO'
-import { NextFunction, Request, Response } from 'express'
-import ListCouponService from '../../../services/ListCouponService'
-import FindCouponService from '../../../services/FindCouponService'
-import UpdateCouponService from '../../../services/UpdateCouponService'
-import DeleteCouponService from '../../../services/DeleteCouponService'
-import CreateCouponService from '../../../services/CreateCouponService'
+import { container, injectable } from 'tsyringe';
+import { NextFunction, Request, Response } from 'express';
+
+import { ListCouponService } from '@modules/Coupon/services/ListCouponService';
+import { CreateCouponService } from '@modules/Coupon/services/CreateCouponService';
+import { UpdateCouponService } from '@modules/Coupon/services/UpdateCouponService';
+import { FindCouponByIdService } from '@modules/Coupon/services/FindCouponByIdService';
+import { SoftDeleteCouponService } from '@modules/Coupon/services/SoftDeleteCouponService';
 
 @injectable()
-export default class CouponController {
+export class CouponController {
   public async create(
     request: Request,
     response: Response,
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(CreateCouponService)
+      const service = container.resolve(CreateCouponService);
 
-      const data = request.body
+      const data = request.body;
 
-      response.json(await service.execute(data as ICouponDTO))
+      response.json(await service.execute(data));
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
 
@@ -31,11 +31,11 @@ export default class CouponController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(ListCouponService)
+      const service = container.resolve(ListCouponService);
 
-      response.json(await service.execute())
+      response.json(await service.execute());
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
 
@@ -45,13 +45,13 @@ export default class CouponController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(FindCouponService)
+      const service = container.resolve(FindCouponByIdService);
 
-      const { id } = request.params
+      const { id } = request.params;
 
-      response.json(await service.execute(Number(id)))
+      response.json(await service.execute(Number(id)));
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
 
@@ -61,14 +61,14 @@ export default class CouponController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(UpdateCouponService)
+      const service = container.resolve(UpdateCouponService);
 
-      const { id } = request.params
-      const data = request.body
+      const { id } = request.params;
+      const data = request.body;
 
-      response.json(await service.execute(Number(id), data as ICouponDTO))
+      response.json(await service.execute(Number(id), data));
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
 
@@ -78,13 +78,13 @@ export default class CouponController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(DeleteCouponService)
+      const service = container.resolve(SoftDeleteCouponService);
 
-      const { id } = request.params
+      const { id } = request.params;
 
-      response.json(await service.execute(Number(id)))
+      response.json(await service.execute(Number(id)));
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
 }

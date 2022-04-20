@@ -2,14 +2,14 @@ import { container, injectable } from 'tsyringe';
 import { NextFunction, Request, Response } from 'express';
 
 import { ListUserService } from '@modules/User/services/ListUserService';
-import { FindUserService } from '@modules/User/services/FindUserService';
 import { LoginUserService } from '@modules/User/services/LoginUserService';
 import { UpdateUserService } from '@modules/User/services/UpdateUserService';
-import { DeleteUserService } from '@modules/User/services/DeleteUserService';
 import { CreateUserService } from '@modules/User/services/CreateUserService';
+import { FindUserByIdService } from '@modules/User/services/FindUserByIdService';
+import { SoftDeleteUserService } from '@modules/User/services/SoftDeleteUserService';
 
 @injectable()
-export default class UserController {
+export class UserController {
   public async create(
     request: Request,
     response: Response,
@@ -63,7 +63,7 @@ export default class UserController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(FindUserService);
+      const service = container.resolve(FindUserByIdService);
 
       const { id } = request.params;
 
@@ -97,7 +97,7 @@ export default class UserController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(DeleteUserService);
+      const service = container.resolve(SoftDeleteUserService);
 
       const { id } = request.params;
 

@@ -1,23 +1,26 @@
 import { injectable } from 'tsyringe';
 import { getRepository, Repository } from 'typeorm';
 
-import { IUserDTO } from '@modules/User/dtos/IUserDTO';
-import UserEntity from '@modules/User/infra/typeorm/entities/UserEntity';
+import { UserEntity } from '@modules/User/infra/typeorm/entities/UserEntity';
 import { IUserRepository } from '@modules/User/repositories/IUserRepository';
 
 @injectable()
-export default class UserRepository implements IUserRepository {
+export class UserRepository implements IUserRepository {
   private repository: Repository<UserEntity>;
 
   constructor() {
     this.repository = getRepository(UserEntity);
   }
 
-  async list(): Promise<IUserDTO[]> {
+  async create(data: UserEntity): Promise<void> {
+    await this.repository.save(await this.repository.create(data));
+  }
+
+  async list(): Promise<UserEntity[]> {
     return this.repository.find();
   }
 
-  async findbyId(id: number): Promise<IUserDTO | undefined> {
+  async findbyId(id: number): Promise<UserEntity | undefined> {
     return this.repository.findOne(id);
   }
 
@@ -31,10 +34,6 @@ export default class UserRepository implements IUserRepository {
 
   async softDelete(id: number): Promise<void> {
     await this.repository.softDelete(id);
-  }
-
-  async create(data: UserEntity): Promise<void> {
-    await this.repository.save(this.repository.create(data));
   }
 
   async findByEmail(email: string): Promise<UserEntity | undefined> {

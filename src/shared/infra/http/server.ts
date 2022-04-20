@@ -1,5 +1,5 @@
-import { app } from '@shared/infra/http/app';
 import api from '@config/api';
+import { app } from '@shared/infra/http/app';
 
 const apiConfig = api();
 
@@ -8,6 +8,7 @@ app.listen(apiConfig.API_PORT, async () => {
 });
 
 /** TODO
+ *   CRIAR O .ENV E COLOCAR AS INFORMAÇÕES DO BANCO NELE
  *   PEGAR O EMPLOYER DIRETO NO CONTROLLER POR MEIO DO TOKEN
  *   O MESMO SE REPLICARÁ PARA OS SERVIÇOS EM QUE ADICIONAREMOS UM EMPLOYEE
  *   IMPLEMENTAR O JWT E SERVIÇOS DE AUTENTICAÇÃO

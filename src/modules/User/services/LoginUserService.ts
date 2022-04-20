@@ -28,7 +28,10 @@ export class LoginUserService {
       throw new Error('Credentials incorrect');
     }
 
-    const passwordMatch = this.encoderProvider.compare(password, user.password);
+    const passwordMatch = await this.encoderProvider.compare(
+      password,
+      user.password
+    );
 
     if (!passwordMatch) {
       throw new Error('Credentials incorrect');

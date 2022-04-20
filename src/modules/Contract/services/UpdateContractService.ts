@@ -1,15 +1,16 @@
-import { UpdateResult } from 'typeorm'
-import { inject, injectable } from 'tsyringe'
-import IContractDTO from '../dtos/IContractDTO'
-import ContractRepository from '../infra/typeorm/repositories/ContractRepository'
+import { inject, injectable } from 'tsyringe';
+
+import { IContractDTO } from '@modules/Contract/dtos/IContractDTO';
+import { IContractRepository } from '@modules/Contract/repositories/IContractRepository';
 
 @injectable()
-export default class UpdateContractService {
+export class UpdateContractService {
   constructor(
-    @inject(ContractRepository) private contractRepository: ContractRepository
+    @inject('ContractRepository')
+    private contractRepository: IContractRepository
   ) {}
 
-  public async execute(id: number, data: IContractDTO): Promise<UpdateResult> {
-    return this.contractRepository.update(id, data)
+  public async execute(id: number, data: Partial<IContractDTO>): Promise<void> {
+    await this.contractRepository.update(id, data);
   }
 }

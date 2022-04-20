@@ -1,11 +1,12 @@
 import { IUserDTO } from '@modules/User/dtos/IUserDTO';
 
 export interface IUserRepository {
+  // CQRS - Command Query Responsibility Segregation
+  create(data: IUserDTO): Promise<void>;
+
   list(): Promise<IUserDTO[]>;
 
   findbyId(id: number): Promise<IUserDTO | undefined>;
-
-  findByEmail(email: string): Promise<IUserDTO | undefined>;
 
   update(id: number, data: Partial<IUserDTO>): Promise<void>;
 
@@ -13,6 +14,5 @@ export interface IUserRepository {
 
   softDelete(id: number): Promise<void>;
 
-  // CQRS - Command Query Responsibility Segregation
-  create(data: IUserDTO): Promise<void>;
+  findByEmail(email: string): Promise<IUserDTO | undefined>;
 }

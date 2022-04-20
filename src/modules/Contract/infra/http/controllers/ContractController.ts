@@ -1,14 +1,14 @@
 import { container, injectable } from 'tsyringe';
-import IContractDTO from '../../../dtos/IContractDTO';
 import { NextFunction, Request, Response } from 'express';
-import ListContractService from '../../../services/ListContractService';
-import FindContractService from '../../../services/FindContractService';
-import CreateContractService from '../../../services/CreateContractService';
-import UpdateContractService from '../../../services/UpdateContractService';
-import DeleteContractService from '../../../services/DeleteContractService';
+
+import { ListContractService } from '@modules/Contract/services/ListContractService';
+import { UpdateContractService } from '@modules/Contract/services/UpdateContractService';
+import { CreateContractService } from '@modules/Contract/services/CreateContractService';
+import { FindContractByIdService } from '@modules/Contract/services/FindContractByIdService';
+import { SoftDeleteContractService } from '@modules/Contract/services/SoftDeleteContractService';
 
 @injectable()
-export default class ContractController {
+export class ContractController {
   public async create(
     request: Request,
     response: Response,
@@ -20,7 +20,7 @@ export default class ContractController {
 
       const data = request.body;
 
-      response.json(await service.execute(data as IContractDTO));
+      response.json(await service.execute(data));
     } catch (err) {
       next(err);
     }
@@ -46,7 +46,7 @@ export default class ContractController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(FindContractService);
+      const service = container.resolve(FindContractByIdService);
 
       const { id } = request.params;
 
@@ -67,7 +67,7 @@ export default class ContractController {
       const { id } = request.params;
       const data = request.body;
 
-      response.json(await service.execute(Number(id), data as IContractDTO));
+      response.json(await service.execute(Number(id), data));
     } catch (err) {
       next(err);
     }
@@ -79,7 +79,7 @@ export default class ContractController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(DeleteContractService);
+      const service = container.resolve(SoftDeleteContractService);
 
       const { id } = request.params;
 

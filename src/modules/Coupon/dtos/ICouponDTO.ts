@@ -1,11 +1,8 @@
-import IDefaultRatingDTO from '../../DefaultRating/dtos/IDefaultRatingDTO'
+import { IBaseDTO } from '@shared/dtos/IBaseDTO';
+import { IDefaultRatingDTO } from '@modules/DefaultRating/dtos/IDefaultRatingDTO';
 
-export default interface ICouponDTO {
-  id?: number
-  ratingId: IDefaultRatingDTO
-  value: number
-  deadline: Date
-  createdAt: Date
-  updatedAt: Date
-  deletedAt: Date
+export interface ICouponDTO extends IBaseDTO {
+  ratingId: IDefaultRatingDTO;
+  value: number;
+  deadline: Date;
 }

@@ -1,38 +1,39 @@
 import { Router } from 'express';
-import uploads from '@shared/infra/middlewares/upload';
 import { celebrate, Segments } from 'celebrate';
-import UserController from '../controllers/UserController';
-import loginSchema from '@modules/User/schemas/login.schema';
-import createUserSchema from '../../../schemas/createUser.schema';
-import updateUserSchema from '../../../schemas/updateUser.schema';
 
-const userRouter = Router();
+import { uploads } from '@shared/infra/middlewares/upload';
+import { loginSchema } from '@modules/User/schemas/login.schema';
+import { createUserSchema } from '@modules/User/schemas/createUser.schema';
+import { updateUserSchema } from '@modules/User/schemas/updateUser.schema';
+import { UserController } from '@modules/User/infra/http/controllers/UserController';
+
+const userRoutes = Router();
 const userController = new UserController();
 
-userRouter.post(
+userRoutes.post(
   '',
   uploads.single('profilePicture'),
   [celebrate({ [Segments.BODY]: createUserSchema }, { abortEarly: false })],
   userController.create
 );
 
-userRouter.post(
+userRoutes.post(
   '/login',
   [celebrate({ [Segments.BODY]: loginSchema }, { abortEarly: false })],
   userController.login
 );
 
-userRouter.get('', userController.list);
+userRoutes.get('', userController.list);
 
-userRouter.get('/:id', userController.find);
+userRoutes.get('/:id', userController.find);
 
-userRouter.put(
+userRoutes.put(
   '/:id',
   uploads.single('profilePicture'),
   [celebrate({ [Segments.BODY]: updateUserSchema }, { abortEarly: false })],
   userController.update
 );
 
-userRouter.delete('/:id', userController.delete);
+userRoutes.delete('/:id', userController.delete);
 
-export default userRouter;
+export { userRoutes };

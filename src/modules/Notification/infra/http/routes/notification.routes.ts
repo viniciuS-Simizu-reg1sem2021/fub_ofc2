@@ -1,28 +1,28 @@
-import { Router } from 'express'
-import { celebrate, Segments } from 'celebrate'
-import createNotificationSchema from '@modules/Notification/schemas/createNotification.schema'
-import NotificationController from '@modules/Notification/infra/http/controllers/NotificationController'
-import updateNotificationSchema from '@modules/Notification/schemas/updateNotification.schema'
+import { Router } from 'express';
+import { celebrate, Segments } from 'celebrate';
+import createNotificationSchema from '@modules/Notification/schemas/createNotification.schema';
+import NotificationController from '@modules/Notification/infra/http/controllers/NotificationController';
+import updateNotificationSchema from '@modules/Notification/schemas/updateNotification.schema';
 
-const notificationRouter = Router()
-const notificationController = new NotificationController()
+const notificationRoutes = Router();
+const notificationController = new NotificationController();
 
-notificationRouter.post(
+notificationRoutes.post(
   '',
   [celebrate({ [Segments.BODY]: createNotificationSchema })],
   notificationController.create
-)
+);
 
-notificationRouter.get('', notificationController.list)
+notificationRoutes.get('', notificationController.list);
 
-notificationRouter.get('/:id', notificationController.find)
+notificationRoutes.get('/:id', notificationController.find);
 
-notificationRouter.put(
+notificationRoutes.put(
   '/:id',
   [celebrate({ [Segments.BODY]: updateNotificationSchema })],
   notificationController.update
-)
+);
 
-notificationRouter.delete('/:id', notificationController.delete)
+notificationRoutes.delete('/:id', notificationController.delete);
 
-export default notificationRouter
+export { notificationRoutes };

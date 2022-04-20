@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
+import { NextFunction, Request, Response } from 'express';
 
 import auth from '@config/auth';
 import { IPayloadDTO } from '@modules/User/dtos/IPayloadDTO';

@@ -1,11 +1,11 @@
 import 'reflect-metadata';
 import express from 'express';
 import { errors } from 'celebrate';
-import { routes } from './routes';
 import { createConnection } from 'typeorm';
 
 import '@shared/container';
 import api from '@config/api';
+import { routes } from './routes';
 
 createConnection()
   .then(() => console.log('Database connected'))

@@ -1,14 +1,16 @@
-import { inject, injectable } from 'tsyringe'
-import ContractEntity from '../infra/typeorm/entities/ContractEntity'
-import ContractRepository from '../infra/typeorm/repositories/ContractRepository'
+import { inject, injectable } from 'tsyringe';
+
+import { IContractDTO } from '@modules/Contract/dtos/IContractDTO';
+import { IContractRepository } from '@modules/Contract/repositories/IContractRepository';
 
 @injectable()
-export default class ListContractService {
+export class ListContractService {
   constructor(
-    @inject(ContractRepository) private contractRepository: ContractRepository
+    @inject('ContractRepository')
+    private contractRepository: IContractRepository
   ) {}
 
-  public async execute(): Promise<ContractEntity[]> {
-    return this.contractRepository.list()
+  public async execute(): Promise<IContractDTO[]> {
+    return this.contractRepository.list();
   }
 }
