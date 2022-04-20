@@ -1,12 +1,15 @@
-import { inject, injectable } from 'tsyringe'
-import UserEntity from '../infra/typeorm/entities/UserEntity'
-import UserRepository from '../infra/typeorm/repositories/UserRepository'
+import { inject, injectable } from 'tsyringe';
+
+import { IUserDTO } from '@modules/User/dtos/IUserDTO';
+import { IUserRepository } from '@modules/User/repositories/IUserRepository';
 
 @injectable()
-export default class ListUserService {
-  constructor(@inject(UserRepository) private userRepository: UserRepository) {}
+export class ListUserService {
+  constructor(
+    @inject('UserRepository') private userRepository: IUserRepository
+  ) {}
 
-  public async execute(): Promise<UserEntity[]> {
-    return this.userRepository.list()
+  public async execute(): Promise<IUserDTO[]> {
+    return this.userRepository.list();
   }
 }

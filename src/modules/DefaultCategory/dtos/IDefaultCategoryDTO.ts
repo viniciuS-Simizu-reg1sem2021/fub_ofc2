@@ -1,4 +1,4 @@
-export default interface IDefaultCategoryDTO {
-  id?: number
-  category: string
+export interface IDefaultCategoryDTO {
+  id?: number;
+  category: string;
 }

@@ -1,39 +1,38 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
+  JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  JoinTable,
-  DeleteDateColumn,
-} from 'typeorm'
-import IUserDTO from '../../../dtos/IUserDTO'
-import DefaultCategoryEntity from '../../../../DefaultCategory/infra/typeorm/entities/DefaultCategoryEntity'
-import DefaultRatingEntity from '../../../../DefaultRating/infra/typeorm/entities/DefaultRatingEntity'
+} from 'typeorm';
+
+import { IUserDTO } from '@modules/User/dtos/IUserDTO';
+import { BaseEntity } from '@shared/infra/typeorm/entities/BaseEntity';
+import { DefaultCategoryEntity } from '@modules/DefaultCategory/infra/typeorm/entities/DefaultCategoryEntity';
+import { DefaultRatingEntity } from '@modules/DefaultRating/infra/typeorm/entities/DefaultRatingEntity';
 
 @Entity('users')
-export default class UserEntity implements IUserDTO {
+export class UserEntity extends BaseEntity implements IUserDTO {
   @PrimaryGeneratedColumn({ name: 'id_user' })
-  id?: number
+  id?: number;
 
   @Column({ name: 'email' })
-  email: string
+  email: string;
 
   @Column({ name: 'password' })
-  password: string
+  password: string;
 
   @Column({ name: 'username' })
-  username: string
+  username: string;
 
   @Column({ name: 'phone' })
-  phone: string
+  phone: string;
 
   @Column({ name: 'balance' })
-  balance: number
+  balance: number;
 
   @Column({ name: 'image_path' })
-  imagePath: string
+  imagePath: string;
 
   @ManyToMany(() => DefaultCategoryEntity)
   @JoinTable({
@@ -47,7 +46,7 @@ export default class UserEntity implements IUserDTO {
       referencedColumnName: 'id',
     },
   })
-  categories: DefaultCategoryEntity[]
+  categories: DefaultCategoryEntity[];
 
   @ManyToMany(() => DefaultRatingEntity)
   @JoinTable({
@@ -61,23 +60,14 @@ export default class UserEntity implements IUserDTO {
       referencedColumnName: 'id',
     },
   })
-  ratings: DefaultRatingEntity[]
+  ratings: DefaultRatingEntity[];
 
   @Column({ name: 'street' })
-  street: string
+  street: string;
 
   @Column({ name: 'district' })
-  district: string
+  district: string;
 
   @Column({ name: 'state' })
-  state: string
-
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date
-
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date
-
-  @DeleteDateColumn({ name: 'deleted_at' })
-  deletedAt: Date
+  state: string;
 }

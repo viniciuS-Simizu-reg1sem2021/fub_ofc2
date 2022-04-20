@@ -1,4 +1,4 @@
-export default interface IDefaultRatingDTO {
-  id?: number
-  rating: string
+export interface IDefaultRatingDTO {
+  id?: number;
+  rating: string;
 }

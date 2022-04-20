@@ -1,24 +1,29 @@
-import { UpdateResult } from 'typeorm'
-import IUserDTO from '../dtos/IUserDTO'
-import { inject, injectable } from 'tsyringe'
-import UserRepository from '../infra/typeorm/repositories/UserRepository'
+import { inject, injectable } from 'tsyringe';
+
+import { IUserDTO } from '@modules/User/dtos/IUserDTO';
+import { IUserRepository } from '@modules/User/repositories/IUserRepository';
 
 @injectable()
-export default class UpdateUserService {
-  constructor(@inject(UserRepository) private userRepository: UserRepository) {}
+export class UpdateUserService {
+  constructor(
+    @inject('UserRepository')
+    private userRepository: IUserRepository
+  ) {}
 
   public async execute(
     id: number,
-    data: IUserDTO,
+    data: Partial<IUserDTO>,
     img?: Express.Multer.File
-  ): Promise<UpdateResult> {
+  ): Promise<void> {
+    let imagePath: string | null = null;
+
     if (img) {
-      return this.userRepository.update(id, {
-        ...data,
-        imagePath: `${img.destination}${img.filename}`,
-      })
+      imagePath = `${img.destination}${img.filename}`;
     }
 
-    return this.userRepository.update(id, data)
+    return this.userRepository.update(id, {
+      ...data,
+      imagePath,
+    });
   }
 }

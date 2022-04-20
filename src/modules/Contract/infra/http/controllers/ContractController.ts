@@ -1,11 +1,11 @@
-import { container, injectable } from 'tsyringe'
-import IContractDTO from '../../../dtos/IContractDTO'
-import { NextFunction, Request, Response } from 'express'
-import ListContractService from '../../../services/ListContractService'
-import FindContractService from '../../../services/FindContractService'
-import CreateContractService from '../../../services/CreateContractService'
-import UpdateContractService from '../../../services/UpdateContractService'
-import DeleteContractService from '../../../services/DeleteContractService'
+import { container, injectable } from 'tsyringe';
+import IContractDTO from '../../../dtos/IContractDTO';
+import { NextFunction, Request, Response } from 'express';
+import ListContractService from '../../../services/ListContractService';
+import FindContractService from '../../../services/FindContractService';
+import CreateContractService from '../../../services/CreateContractService';
+import UpdateContractService from '../../../services/UpdateContractService';
+import DeleteContractService from '../../../services/DeleteContractService';
 
 @injectable()
 export default class ContractController {
@@ -15,13 +15,14 @@ export default class ContractController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(CreateContractService)
+      const { user } = request.token.sub;
+      const service = container.resolve(CreateContractService);
 
-      const data = request.body
+      const data = request.body;
 
-      response.json(await service.execute(data as IContractDTO))
+      response.json(await service.execute(data as IContractDTO));
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
 
@@ -31,11 +32,11 @@ export default class ContractController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(ListContractService)
+      const service = container.resolve(ListContractService);
 
-      response.json(await service.execute())
+      response.json(await service.execute());
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
 
@@ -45,13 +46,13 @@ export default class ContractController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(FindContractService)
+      const service = container.resolve(FindContractService);
 
-      const { id } = request.params
+      const { id } = request.params;
 
-      response.json(await service.execute(Number(id)))
+      response.json(await service.execute(Number(id)));
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
 
@@ -61,14 +62,14 @@ export default class ContractController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(UpdateContractService)
+      const service = container.resolve(UpdateContractService);
 
-      const { id } = request.params
-      const data = request.body
+      const { id } = request.params;
+      const data = request.body;
 
-      response.json(await service.execute(Number(id), data as IContractDTO))
+      response.json(await service.execute(Number(id), data as IContractDTO));
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
 
@@ -78,13 +79,13 @@ export default class ContractController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const service = container.resolve(DeleteContractService)
+      const service = container.resolve(DeleteContractService);
 
-      const { id } = request.params
+      const { id } = request.params;
 
-      response.json(await service.execute(Number(id)))
+      response.json(await service.execute(Number(id)));
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
 }

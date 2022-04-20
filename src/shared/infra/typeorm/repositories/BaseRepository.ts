@@ -1,5 +1,5 @@
 import IBaseRepository from './IBaseRepository'
-import { getRepository, Repository, UpdateResult } from 'typeorm'
+import { getRepository, Repository } from 'typeorm'
 
 declare type ClassType<T> = new (...args: never[]) => T
 
@@ -28,7 +28,7 @@ export default abstract class BaseRepository<Interface, Entity>
     return this.repository.find({ loadRelationIds: true })
   }
 
-  async update(id: number, data: Interface): Promise<UpdateResult> {
-    return this.repository.update(id, data)
+  async update(id: number, data: Interface): Promise<void> {
+    await this.repository.update(id, data)
   }
 }

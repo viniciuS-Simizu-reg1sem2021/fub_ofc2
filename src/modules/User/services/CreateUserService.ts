@@ -1,28 +1,34 @@
-import { createHash } from 'crypto'
-import IUserDTO from '../dtos/IUserDTO'
-import { inject, injectable } from 'tsyringe'
-import UserEntity from '../infra/typeorm/entities/UserEntity'
-import UserRepository from '../infra/typeorm/repositories/UserRepository'
+import { inject, injectable } from 'tsyringe';
+
+import { IUserRepository } from '@modules/User/repositories/IUserRepository';
+import { IEncoderProvider } from '@shared/providers/EncoderProvider/IEncoderProvider';
+import { IUserDTO } from '@modules/User/dtos/IUserDTO';
 
 @injectable()
-export default class CreateUserService {
-  constructor(@inject(UserRepository) private userRepository: UserRepository) {}
+export class CreateUserService {
+  constructor(
+    @inject('UserRepository')
+    private userRepository: IUserRepository,
+    @inject('EncoderProvider')
+    private encoderProvider: IEncoderProvider
+  ) {}
 
   public async execute(
     data: IUserDTO,
     img?: Express.Multer.File
-  ): Promise<UserEntity> {
-    const hashedPassword = createHash('sha256')
-      .update(data.password)
-      .digest('hex')
+  ): Promise<void> {
+    const hashedPassword = await this.encoderProvider.encode(data.password);
 
-    if (img)
-      return this.userRepository.create({
-        ...data,
-        imagePath: `${img.destination}${img.filename}`,
-        password: hashedPassword,
-      })
+    let imagePath: string | null = null;
 
-    return this.userRepository.create({ ...data, password: hashedPassword })
+    if (img) {
+      imagePath = `${img.destination}${img.filename}`;
+    }
+
+    await this.userRepository.create({
+      ...data,
+      password: hashedPassword,
+      imagePath,
+    });
   }
 }

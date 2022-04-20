@@ -1,12 +1,22 @@
-import { inject, injectable } from 'tsyringe'
-import UserEntity from '../infra/typeorm/entities/UserEntity'
-import UserRepository from '../infra/typeorm/repositories/UserRepository'
+import { inject, injectable } from 'tsyringe';
+
+import { IUserDTO } from '@modules/User/dtos/IUserDTO';
+import { IUserRepository } from '@modules/User/repositories/IUserRepository';
 
 @injectable()
-export default class FindUserService {
-  constructor(@inject(UserRepository) private userRepository: UserRepository) {}
+export class FindUserService {
+  constructor(
+    @inject('UserRepository')
+    private userRepository: IUserRepository
+  ) {}
 
-  public async execute(id: number): Promise<UserEntity | undefined> {
-    return this.userRepository.find(id)
+  public async execute(id: number): Promise<IUserDTO> {
+    const user = await this.userRepository.findbyId(id);
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    return user;
   }
 }
