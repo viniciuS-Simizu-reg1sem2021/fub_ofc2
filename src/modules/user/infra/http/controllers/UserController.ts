@@ -37,7 +37,7 @@ export class UserController {
 
       const loginRequest = request.body;
 
-      response.json(await service.execute(loginRequest));
+      response.json({ auth: true, token: await service.execute(loginRequest) });
     } catch (err) {
       next(err);
     }

@@ -41,8 +41,10 @@ export class LoginUserService {
       sub: { user: { id: <number>user.id } },
     };
 
-    return sign(payload, authConfig.JWT_SECRET, {
+    const token = sign(payload, authConfig.JWT_SECRET, {
       expiresIn: authConfig.JWT_EXPIRATION,
     });
+
+    return token;
   }
 }

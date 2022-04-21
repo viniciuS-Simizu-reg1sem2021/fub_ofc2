@@ -20,15 +20,14 @@ export function ensureAuth(
   const [, token] = authToken.split(' ');
 
   try {
-    const { sub } = verify(
+    request.token = verify(
       token,
       authConfig.JWT_SECRET
     ) as unknown as IPayloadDTO;
 
-    request.token.sub = sub;
-
-    return next();
+    next();
   } catch (err) {
     response.status(401).end();
+    console.log(err);
   }
 }

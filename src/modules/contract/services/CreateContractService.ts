@@ -10,7 +10,10 @@ export class CreateContractService {
     private contractRepository: IContractRepository
   ) {}
 
-  public async execute(data: IContractDTO): Promise<void> {
-    await this.contractRepository.create(data);
+  public async execute(
+    data: IContractDTO,
+    user: { id: number }
+  ): Promise<void> {
+    await this.contractRepository.create({ ...data, employer: user.id });
   }
 }

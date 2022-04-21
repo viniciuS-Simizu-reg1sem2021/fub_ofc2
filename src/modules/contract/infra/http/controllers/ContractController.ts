@@ -15,12 +15,12 @@ export class ContractController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const { user } = request.token.sub;
       const service = container.resolve(CreateContractService);
 
       const data = request.body;
+      const { user } = request.token.sub;
 
-      response.status(201).json(await service.execute(data));
+      response.status(201).json(await service.execute(data, user));
     } catch (err) {
       next(err);
     }

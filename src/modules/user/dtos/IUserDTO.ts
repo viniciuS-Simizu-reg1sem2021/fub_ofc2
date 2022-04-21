@@ -5,6 +5,7 @@ import { IDefaultCategoryDTO } from '@modules/category/dtos/IDefaultCategoryDTO'
 export interface IUserDTO extends IBaseDTO {
   email: string;
   password: string;
+  realName: string;
   username: string;
   phone: string;
   imagePath: string | null;
@@ -13,4 +14,5 @@ export interface IUserDTO extends IBaseDTO {
   street: string;
   district: string;
   state: string;
+  city: string;
 }

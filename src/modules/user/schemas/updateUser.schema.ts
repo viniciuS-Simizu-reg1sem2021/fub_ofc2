@@ -7,6 +7,7 @@ const updateUserSchema = Joi.object({
     .items(Joi.object({ id: Joi.number().required() }))
     .min(1),
   street: Joi.string().optional(),
+  city: Joi.string().required(),
   district: Joi.string().optional(),
   state: Joi.string().optional(),
 });

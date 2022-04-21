@@ -8,8 +8,8 @@ import {
 
 import { IUserDTO } from '@modules/user/dtos/IUserDTO';
 import { BaseEntity } from '@shared/infra/typeorm/entities/BaseEntity';
-import { DefaultRatingEntity } from '@modules/default/rating/infra/typeorm/entities/DefaultRatingEntity';
 import { DefaultCategoryEntity } from '@modules/category/infra/typeorm/entities/DefaultCategoryEntity';
+import { DefaultRatingEntity } from '@modules/default/rating/infra/typeorm/entities/DefaultRatingEntity';
 
 @Entity('users')
 export class UserEntity extends BaseEntity implements IUserDTO {
@@ -21,6 +21,9 @@ export class UserEntity extends BaseEntity implements IUserDTO {
 
   @Column({ name: 'password' })
   password: string;
+
+  @Column({ name: 'real_name' })
+  realName: string;
 
   @Column({ name: 'username' })
   username: string;
@@ -67,4 +70,7 @@ export class UserEntity extends BaseEntity implements IUserDTO {
 
   @Column({ name: 'state' })
   state: string;
+
+  @Column({ name: 'city' })
+  city: string;
 }
