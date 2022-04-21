@@ -2,7 +2,7 @@ import { verify } from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
 
 import auth from '@config/auth';
-import { IPayloadDTO } from '@modules/User/dtos/IPayloadDTO';
+import { IPayloadDTO } from '@modules/user/dtos/IPayloadDTO';
 
 export function ensureAuth(
   request: Request,
