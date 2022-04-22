@@ -25,7 +25,7 @@ userRoutes.post(
 
 userRoutes.get('', userController.list);
 
-userRoutes.get('/:id', userController.find);
+userRoutes.get('/:id', userController.findById);
 
 userRoutes.put(
   '/:id',

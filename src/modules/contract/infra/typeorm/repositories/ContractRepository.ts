@@ -1,6 +1,7 @@
 import { injectable } from 'tsyringe';
 import { getRepository, Repository } from 'typeorm';
 
+import { UserEntity } from '@modules/user/infra/typeorm/entities/UserEntity';
 import { ContractEntity } from '@modules/contract/infra/typeorm/entities/ContractEntity';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
 
@@ -17,11 +18,11 @@ export class ContractRepository implements IContractRepository {
   }
 
   async list(): Promise<ContractEntity[]> {
-    return this.repository.find();
+    return this.repository.find({ loadRelationIds: true });
   }
 
   async findById(id: number): Promise<ContractEntity | undefined> {
-    return this.repository.findOne(id);
+    return this.repository.findOne(id, { loadRelationIds: true });
   }
 
   async update(id: number, data: Partial<ContractEntity>): Promise<void> {
@@ -34,5 +35,15 @@ export class ContractRepository implements IContractRepository {
 
   async softDelete(id: number): Promise<void> {
     await this.repository.softDelete(id);
+  }
+
+  async applyToContract(id: number, interested: UserEntity): Promise<void> {
+    await this.repository
+      .createQueryBuilder('contract')
+      .leftJoin('id_contract', 'aux_contracts_users')
+      .insert()
+      .into('aux_contracts_users')
+      .values([{ id_contract: id, id_user: interested.id }])
+      .execute();
   }
 }

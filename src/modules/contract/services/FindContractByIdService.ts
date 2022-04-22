@@ -14,7 +14,7 @@ export class FindContractByIdService {
     const contract = await this.contractRepository.findById(id);
 
     if (!contract) {
-      throw new Error('contract not found');
+      throw new Error('Contract not found');
     }
 
     return contract;

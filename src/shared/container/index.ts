@@ -4,7 +4,7 @@ import { IUserRepository } from '@modules/user/repositories/IUserRepository';
 import { IEncoderProvider } from '@shared/providers/EncoderProvider/IEncoderProvider';
 import { UserRepository } from '@modules/user/infra/typeorm/repositories/UserRepository';
 import { ContractRepository } from '@modules/contract/infra/typeorm/repositories/ContractRepository';
-import { CouponRepository } from '@modules/default/coupon/infra/typeorm/repositories/CouponRepository';
+import { CouponRepository } from '@modules/coupon/infra/typeorm/repositories/CouponRepository';
 import { BcryptEncoderProvider } from '@shared/providers/EncoderProvider/implementations/BcryptEncoderProvider';
 import { NotificationRepository } from '@modules/notification/infra/typeorm/repositories/NotificationRepository';
 

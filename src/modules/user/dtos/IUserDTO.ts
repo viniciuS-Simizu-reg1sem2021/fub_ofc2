@@ -1,6 +1,6 @@
 import { IBaseDTO } from '@shared/dtos/IBaseDTO';
-import { IDefaultRatingDTO } from '@modules/default/rating/dtos/IDefaultRatingDTO';
-import { IDefaultCategoryDTO } from '@modules/category/dtos/IDefaultCategoryDTO';
+import { IDefaultRatingDTO } from '@modules/defaults/rating/dtos/IDefaultRatingDTO';
+import { IDefaultCategoryDTO } from '@modules/defaults/category/dtos/IDefaultCategoryDTO';
 
 export interface IUserDTO extends IBaseDTO {
   email: string;

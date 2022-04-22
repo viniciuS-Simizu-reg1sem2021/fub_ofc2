@@ -2,6 +2,8 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -10,7 +12,7 @@ import {
 import { IContractDTO } from '@modules/contract/dtos/IContractDTO';
 import { BaseEntity } from '@shared/infra/typeorm/entities/BaseEntity';
 import { UserEntity } from '@modules/user/infra/typeorm/entities/UserEntity';
-import { DefaultStatusContractEntity } from '@modules/default/statuscontract/infra/typeorm/entities/DefaultStatusContractEntity';
+import { DefaultStatusContractEntity } from '@modules/defaults/statuscontract/infra/typeorm/entities/DefaultStatusContractEntity';
 
 @Entity('contracts')
 export class ContractEntity extends BaseEntity implements IContractDTO {
@@ -24,6 +26,20 @@ export class ContractEntity extends BaseEntity implements IContractDTO {
   @OneToOne(() => UserEntity)
   @JoinColumn({ referencedColumnName: 'id', name: 'id_employer' })
   employer: UserEntity;
+
+  @ManyToMany(() => UserEntity)
+  @JoinTable({
+    name: 'aux_contracts_users',
+    joinColumn: {
+      name: 'id_contract',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'id_user',
+      referencedColumnName: 'id',
+    },
+  })
+  interested: UserEntity[];
 
   @ManyToOne(() => DefaultStatusContractEntity)
   @JoinColumn({

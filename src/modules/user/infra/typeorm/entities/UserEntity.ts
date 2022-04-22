@@ -8,8 +8,8 @@ import {
 
 import { IUserDTO } from '@modules/user/dtos/IUserDTO';
 import { BaseEntity } from '@shared/infra/typeorm/entities/BaseEntity';
-import { DefaultCategoryEntity } from '@modules/category/infra/typeorm/entities/DefaultCategoryEntity';
-import { DefaultRatingEntity } from '@modules/default/rating/infra/typeorm/entities/DefaultRatingEntity';
+import { DefaultRatingEntity } from '@modules/defaults/rating/infra/typeorm/entities/DefaultRatingEntity';
+import { DefaultCategoryEntity } from '@modules/defaults/category/infra/typeorm/entities/DefaultCategoryEntity';
 
 @Entity('users')
 export class UserEntity extends BaseEntity implements IUserDTO {

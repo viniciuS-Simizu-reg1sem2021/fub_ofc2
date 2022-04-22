@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
-import { INotificationRepository } from '@modules/notification/repositories/INotificationRepository';
 import { INotificationDTO } from '@modules/notification/dtos/INotificationDTO';
+import { INotificationRepository } from '@modules/notification/repositories/INotificationRepository';
 
 @injectable()
 export class FindNotificationByIdService {

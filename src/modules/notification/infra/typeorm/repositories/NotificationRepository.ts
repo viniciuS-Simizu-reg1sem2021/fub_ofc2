@@ -17,11 +17,11 @@ export class NotificationRepository implements INotificationRepository {
   }
 
   async list(): Promise<NotificationEntity[]> {
-    return this.repository.find();
+    return this.repository.find({ loadRelationIds: true });
   }
 
   async findById(id: number): Promise<NotificationEntity | undefined> {
-    return this.repository.findOne(id);
+    return this.repository.findOne(id, { loadRelationIds: true });
   }
 
   async update(id: number, data: Partial<NotificationEntity>): Promise<void> {

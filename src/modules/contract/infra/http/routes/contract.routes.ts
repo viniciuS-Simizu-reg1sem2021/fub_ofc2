@@ -16,7 +16,7 @@ contractRoutes.post(
 
 contractRoutes.get('', contractController.list);
 
-contractRoutes.get('/:id', contractController.find);
+contractRoutes.get('/:id', contractController.findById);
 
 contractRoutes.put(
   '/:id',
@@ -24,6 +24,10 @@ contractRoutes.put(
   contractController.update
 );
 
-contractRoutes.delete('/:id', contractController.delete);
+contractRoutes.patch('/apply/:id', contractController.applyToContract);
+
+contractRoutes.patch('/select/:id', contractController.selectEmployee);
+
+contractRoutes.delete('/:id', contractController.softDelete);
 
 export { contractRoutes };

@@ -17,11 +17,11 @@ export class UserRepository implements IUserRepository {
   }
 
   async list(): Promise<UserEntity[]> {
-    return this.repository.find();
+    return this.repository.find({ loadRelationIds: true });
   }
 
   async findById(id: number): Promise<UserEntity | undefined> {
-    return this.repository.findOne(id);
+    return this.repository.findOne(id, { loadRelationIds: true });
   }
 
   async update(id: number, data: Partial<UserEntity>): Promise<void> {

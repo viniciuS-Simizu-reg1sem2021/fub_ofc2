@@ -57,7 +57,7 @@ export class UserController {
     }
   }
 
-  public async find(
+  public async findById(
     request: Request,
     response: Response,
     next: NextFunction
