@@ -5,8 +5,14 @@ import { IContractDTO } from '@modules/contract/dtos/IContractDTO';
 import { IUserRepository } from '@modules/user/repositories/IUserRepository';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
 
+interface RetrievedInfo {
+  contract: IContractDTO;
+  foundUser: IUserDTO;
+  selectedUser: IUserDTO;
+}
+
 @injectable()
-export class RetrieveContractAndFoundUserHelper {
+export class ApplicationAndSelectionToContractHelper {
   constructor(
     @inject('ContractRepository')
     private contractRepository: IContractRepository,
@@ -16,8 +22,9 @@ export class RetrieveContractAndFoundUserHelper {
 
   public async execute(
     id: number,
-    user: { id: number }
-  ): Promise<{ contract: IContractDTO; foundUser: IUserDTO }> {
+    user: { id: number },
+    selectedUserId?: number
+  ): Promise<RetrievedInfo> {
     const contract = await this.contractRepository.findById(id);
 
     if (!contract) {
@@ -38,6 +45,21 @@ export class RetrieveContractAndFoundUserHelper {
       throw new Error('Your user does not exists');
     }
 
-    return { contract, foundUser };
+    if (selectedUserId) {
+      const selectedUser = await this.userRepository.findById(selectedUserId);
+
+      if (!selectedUser) {
+        throw new Error('This user does not exists');
+      }
+
+      // @ts-ignore
+      if (!contract.interested.includes(selectedUser.id)) {
+        throw new Error('This user is not interested in your job');
+      }
+
+      return { contract, foundUser, selectedUser };
+    }
+
+    return { contract, foundUser, selectedUser: {} as IUserDTO };
   }
 }

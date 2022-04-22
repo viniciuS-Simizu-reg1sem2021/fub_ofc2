@@ -100,10 +100,12 @@ export class ContractController {
     try {
       const service = container.resolve(SelectEmployeeService);
 
-      const { id } = request.params;
+      const { id, selectedUserId } = request.params;
       const { user } = request.token.sub;
 
-      response.json(await service.execute(Number(id), user));
+      response.json(
+        await service.execute(Number(id), user, Number(selectedUserId))
+      );
     } catch (err) {
       next(err);
     }

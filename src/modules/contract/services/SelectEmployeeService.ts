@@ -1,7 +1,7 @@
 import { container, inject, injectable } from 'tsyringe';
 
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
-import { RetrieveContractAndFoundUserHelper } from '@shared/helpers/RetrieveContractAndFoundUserHelper';
+import { ApplicationAndSelectionToContractHelper } from '@shared/helpers/ApplicationAndSelectionToContractHelper';
 
 @injectable()
 export class SelectEmployeeService {
@@ -10,15 +10,26 @@ export class SelectEmployeeService {
     private contractRepository: IContractRepository
   ) {}
 
-  public async execute(id: number, user: { id: number }): Promise<void> {
-    const helper = container.resolve(RetrieveContractAndFoundUserHelper);
+  public async execute(
+    id: number,
+    user: { id: number },
+    selectedUserId: number
+  ): Promise<void> {
+    const helper = container.resolve(ApplicationAndSelectionToContractHelper);
 
-    const { contract, foundUser } = await helper.execute(id, user);
+    const { contract, selectedUser } = await helper.execute(
+      id,
+      user,
+      selectedUserId
+    );
 
-    // TODO: MUDAR O STATUS DO CONTRATO TAMBÉM - CRIAR UM MÉTODO NO REPOSITÓRIO QUE FAÇA ESSE UPDATE
-    await this.contractRepository.update(id, {
-      ...contract,
-      employee: foundUser,
-    });
+    // @ts-ignore
+    if (contract.employer !== user.id) {
+      throw new Error(
+        'You do not have permission to select the employee for this contract'
+      );
+    }
+
+    await this.contractRepository.selectEmployee(id, selectedUser);
   }
 }

@@ -1,5 +1,5 @@
-import { IContractDTO } from '@modules/contract/dtos/IContractDTO';
 import { IUserDTO } from '@modules/user/dtos/IUserDTO';
+import { IContractDTO } from '@modules/contract/dtos/IContractDTO';
 
 export interface IContractRepository {
   create(data: IContractDTO): Promise<void>;
@@ -15,4 +15,6 @@ export interface IContractRepository {
   softDelete(id: number): Promise<void>;
 
   applyToContract(id: number, interested: IUserDTO): Promise<void>;
+
+  selectEmployee(id: number, employee: IUserDTO): Promise<void>;
 }

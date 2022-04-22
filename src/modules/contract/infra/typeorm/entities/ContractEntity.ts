@@ -13,6 +13,7 @@ import { IContractDTO } from '@modules/contract/dtos/IContractDTO';
 import { BaseEntity } from '@shared/infra/typeorm/entities/BaseEntity';
 import { UserEntity } from '@modules/user/infra/typeorm/entities/UserEntity';
 import { DefaultStatusContractEntity } from '@modules/defaults/statuscontract/infra/typeorm/entities/DefaultStatusContractEntity';
+import { DefaultCategoryEntity } from '@modules/defaults/category/infra/typeorm/entities/DefaultCategoryEntity';
 
 @Entity('contracts')
 export class ContractEntity extends BaseEntity implements IContractDTO {
@@ -47,6 +48,10 @@ export class ContractEntity extends BaseEntity implements IContractDTO {
     name: 'id_default_status_contract',
   })
   statusContract: DefaultStatusContractEntity;
+
+  @ManyToOne(() => DefaultCategoryEntity)
+  @JoinColumn({ referencedColumnName: 'id', name: 'id_default_category' })
+  category: DefaultCategoryEntity;
 
   @Column({ name: 'title' })
   title: string;

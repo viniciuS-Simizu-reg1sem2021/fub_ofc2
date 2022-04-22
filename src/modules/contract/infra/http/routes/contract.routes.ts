@@ -24,9 +24,12 @@ contractRoutes.put(
   contractController.update
 );
 
-contractRoutes.patch('/apply/:id', contractController.applyToContract);
+contractRoutes.put(
+  '/select/:id/employee/:selectedUserId',
+  contractController.selectEmployee
+);
 
-contractRoutes.patch('/select/:id', contractController.selectEmployee);
+contractRoutes.patch('/apply/:id', contractController.applyToContract);
 
 contractRoutes.delete('/:id', contractController.softDelete);
 

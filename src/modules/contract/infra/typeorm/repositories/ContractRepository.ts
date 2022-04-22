@@ -46,4 +46,14 @@ export class ContractRepository implements IContractRepository {
       .values([{ id_contract: id, id_user: interested.id }])
       .execute();
   }
+
+  async selectEmployee(id: number, employee: UserEntity): Promise<void> {
+    await this.repository
+      .createQueryBuilder('contract')
+      .leftJoin('id_contract', 'aux_contracts_users')
+      .update()
+      .set({ employee, statusContract: { id: 2 } })
+      .where('id_contract = :id', { id })
+      .execute();
+  }
 }
