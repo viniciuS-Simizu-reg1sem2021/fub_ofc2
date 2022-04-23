@@ -7,7 +7,7 @@ import { IContractRepository } from '@modules/contract/repositories/IContractRep
 
 interface RetrievedInfo {
   contract: IContractDTO;
-  foundUser: IUserDTO;
+  userInfo: IUserDTO;
   selectedUser: IUserDTO;
 }
 
@@ -31,17 +31,13 @@ export class ApplicationAndSelectionToContractHelper {
       throw new Error('Contract not found');
     }
 
-    if (user.id === contract.employer.id) {
-      throw new Error('You cannot apply to your own contract');
-    }
-
     if (contract.employee) {
       throw new Error('Contract already have employee');
     }
 
-    const foundUser = await this.userRepository.findById(user.id);
+    const userInfo = await this.userRepository.findById(user.id);
 
-    if (!foundUser) {
+    if (!userInfo) {
       throw new Error('Your user does not exists');
     }
 
@@ -57,9 +53,9 @@ export class ApplicationAndSelectionToContractHelper {
         throw new Error('This user is not interested in your job');
       }
 
-      return { contract, foundUser, selectedUser };
+      return { contract, userInfo, selectedUser };
     }
 
-    return { contract, foundUser, selectedUser: {} as IUserDTO };
+    return { contract, userInfo, selectedUser: {} as IUserDTO };
   }
 }

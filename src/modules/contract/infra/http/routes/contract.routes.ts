@@ -33,4 +33,6 @@ contractRoutes.patch('/apply/:id', contractController.applyToContract);
 
 contractRoutes.delete('/:id', contractController.softDelete);
 
+contractRoutes.delete('/unapply/:id', contractController.unapplyToContract);
+
 export { contractRoutes };

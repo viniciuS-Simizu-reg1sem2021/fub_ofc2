@@ -8,6 +8,7 @@ import { SelectEmployeeService } from '@modules/contract/services/SelectEmployee
 import { ApplyToContractService } from '@modules/contract/services/ApplyToContractService';
 import { FindContractByIdService } from '@modules/contract/services/FindContractByIdService';
 import { SoftDeleteContractService } from '@modules/contract/services/SoftDeleteContractService';
+import { UnapplyToContract } from '@modules/contract/services/UnapplyToContract';
 
 @injectable()
 export class ContractController {
@@ -66,10 +67,11 @@ export class ContractController {
     try {
       const service = container.resolve(UpdateContractService);
 
+      const { user } = request.token.sub;
       const { id } = request.params;
       const data = request.body;
 
-      response.json(await service.execute(Number(id), data));
+      response.json(await service.execute(Number(id), data, user));
     } catch (err) {
       next(err);
     }
@@ -83,8 +85,25 @@ export class ContractController {
     try {
       const service = container.resolve(ApplyToContractService);
 
-      const { id } = request.params;
       const { user } = request.token.sub;
+      const { id } = request.params;
+
+      response.json(await service.execute(Number(id), user));
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async unapplyToContract(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const service = container.resolve(UnapplyToContract);
+
+      const { user } = request.token.sub;
+      const { id } = request.params;
 
       response.json(await service.execute(Number(id), user));
     } catch (err) {
@@ -119,9 +138,10 @@ export class ContractController {
     try {
       const service = container.resolve(SoftDeleteContractService);
 
+      const { user } = request.token.sub;
       const { id } = request.params;
 
-      response.json(await service.execute(Number(id)));
+      response.json(await service.execute(Number(id), user));
     } catch (err) {
       next(err);
     }

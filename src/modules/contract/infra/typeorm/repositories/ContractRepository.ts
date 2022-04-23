@@ -4,6 +4,7 @@ import { getRepository, Repository } from 'typeorm';
 import { UserEntity } from '@modules/user/infra/typeorm/entities/UserEntity';
 import { ContractEntity } from '@modules/contract/infra/typeorm/entities/ContractEntity';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
+import { IUserDTO } from '@modules/user/dtos/IUserDTO';
 
 @injectable()
 export class ContractRepository implements IContractRepository {
@@ -44,6 +45,19 @@ export class ContractRepository implements IContractRepository {
       .insert()
       .into('aux_contracts_users')
       .values([{ id_contract: id, id_user: interested.id }])
+      .execute();
+  }
+
+  async unapplyToContract(id: number, interested: IUserDTO): Promise<void> {
+    await this.repository
+      .createQueryBuilder('contract')
+      .leftJoin('id_contract', 'aux_contracts_users')
+      .delete()
+      .from('aux_contracts_users')
+      .where('aux_contracts_users.id_contract = :id', { id })
+      .andWhere('aux_contracts_users.id_user = :interestedId', {
+        interestedId: interested.id,
+      })
       .execute();
   }
 

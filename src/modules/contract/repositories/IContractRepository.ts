@@ -16,5 +16,7 @@ export interface IContractRepository {
 
   applyToContract(id: number, interested: IUserDTO): Promise<void>;
 
+  unapplyToContract(id: number, interested: IUserDTO): Promise<void>;
+
   selectEmployee(id: number, employee: IUserDTO): Promise<void>;
 }

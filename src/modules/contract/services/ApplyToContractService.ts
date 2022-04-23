@@ -16,7 +16,12 @@ export class ApplyToContractService {
   public async execute(id: number, user: { id: number }): Promise<void> {
     const helper = container.resolve(ApplicationAndSelectionToContractHelper);
 
-    const { contract, foundUser } = await helper.execute(id, user);
+    const { contract, userInfo } = await helper.execute(id, user);
+
+    // @ts-ignore
+    if (user.id === contract.employer) {
+      throw new Error('You cannot apply to your own contract');
+    }
 
     contract.interested.forEach((interestedUser) => {
       // @ts-ignore
@@ -25,6 +30,6 @@ export class ApplyToContractService {
       }
     });
 
-    await this.contractRepository.applyToContract(id, foundUser);
+    await this.contractRepository.applyToContract(id, userInfo);
   }
 }
