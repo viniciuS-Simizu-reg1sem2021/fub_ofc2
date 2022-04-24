@@ -12,7 +12,7 @@ interface RetrievedInfo {
 }
 
 @injectable()
-export class ApplicationAndSelectionToContractHelper {
+export class RetrieveUsersAndContractHelper {
   constructor(
     @inject('ContractRepository')
     private contractRepository: IContractRepository,

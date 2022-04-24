@@ -2,7 +2,7 @@ import { container, inject, injectable } from 'tsyringe';
 
 import { IUserRepository } from '@modules/user/repositories/IUserRepository';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
-import { ApplicationAndSelectionToContractHelper } from '@shared/helpers/ApplicationAndSelectionToContractHelper';
+import { RetrieveUsersAndContractHelper } from '@shared/helpers/RetrieveUsersAndContractHelper';
 
 @injectable()
 export class ApplyToContractService {
@@ -14,7 +14,7 @@ export class ApplyToContractService {
   ) {}
 
   public async execute(id: number, user: { id: number }): Promise<void> {
-    const helper = container.resolve(ApplicationAndSelectionToContractHelper);
+    const helper = container.resolve(RetrieveUsersAndContractHelper);
 
     const { contract, userInfo } = await helper.execute(id, user);
 
