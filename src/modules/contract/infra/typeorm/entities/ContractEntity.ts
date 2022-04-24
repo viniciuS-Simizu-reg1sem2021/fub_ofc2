@@ -61,4 +61,7 @@ export class ContractEntity extends BaseEntity implements IContractDTO {
 
   @Column({ name: 'is_paid' })
   isPaid: boolean;
+
+  @Column({ name: 'generated_coupon' })
+  generatedCoupon: boolean;
 }

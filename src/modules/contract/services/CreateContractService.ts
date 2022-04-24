@@ -20,7 +20,7 @@ export class CreateContractService {
     const foundUser = await this.userRepository.findById(user.id);
 
     if (!foundUser) {
-      throw new Error('You user does not exists');
+      throw new Error('Your user does not exists');
     }
 
     await this.contractRepository.create({ ...data, employer: foundUser });

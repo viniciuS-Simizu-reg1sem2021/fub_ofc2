@@ -1,14 +1,16 @@
 import { container, injectable } from 'tsyringe';
 import { NextFunction, Request, Response } from 'express';
 
+import { UnapplyToContract } from '@modules/contract/services/UnapplyToContract';
 import { ListContractService } from '@modules/contract/services/ListContractService';
+import { GenerateCouponService } from '@modules/contract/services/GenerateCouponService';
 import { UpdateContractService } from '@modules/contract/services/UpdateContractService';
 import { CreateContractService } from '@modules/contract/services/CreateContractService';
 import { SelectEmployeeService } from '@modules/contract/services/SelectEmployeeService';
 import { ApplyToContractService } from '@modules/contract/services/ApplyToContractService';
 import { FindContractByIdService } from '@modules/contract/services/FindContractByIdService';
 import { SoftDeleteContractService } from '@modules/contract/services/SoftDeleteContractService';
-import { UnapplyToContract } from '@modules/contract/services/UnapplyToContract';
+import { ConfirmPaymentService } from '@modules/contract/services/ConfirmPaymentService';
 
 @injectable()
 export class ContractController {
@@ -24,6 +26,24 @@ export class ContractController {
       const { user } = request.token.sub;
 
       response.status(201).json(await service.execute(data, user));
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async generateCoupon(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const service = container.resolve(GenerateCouponService);
+
+      const data = request.body;
+      const { id } = request.params;
+      const { user } = request.token.sub;
+
+      response.status(201).json(await service.execute(Number(id), data, user));
     } catch (err) {
       next(err);
     }
@@ -125,6 +145,23 @@ export class ContractController {
       response.json(
         await service.execute(Number(id), user, Number(selectedUserId))
       );
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async confirmPayment(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const service = container.resolve(ConfirmPaymentService);
+
+      const { id } = request.params;
+      const { user } = request.token.sub;
+
+      response.json(await service.execute(Number(id), user));
     } catch (err) {
       next(err);
     }

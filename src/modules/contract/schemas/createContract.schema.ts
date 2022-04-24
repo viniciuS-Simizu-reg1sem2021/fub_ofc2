@@ -8,6 +8,7 @@ const createContractSchema = Joi.object({
     .items(Joi.object({ id: Joi.number().required() }))
     .default([]),
   category: Joi.object({ id: Joi.number().required() }).required(),
+  isPaid: Joi.boolean().default(false),
 });
 
 export { createContractSchema };

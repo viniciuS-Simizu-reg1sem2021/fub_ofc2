@@ -70,4 +70,22 @@ export class ContractRepository implements IContractRepository {
       .where('id_contract = :id', { id })
       .execute();
   }
+
+  async generateCoupon(id: number): Promise<void> {
+    await this.repository
+      .createQueryBuilder('contract')
+      .update()
+      .set({ statusContract: { id: 3 }, generatedCoupon: true })
+      .where('id_contract =:id', { id })
+      .execute();
+  }
+
+  async confirmPayment(id: number): Promise<void> {
+    await this.repository
+      .createQueryBuilder('contract')
+      .update()
+      .set({ statusContract: { id: 4 }, isPaid: true })
+      .where('id_contract = :id', { id })
+      .execute();
+  }
 }
