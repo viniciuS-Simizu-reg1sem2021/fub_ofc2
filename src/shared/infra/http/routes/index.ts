@@ -1,17 +1,19 @@
-import { Router } from 'express'
-import userRoutes from '../../../../modules/User/infra/http/routes/user.routes'
-import couponRoutes from '../../../../modules/Coupon/infra/http/routes/coupon.routes'
-import contractRoutes from '../../../../modules/Contract/infra/http/routes/contract.routes'
-import notificationRoutes from '@modules/Notification/infra/http/routes/notification.routes'
+import { Router } from 'express';
 
-const mainRouter = Router()
+import { ensureAuth } from '@shared/infra/middlewares/ensureAuth';
+import { userRoutes } from '@modules/user/infra/http/routes/user.routes';
+import { couponRoutes } from '@modules/coupon/infra/http/routes/coupon.routes';
+import { contractRoutes } from '@modules/contract/infra/http/routes/contract.routes';
+import { notificationRoutes } from '@modules/notification/infra/http/routes/notification.routes';
 
-mainRouter.use('/notification', notificationRoutes)
+const routes = Router();
 
-mainRouter.use('/contract', contractRoutes)
+routes.use('/user', userRoutes);
 
-mainRouter.use('/coupon', couponRoutes)
+routes.use('/coupon', ensureAuth, couponRoutes);
 
-mainRouter.use('/user', userRoutes)
+routes.use('/contract', ensureAuth, contractRoutes);
 
-export { mainRouter }
+routes.use('/notification', ensureAuth, notificationRoutes);
+
+export { routes };

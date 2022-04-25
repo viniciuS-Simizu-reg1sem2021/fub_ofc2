@@ -1,27 +1,21 @@
-import 'reflect-metadata'
-import express from 'express'
-import { errors } from 'celebrate'
-import { mainRouter } from './routes'
-import { createConnection } from 'typeorm'
+import api from '@config/api';
+import { app } from '@shared/infra/http/app';
 
-const app = express()
+const apiConfig = api();
 
-app.use(express.json())
-
-app.listen(3000, async () => {
-  await createConnection()
-  console.log(`SERVER STARTED ON http://localhost:3000`)
-})
-
-app.use('/v1/fub', mainRouter)
-app.use(errors())
+app.listen(apiConfig.API_PORT, async () => {
+  console.log(`SERVER STARTED ON http://localhost:${apiConfig.API_PORT}`);
+});
 
 /** TODO
- *   PEGAR O EMPLOYER DIRETO NO CONTROLLER POR MEIO DO TOKEN
- *   O MESMO SE REPLICARÁ PARA OS SERVIÇOS EM QUE ADICIONAREMOS UM EMPLOYEE
- *   IMPLEMENTAR O JWT E SERVIÇOS DE AUTENTICAÇÃO
- *   CRIAR UM HELPER PARA BARRAR A ENTRADA DE USUÁRIOS QUE JÁ EXISTEM NO CREATE USER SERVICE
- *    - SE NÃO FUNCIONAR DO HELPER MELHORAR O CONFIG DE UPLOADS
- *    - POIS O PROBLEMA É SEMPRE UPLODEAR O ARQUIVO
- *    - MESMO SE ELE RETORNA UM ERRO
+ *   REFAZER MODELO CONCEITUAL
+ *   TROCAR DO BICO PARA SER UM ISFINISHED AO INVES DE ISPAID E ADD
+ *   ADICIONAR UM BOOLEAN PARA GARANTIR QUE O CUPOM FOI PAGO (EMPREGADO FARÁ ISSO)
+ *   SERVIÇO DE AVALIAÇÃO DE EMPREGADOR E EMPREGADO, ALÉM DE ADICIONAR ISSO NO USER
+ *   ADICIONAR SERVIÇOS DE AVALIAÇÃO NO MÓDULO DO (USUARIO | COUPON) E DEPOIS FINALIZAR O CONTRATO
+ *   SE SOBRAR TEMPO:
+ *   - INTEGRAR O SERVIÇO DA IBM PARA O UPLOAD DE IMAGENS + O IBM FACADE
+ *   - ADICIONAR A ROTA DE DELETE NORMAL
+ *   - ADICIONAR UM BOOLEAN PARA GARANTIR QUE O CUPOM ESTÁ DENTRO DA VALIDADE
+ *   - FAZER ISSO COM UM CRON PARA CADA DIA FAZER ESSA VERIFICAÇÃO
  **/
