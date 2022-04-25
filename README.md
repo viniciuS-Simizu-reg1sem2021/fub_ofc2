@@ -4,16 +4,16 @@
 
 ### Usuário
 
-- Registro com email e nome de usuário únicos
-- Sistema de notififcações que daram um feedback dos bicos em que o usuário está de alguma forma inserido
-- Criação de bicos com base em suas necessidades
-- Oferecer seus serviços para cumprir os bicos
+- Registro com _email_ e nome de usuário únicos
+- Sistema de notififcações que daram um _feedback_ dos bicos em que o usuário está de alguma forma inserido
+- Criação de bicos com base nas suas necessidades
+- Oferecer os seus serviços para cumprir os bicos
 - O usuário possuirá uma nota com base na média de todos os contratos realizados e oferecidos
-- Forma de contato entre empregador e empregado via whatsapp
+- Forma de contato entre empregador e empregado via WhatsApp
 
 ### Bico
 
-- Cada usuário se canditará para o bico e ficará em uma lista de interessados
+- Cada usuário se canditará para o bico e ficará numa lista de interessados
 - O usuário que oferece o bico escolherá alguém da lista de interessados para ser o empregado
 - Após o empregado ser escolhido será possível ter acesso ao número de telefone um do outro para o contato
 - Após o contato o empregador gerará um cupom que possui o prazo de entrega e valor com base no contato
