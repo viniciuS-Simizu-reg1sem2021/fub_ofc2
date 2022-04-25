@@ -13,39 +13,13 @@ module.exports = [
     synchronize: false,
     logging: true,
     logger: 'file',
-    entities: ['src/modules/**/infra/typeorm/entities/*.ts'],
-    migrations: ['src/shared/infra/typeorm/migrations/*.ts'],
-    subscribers: ['src/subscriber/**/*.ts'],
+    entities: ['./src/modules/**/infra/typeorm/entities/*.ts'],
+    migrations: ['./src/shared/infra/typeorm/migrations/*.ts'],
+    subscribers: ['./src/subscriber/**/*.ts'],
     cli: {
-      entitiesDir: 'src/modules/**/infra/typeorm/entities/*.ts',
-      migrationsDir: 'src/shared/infra/typeorm/migrations/',
-      subscribersDir: 'src/subscriber',
+      entitiesDir: './src/modules/**/infra/typeorm/entities/*.ts',
+      migrationsDir: './src/shared/infra/typeorm/migrations',
+      subscribersDir: './src/subscriber',
     },
   },
 ];
-
-//{
-//   "type": "mysql",
-//   "host": "localhost",
-//   "port": 3306,
-//   "username": "root",
-//   "password": "ademiroMDR",
-//   "database": "doing_a_beak",
-//   "synchronize": false,
-//   "logging": true,
-//   "logger": "file",
-//   "entities": [
-//     "src/modules/**/infra/typeorm/entities/*.ts"
-//   ],
-//   "migrations": [
-//     "src/shared/infra/typeorm/migrations/*.ts"
-//   ],
-//   "subscribers": [
-//     "src/subscriber/**/*.ts"
-//   ],
-//   "cli": {
-//     "entitiesDir": "src/modules/**/infra/typeorm/entities/*.ts",
-//     "migrationsDir": "src/shared/infra/typeorm/migrations/",
-//     "subscribersDir": "src/subscriber"
-//   }
-// }
