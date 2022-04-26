@@ -38,8 +38,6 @@ contractRoutes.put(
 
 contractRoutes.patch('/apply/:id', contractController.applyToContract);
 
-contractRoutes.patch('/confirm-payment/:id', contractController.confirmPayment);
-
 contractRoutes.delete('/:id', contractController.softDelete);
 
 contractRoutes.delete('/unapply/:id', contractController.unapplyToContract);

@@ -21,6 +21,4 @@ export interface IContractRepository {
   selectEmployee(id: number, employee: IUserDTO): Promise<void>;
 
   generateCoupon(id: number): Promise<void>;
-
-  confirmPayment(id: number): Promise<void>;
 }

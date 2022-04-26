@@ -35,4 +35,78 @@ export class CouponRepository implements ICouponRepository {
   async softDelete(id: number): Promise<void> {
     await this.repository.softDelete(id);
   }
+
+  async employeeConfirmJobDone(id: number): Promise<void> {
+    await this.repository
+      .createQueryBuilder('coupon')
+      .update()
+      .set({ isFinished: true })
+      .where('id_coupon = :id', { id })
+      .execute();
+  }
+
+  async employeeDisproveJobDone(id: number): Promise<void> {
+    await this.repository
+      .createQueryBuilder('coupon')
+      .update()
+      .set({ isFinished: false })
+      .where('id_coupon = :id', { id })
+      .execute();
+  }
+
+  async employeeConfirmPayment(id: number): Promise<void> {
+    await this.repository
+      .createQueryBuilder('coupon')
+      .update()
+      .set({ isPaid: true })
+      .where('id_coupon = :id', { id })
+      .execute();
+  }
+
+  async employerFinishJob(id: number, contractId: number): Promise<void> {
+    await this.repository
+      .createQueryBuilder('coupon')
+      .softDelete()
+      .where('id_coupon = :id', { id })
+      .execute();
+
+    await this.repository
+      .createQueryBuilder('coupon')
+      .leftJoin('id_contract', 'contracts')
+      .update('ContractEntity')
+      .set({ statusContract: { id: 4 } })
+      .andWhere('id_contract = :contractId', { contractId })
+      .execute();
+  }
+
+  async employerRemoveEmployee(id: number, idContract: number): Promise<void> {
+    await this.repository
+      .createQueryBuilder('coupon')
+      .softDelete()
+      .where('id_coupon = :id', { id })
+      .execute();
+
+    await this.repository
+      .createQueryBuilder('coupon')
+      .select('id_contract', 'coupon.id_contract')
+      .leftJoin('id_contract', 'contracts')
+      .update('contracts')
+      .set({
+        employee: null,
+        statusContract: { id: 1 },
+        generatedCoupon: false,
+      })
+      .where('id_contract = :idContract', { idContract })
+      .execute();
+  }
+
+  employeeRateEmployer(id: number): Promise<void> {
+    // TODO
+    return Promise.resolve(undefined);
+  }
+
+  employerRateEmployee(id: number): Promise<void> {
+    // TODO
+    return Promise.resolve(undefined);
+  }
 }

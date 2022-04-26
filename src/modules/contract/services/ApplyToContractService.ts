@@ -1,20 +1,17 @@
 import { container, inject, injectable } from 'tsyringe';
 
-import { IUserRepository } from '@modules/user/repositories/IUserRepository';
+import { ContractApplicationHelper } from '@shared/helpers/ContractApplicationHelper';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
-import { RetrieveUsersAndContractHelper } from '@shared/helpers/RetrieveUsersAndContractHelper';
 
 @injectable()
 export class ApplyToContractService {
   constructor(
     @inject('ContractRepository')
-    private contractRepository: IContractRepository,
-    @inject('UserRepository')
-    private userRepository: IUserRepository
+    private contractRepository: IContractRepository
   ) {}
 
   public async execute(id: number, user: { id: number }): Promise<void> {
-    const helper = container.resolve(RetrieveUsersAndContractHelper);
+    const helper = container.resolve(ContractApplicationHelper);
 
     const { contract, userInfo } = await helper.execute(id, user);
 

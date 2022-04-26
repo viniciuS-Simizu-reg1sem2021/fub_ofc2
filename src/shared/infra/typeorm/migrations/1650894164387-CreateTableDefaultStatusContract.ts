@@ -25,9 +25,8 @@ export class CreateTableDefaultStatusContract1650894164387
       })
     );
 
-    // TODO: VERIFICAR SE HOUVE MUDANÇAS NOS STATUS CONTRACT
     await queryRunner.query(
-      'INSERT INTO default_status_contract(status_contract) VALUES '
+      'INSERT INTO default_status_contract(status_contract) VALUES ("No employee"), ("Waiting for approval"), ("Working on it"), ("Finished")'
     );
   }
 

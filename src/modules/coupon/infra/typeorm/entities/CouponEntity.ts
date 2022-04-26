@@ -18,7 +18,7 @@ export class CouponEntity extends BaseEntity implements ICouponDTO {
 
   @ManyToOne(() => DefaultRatingEntity)
   @JoinColumn({ referencedColumnName: 'id', name: 'id_default_rating' })
-  ratingId: DefaultRatingEntity;
+  rating: DefaultRatingEntity;
 
   @ManyToOne(() => ContractEntity)
   @JoinColumn({ referencedColumnName: 'id', name: 'id_contract' })
@@ -29,4 +29,13 @@ export class CouponEntity extends BaseEntity implements ICouponDTO {
 
   @Column({ name: 'deadline' })
   deadline: Date;
+
+  @Column({ name: 'is_out_deadline' })
+  isOutDeadline: boolean;
+
+  @Column({ name: 'is_finished' })
+  isFinished: boolean;
+
+  @Column({ name: 'is_paid' })
+  isPaid: boolean;
 }

@@ -23,6 +23,22 @@ couponRoutes.put(
   couponController.update
 );
 
+couponRoutes.put('/confirm-job/:id', couponController.employeeConfirmJobDone);
+
+couponRoutes.put('/disprove-job/:id', couponController.employeeDisproveJobDone);
+
+couponRoutes.put(
+  '/confirm-payment/:id',
+  couponController.employeeConfirmPayment
+);
+
+couponRoutes.put(
+  '/remove-employee/:id',
+  couponController.employerRemoveEmployee
+);
+
+couponRoutes.patch('/finish-job/:id', couponController.employerFinishJob);
+
 couponRoutes.delete('/:id', couponController.softDelete);
 
 export { couponRoutes };

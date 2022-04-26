@@ -9,7 +9,6 @@ import {
 import { IUserDTO } from '@modules/user/dtos/IUserDTO';
 import { BaseEntity } from '@shared/infra/typeorm/entities/BaseEntity';
 import { DefaultRatingEntity } from '@modules/defaults/rating/infra/typeorm/entities/DefaultRatingEntity';
-import { DefaultCategoryEntity } from '@modules/defaults/category/infra/typeorm/entities/DefaultCategoryEntity';
 
 @Entity('users')
 export class UserEntity extends BaseEntity implements IUserDTO {
@@ -33,20 +32,6 @@ export class UserEntity extends BaseEntity implements IUserDTO {
 
   @Column({ name: 'image_path' })
   imagePath: string;
-
-  @ManyToMany(() => DefaultCategoryEntity)
-  @JoinTable({
-    name: 'aux_users_default_categories',
-    joinColumn: {
-      name: 'id_user',
-      referencedColumnName: 'id',
-    },
-    inverseJoinColumn: {
-      name: 'id_default_category',
-      referencedColumnName: 'id',
-    },
-  })
-  categories: DefaultCategoryEntity[];
 
   @ManyToMany(() => DefaultRatingEntity)
   @JoinTable({

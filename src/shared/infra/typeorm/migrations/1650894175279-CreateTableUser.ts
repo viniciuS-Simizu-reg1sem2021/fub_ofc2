@@ -21,6 +21,11 @@ export class CreateTableUser1650894175279 implements MigrationInterface {
             isUnique: true,
           },
           {
+            name: 'real_name',
+            type: 'varchar(240)',
+            isNullable: false,
+          },
+          {
             name: 'email',
             type: 'varchar(120)',
             isNullable: false,
@@ -61,10 +66,28 @@ export class CreateTableUser1650894175279 implements MigrationInterface {
             type: 'char(2)',
             isNullable: false,
           },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+            isNullable: false,
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'now()',
+            onUpdate: 'now()',
+            isNullable: false,
+          },
+          {
+            name: 'deleted_at',
+            type: 'timestamp',
+            default: null,
+            isNullable: true,
+          },
         ],
       })
     );
-    // TODO: ADICIONAR OS TIMESTAMPS
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

@@ -6,6 +6,11 @@ import { CreateCouponService } from '@modules/coupon/services/CreateCouponServic
 import { UpdateCouponService } from '@modules/coupon/services/UpdateCouponService';
 import { FindCouponByIdService } from '@modules/coupon/services/FindCouponByIdService';
 import { SoftDeleteCouponService } from '@modules/coupon/services/SoftDeleteCouponService';
+import { EmployeeConfirmJobDoneService } from '@modules/coupon/services/EmployeeConfirmJobDoneService';
+import { EmployeeConfirmPaymentService } from '@modules/coupon/services/EmployeeConfirmPaymentService';
+import { EmployerRemoveEmployeeService } from '@modules/coupon/services/EmployerRemoveEmployeeService';
+import { EmployeeDisproveJobDoneService } from '@modules/coupon/services/EmployeeDisproveJobDoneService';
+import { EmployerFinishJobService } from '@modules/coupon/services/EmployerFinishJobService';
 
 @injectable()
 export class CouponController {
@@ -63,10 +68,96 @@ export class CouponController {
     try {
       const service = container.resolve(UpdateCouponService);
 
+      const { user } = request.token.sub;
       const { id } = request.params;
       const data = request.body;
 
-      response.json(await service.execute(Number(id), data));
+      response.json(await service.execute(Number(id), user, data));
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async employeeConfirmJobDone(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const service = container.resolve(EmployeeConfirmJobDoneService);
+
+      const { id } = request.params;
+      const { user } = request.token.sub;
+
+      response.json(await service.execute(Number(id), user));
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async employeeDisproveJobDone(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const service = container.resolve(EmployeeDisproveJobDoneService);
+
+      const { id } = request.params;
+      const { user } = request.token.sub;
+
+      response.json(await service.execute(Number(id), user));
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async employeeConfirmPayment(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const service = container.resolve(EmployeeConfirmPaymentService);
+
+      const { id } = request.params;
+      const { user } = request.token.sub;
+
+      response.json(await service.execute(Number(id), user));
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async employerRemoveEmployee(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const service = container.resolve(EmployerRemoveEmployeeService);
+
+      const { user } = request.token.sub;
+      const { id } = request.params;
+
+      response.json(await service.execute(Number(id), user));
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async employerFinishJob(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const service = container.resolve(EmployerFinishJobService);
+
+      const { id } = request.params;
+      const { user } = request.token.sub;
+
+      response.json(await service.execute(Number(id), user));
     } catch (err) {
       next(err);
     }
