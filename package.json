@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \\\"Error: no test specified\\\" && exit 1",
-    "start": "node ./build/shared/infra/http/server.js",
+    "start": "npm run build && node build/shared/infra/http/server.js",
     "build": "rimraf ./build && tsc",
     "dev:server": "ts-node-dev -r tsconfig-paths/register --transpile-only --trace-warnings --inspect --ignore-watch node_modules src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
