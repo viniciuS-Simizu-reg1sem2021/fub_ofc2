@@ -30,6 +30,15 @@ export class UserEntity extends BaseEntity implements IUserDTO {
   @Column({ name: 'phone' })
   phone: string;
 
+  @Column({ name: 'description' })
+  description: string;
+
+  @Column({ name: 'ocupation' })
+  ocupation: string;
+
+  @Column({ name: 'birth_date' })
+  birthDate: Date;
+
   @Column({ name: 'image_path' })
   imagePath: string;
 

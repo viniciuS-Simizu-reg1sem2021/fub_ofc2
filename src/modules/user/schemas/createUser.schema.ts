@@ -6,9 +6,9 @@ const createUserSchema = Joi.object({
   password: Joi.string().required(),
   username: Joi.string().required(),
   phone: Joi.string().required(),
-  categories: Joi.array()
-    .items(Joi.object({ id: Joi.number().required() }))
-    .min(1),
+  description: Joi.string().optional(),
+  ocupation: Joi.string().required(),
+  birthDate: Joi.date().required(),
   street: Joi.string().required(),
   district: Joi.string().required(),
   city: Joi.string().required(),

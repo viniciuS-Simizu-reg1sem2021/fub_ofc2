@@ -42,6 +42,21 @@ export class CreateTableUser1650894175279 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: 'description',
+            type: 'text',
+            isNullable: true,
+          },
+          {
+            name: 'ocupation',
+            type: 'varchar(64)',
+            isNullable: false,
+          },
+          {
+            name: 'birth_date',
+            type: 'date',
+            isNullable: false,
+          },
+          {
             name: 'image_path',
             type: 'varchar(120)',
             isNullable: true,

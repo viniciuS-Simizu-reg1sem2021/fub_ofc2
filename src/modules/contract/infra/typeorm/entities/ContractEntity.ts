@@ -54,6 +54,15 @@ export class ContractEntity extends BaseEntity implements IContractDTO {
   @Column({ name: 'description' })
   description: string;
 
+  @Column({ name: 'district' })
+  district: string;
+
+  @Column({ name: 'city' })
+  city: string;
+
+  @Column({ name: 'proposed_value' })
+  proposedValue: number;
+
   @Column({ name: 'generated_coupon' })
   generatedCoupon: boolean;
 }

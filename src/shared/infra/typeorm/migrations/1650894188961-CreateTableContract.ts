@@ -42,6 +42,21 @@ export class CreateTableContract1650894188961 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: 'district',
+            type: 'varchar(240)',
+            isNullable: false,
+          },
+          {
+            name: 'city',
+            type: 'archar(240)',
+            isNullable: false,
+          },
+          {
+            name: 'proposed_value',
+            type: 'float',
+            isNullable: false,
+          },
+          {
             name: 'generated_coupon',
             type: 'boolean',
             isNullable: false,

@@ -9,5 +9,8 @@ export interface IContractDTO extends IBaseDTO {
   statusContract: IDefaultStatusContractDTO;
   title: string;
   description: string;
+  district: string;
+  city: string;
+  proposedValue: number;
   generatedCoupon: boolean;
 }
