@@ -8,7 +8,7 @@ export interface IUserDTO extends IBaseDTO {
   username: string;
   phone: string;
   description: string | null;
-  ocupation: string;
+  occupation: string;
   birthDate: Date;
   imagePath: string | null;
   ratings: IDefaultRatingDTO[];

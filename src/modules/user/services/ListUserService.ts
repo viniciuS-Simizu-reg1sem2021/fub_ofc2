@@ -6,7 +6,8 @@ import { IUserRepository } from '@modules/user/repositories/IUserRepository';
 @injectable()
 export class ListUserService {
   constructor(
-    @inject('UserRepository') private userRepository: IUserRepository
+    @inject('UserRepository')
+    private userRepository: IUserRepository
   ) {}
 
   public async execute(): Promise<IUserDTO[]> {

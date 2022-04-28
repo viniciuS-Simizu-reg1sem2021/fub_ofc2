@@ -7,7 +7,7 @@ const createUserSchema = Joi.object({
   username: Joi.string().required(),
   phone: Joi.string().required(),
   description: Joi.string().optional(),
-  ocupation: Joi.string().required(),
+  occupation: Joi.string().required(),
   birthDate: Joi.date().required(),
   street: Joi.string().required(),
   district: Joi.string().required(),

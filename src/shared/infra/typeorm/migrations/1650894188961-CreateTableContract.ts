@@ -48,7 +48,7 @@ export class CreateTableContract1650894188961 implements MigrationInterface {
           },
           {
             name: 'city',
-            type: 'archar(240)',
+            type: 'varchar(240)',
             isNullable: false,
           },
           {

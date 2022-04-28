@@ -33,8 +33,8 @@ export class UserEntity extends BaseEntity implements IUserDTO {
   @Column({ name: 'description' })
   description: string;
 
-  @Column({ name: 'ocupation' })
-  ocupation: string;
+  @Column({ name: 'occupation' })
+  occupation: string;
 
   @Column({ name: 'birth_date' })
   birthDate: Date;

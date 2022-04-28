@@ -47,7 +47,7 @@ export class CreateTableUser1650894175279 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'ocupation',
+            name: 'occupation',
             type: 'varchar(64)',
             isNullable: false,
           },
