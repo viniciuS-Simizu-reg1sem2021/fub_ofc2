@@ -1,6 +1,7 @@
+import { Repository } from 'typeorm';
 import { injectable } from 'tsyringe';
-import { getRepository, Repository } from 'typeorm';
 
+import dataSource from '@shared/infra/typeorm';
 import { INotificationRepository } from '@modules/notification/repositories/INotificationRepository';
 import { NotificationEntity } from '@modules/notification/infra/typeorm/entities/NotificationEntity';
 
@@ -9,7 +10,7 @@ export class NotificationRepository implements INotificationRepository {
   private repository: Repository<NotificationEntity>;
 
   constructor() {
-    this.repository = getRepository(NotificationEntity);
+    this.repository = dataSource.getRepository(NotificationEntity);
   }
 
   async create(data: NotificationEntity): Promise<void> {
@@ -20,8 +21,11 @@ export class NotificationRepository implements INotificationRepository {
     return this.repository.find({ loadRelationIds: true });
   }
 
-  async findById(id: number): Promise<NotificationEntity | undefined> {
-    return this.repository.findOne(id, { loadRelationIds: true });
+  async findById(id: number): Promise<NotificationEntity | null> {
+    return this.repository.findOne({
+      where: { id },
+      relations: ['employee', 'employer', 'contract'],
+    });
   }
 
   async update(id: number, data: Partial<NotificationEntity>): Promise<void> {

@@ -15,14 +15,12 @@ export class ApplyToContractService {
 
     const { contract, userInfo } = await helper.execute(id, user);
 
-    // @ts-ignore
-    if (user.id === contract.employer) {
+    if (user.id === contract.employer.id) {
       throw new Error('You cannot apply to your own contract');
     }
 
     contract.interested.forEach((interestedUser) => {
-      // @ts-ignore
-      if (interestedUser === user.id) {
+      if (interestedUser.id === user.id) {
         throw new Error('You already has applied to this job');
       }
     });

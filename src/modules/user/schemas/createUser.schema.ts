@@ -1,10 +1,9 @@
 import { Joi } from 'celebrate';
 
 const createUserSchema = Joi.object({
-  realName: Joi.string().required(),
+  name: Joi.string().required(),
   email: Joi.string().required(),
   password: Joi.string().required(),
-  username: Joi.string().required(),
   phone: Joi.string().required(),
   description: Joi.string().optional(),
   occupation: Joi.string().required(),

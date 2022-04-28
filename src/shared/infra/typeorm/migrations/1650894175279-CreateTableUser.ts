@@ -15,13 +15,7 @@ export class CreateTableUser1650894175279 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
-            name: 'username',
-            type: 'varchar(60)',
-            isNullable: false,
-            isUnique: true,
-          },
-          {
-            name: 'real_name',
+            name: 'name',
             type: 'varchar(240)',
             isNullable: false,
           },

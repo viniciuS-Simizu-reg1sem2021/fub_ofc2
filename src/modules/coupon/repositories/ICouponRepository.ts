@@ -5,7 +5,7 @@ export interface ICouponRepository {
 
   list(): Promise<ICouponDTO[]>;
 
-  findById(id: number): Promise<ICouponDTO | undefined>;
+  findById(id: number): Promise<ICouponDTO | null>;
 
   update(id: number, data: Partial<ICouponDTO>): Promise<void>;
 

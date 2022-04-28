@@ -1,6 +1,7 @@
+import { Repository } from 'typeorm';
 import { injectable } from 'tsyringe';
-import { getRepository, Repository } from 'typeorm';
 
+import dataSource from '@shared/infra/typeorm';
 import { UserEntity } from '@modules/user/infra/typeorm/entities/UserEntity';
 import { IUserRepository } from '@modules/user/repositories/IUserRepository';
 
@@ -9,7 +10,7 @@ export class UserRepository implements IUserRepository {
   private repository: Repository<UserEntity>;
 
   constructor() {
-    this.repository = getRepository(UserEntity);
+    this.repository = dataSource.getRepository(UserEntity);
   }
 
   async create(data: UserEntity): Promise<void> {
@@ -20,8 +21,8 @@ export class UserRepository implements IUserRepository {
     return this.repository.find({ loadRelationIds: true });
   }
 
-  async findById(id: number): Promise<UserEntity | undefined> {
-    return this.repository.findOne(id, { loadRelationIds: true });
+  async findById(id: number): Promise<UserEntity | null> {
+    return this.repository.findOne({ where: { id }, relations: ['ratings'] });
   }
 
   async update(id: number, data: Partial<UserEntity>): Promise<void> {
@@ -36,7 +37,7 @@ export class UserRepository implements IUserRepository {
     await this.repository.softDelete(id);
   }
 
-  async findByEmail(email: string): Promise<UserEntity | undefined> {
-    return this.repository.findOne({ email });
+  async findByEmail(email: string): Promise<UserEntity | null> {
+    return this.repository.findOneBy({ email });
   }
 }

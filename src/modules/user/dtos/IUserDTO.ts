@@ -4,8 +4,7 @@ import { IDefaultRatingDTO } from '@modules/defaults/rating/dtos/IDefaultRatingD
 export interface IUserDTO extends IBaseDTO {
   email: string;
   password: string;
-  realName: string;
-  username: string;
+  name: string;
   phone: string;
   description: string | null;
   occupation: string;

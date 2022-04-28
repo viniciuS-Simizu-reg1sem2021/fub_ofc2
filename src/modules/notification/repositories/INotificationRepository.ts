@@ -5,7 +5,7 @@ export interface INotificationRepository {
 
   list(): Promise<INotificationDTO[]>;
 
-  findById(id: number): Promise<INotificationDTO | undefined>;
+  findById(id: number): Promise<INotificationDTO | null>;
 
   update(id: number, data: Partial<INotificationDTO>): Promise<void>;
 

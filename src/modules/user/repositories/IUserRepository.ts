@@ -6,7 +6,7 @@ export interface IUserRepository {
 
   list(): Promise<IUserDTO[]>;
 
-  findById(id: number): Promise<IUserDTO | undefined>;
+  findById(id: number): Promise<IUserDTO | null>;
 
   update(id: number, data: Partial<IUserDTO>): Promise<void>;
 
@@ -14,5 +14,5 @@ export interface IUserRepository {
 
   softDelete(id: number): Promise<void>;
 
-  findByEmail(email: string): Promise<IUserDTO | undefined>;
+  findByEmail(email: string): Promise<IUserDTO | null>;
 }

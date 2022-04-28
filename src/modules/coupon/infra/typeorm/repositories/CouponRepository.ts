@@ -1,6 +1,7 @@
 import { injectable } from 'tsyringe';
-import { getRepository, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
+import dataSource from '@shared/infra/typeorm';
 import { ICouponRepository } from '@modules/coupon/repositories/ICouponRepository';
 import { CouponEntity } from '@modules/coupon/infra/typeorm/entities/CouponEntity';
 
@@ -9,7 +10,7 @@ export class CouponRepository implements ICouponRepository {
   private repository: Repository<CouponEntity>;
 
   constructor() {
-    this.repository = getRepository(CouponEntity);
+    this.repository = dataSource.getRepository(CouponEntity);
   }
 
   async create(data: CouponEntity): Promise<void> {
@@ -17,11 +18,14 @@ export class CouponRepository implements ICouponRepository {
   }
 
   async list(): Promise<CouponEntity[]> {
-    return this.repository.find({ loadRelationIds: true });
+    return this.repository.find();
   }
 
-  async findById(id: number): Promise<CouponEntity | undefined> {
-    return this.repository.findOne(id, { loadRelationIds: true });
+  async findById(id: number): Promise<CouponEntity | null> {
+    return this.repository.findOne({
+      where: { id },
+      relations: ['contract', 'rating'],
+    });
   }
 
   async update(id: number, data: Partial<CouponEntity>): Promise<void> {
@@ -88,7 +92,6 @@ export class CouponRepository implements ICouponRepository {
 
     await this.repository
       .createQueryBuilder('coupon')
-      .select('id_contract', 'coupon.id_contract')
       .leftJoin('id_contract', 'contracts')
       .update('contracts')
       .set({

@@ -21,11 +21,8 @@ export class UserEntity extends BaseEntity implements IUserDTO {
   @Column({ name: 'password' })
   password: string;
 
-  @Column({ name: 'real_name' })
-  realName: string;
-
-  @Column({ name: 'username' })
-  username: string;
+  @Column({ name: 'name' })
+  name: string;
 
   @Column({ name: 'phone' })
   phone: string;
