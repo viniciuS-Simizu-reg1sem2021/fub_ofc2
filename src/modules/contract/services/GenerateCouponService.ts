@@ -24,8 +24,7 @@ export class GenerateCouponService {
       throw new Error('Contract not found');
     }
 
-    // @ts-ignore
-    if (contract.employer !== user.id) {
+    if (contract.employer.id !== user.id) {
       throw new Error('You do not have permission to approve this contract');
     }
 

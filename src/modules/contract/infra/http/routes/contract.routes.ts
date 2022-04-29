@@ -25,6 +25,8 @@ contractRoutes.get('', contractController.list);
 
 contractRoutes.get('/:id', contractController.findById);
 
+contractRoutes.get('/contact/:id', contractController.retrieveEmployeeInfo);
+
 contractRoutes.put(
   '/:id',
   [celebrate({ [Segments.BODY]: updateContractSchema }, { abortEarly: false })],

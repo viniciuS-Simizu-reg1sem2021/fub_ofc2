@@ -6,11 +6,11 @@ import { CreateCouponService } from '@modules/coupon/services/CreateCouponServic
 import { UpdateCouponService } from '@modules/coupon/services/UpdateCouponService';
 import { FindCouponByIdService } from '@modules/coupon/services/FindCouponByIdService';
 import { SoftDeleteCouponService } from '@modules/coupon/services/SoftDeleteCouponService';
+import { EmployerFinishJobService } from '@modules/coupon/services/EmployerFinishJobService';
 import { EmployeeConfirmJobDoneService } from '@modules/coupon/services/EmployeeConfirmJobDoneService';
 import { EmployeeConfirmPaymentService } from '@modules/coupon/services/EmployeeConfirmPaymentService';
 import { EmployerRemoveEmployeeService } from '@modules/coupon/services/EmployerRemoveEmployeeService';
 import { EmployeeDisproveJobDoneService } from '@modules/coupon/services/EmployeeDisproveJobDoneService';
-import { EmployerFinishJobService } from '@modules/coupon/services/EmployerFinishJobService';
 
 @injectable()
 export class CouponController {

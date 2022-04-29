@@ -23,7 +23,7 @@ export class CreateTableAuxUsersDefaultRating1650898564287
           {
             name: 'aux_users_default_rating_id_user_FK',
             referencedTableName: 'users',
-            columnNames: ['is_user'],
+            columnNames: ['id_user'],
             referencedColumnNames: ['id_user'],
           },
           {

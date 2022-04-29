@@ -57,11 +57,6 @@ export class CreateTableContract1650894188961 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'value_lost_per_day',
-            type: 'float',
-            isNullable: false,
-          },
-          {
             name: 'generated_coupon',
             type: 'boolean',
             isNullable: false,

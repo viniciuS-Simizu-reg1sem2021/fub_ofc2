@@ -21,13 +21,13 @@ export class CreateTableAuxContractUser1650898613359
         ],
         foreignKeys: [
           {
-            name: 'aux_contracts_users_FK',
+            name: 'aux_contracts_users_id_contract_FK',
             referencedTableName: 'contracts',
             columnNames: ['id_contract'],
             referencedColumnNames: ['id_contract'],
           },
           {
-            name: 'aux_contracts_users_FK',
+            name: 'aux_contracts_users_id_user_FK',
             referencedTableName: 'users',
             columnNames: ['id_user'],
             referencedColumnNames: ['id_user'],

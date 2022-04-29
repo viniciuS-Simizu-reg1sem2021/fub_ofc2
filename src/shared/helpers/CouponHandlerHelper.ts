@@ -28,8 +28,9 @@ export class CouponHandlerHelper {
       throw new Error('Coupon not found');
     }
 
-    // @ts-ignore
-    const contract = await this.contractRepository.findById(coupon.contract);
+    const contract = await this.contractRepository.findById(
+      coupon.contract.id ?? 0
+    );
 
     if (!contract) {
       throw new Error('Contract not found');
@@ -37,16 +38,14 @@ export class CouponHandlerHelper {
 
     switch (userType) {
       case 'employee':
-        // @ts-ignore
-        if (contract.employee !== user.id) {
+        if (contract.employee.id !== user.id) {
           throw new Error('You cannot finalize a job that is not yours');
         }
 
         break;
 
       case 'employer':
-        // @ts-ignore
-        if (contract.employer !== user.id) {
+        if (contract.employer.id !== user.id) {
           throw new Error('You cannot edit a job that is not yours');
         }
 

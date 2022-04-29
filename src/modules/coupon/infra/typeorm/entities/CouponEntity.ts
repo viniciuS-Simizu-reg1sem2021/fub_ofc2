@@ -30,17 +30,11 @@ export class CouponEntity extends BaseEntity implements ICouponDTO {
   @Column({ name: 'deadline' })
   deadline: Date;
 
-  @Column({ name: 'value_lost_per_day' })
-  valueLostPerDay: number;
-
   @Column({ name: 'is_out_deadline' })
   isOutDeadline: boolean;
 
   @Column({ name: 'is_finished' })
   isFinished: boolean;
-
-  @Column({ name: 'finished_date' })
-  finishedDate: Date;
 
   @Column({ name: 'is_paid' })
   isPaid: boolean;

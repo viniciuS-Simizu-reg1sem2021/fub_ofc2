@@ -48,8 +48,11 @@ export class ContractApplicationHelper {
         throw new Error('This user does not exists');
       }
 
-      // @ts-ignore
-      if (!contract.interested.includes(selectedUser.id)) {
+      if (
+        !contract.interested
+          .map((interestedUser) => interestedUser.id)
+          .includes(selectedUser.id)
+      ) {
         throw new Error('This user is not interested in your job');
       }
 

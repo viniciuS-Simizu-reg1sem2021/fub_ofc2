@@ -23,7 +23,6 @@ export class EmployerFinishJobService {
       throw new Error('Employee did not confirmed the payment');
     }
 
-    // @ts-ignore
-    await this.couponRepository.employerFinishJob(id, coupon.contract);
+    await this.couponRepository.employerFinishJob(id, coupon.contract.id);
   }
 }

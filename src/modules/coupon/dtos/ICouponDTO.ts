@@ -7,9 +7,7 @@ export interface ICouponDTO extends IBaseDTO {
   contract: IContractDTO;
   value: number;
   deadline: Date;
-  valueLostPerDay: number;
   isOutDeadline: boolean;
   isFinished: boolean;
-  finishedDate?: Date;
   isPaid: boolean;
 }

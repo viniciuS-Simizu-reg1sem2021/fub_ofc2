@@ -10,14 +10,16 @@ config({ silent: true });
 const databaseConfig = database();
 
 const dataSource = new DataSource({
-  type: 'mysql',
+  type: databaseConfig.DB_DIALECT ? 'mariadb' : 'mysql',
+  migrationsRun: true,
   host: databaseConfig.DB_HOST,
   port: databaseConfig.DB_PORT,
   username: databaseConfig.DB_USER,
   password: databaseConfig.DB_PASSWORD,
   database: databaseConfig.DB_NAME,
   synchronize: false,
-  logging: false,
+  logging: true,
+  logger: 'file',
   entities: [
     resolve(__dirname, 'entities/*.{ts,js}'),
     resolve(

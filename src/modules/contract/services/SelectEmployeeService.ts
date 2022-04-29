@@ -23,8 +23,7 @@ export class SelectEmployeeService {
       selectedUserId
     );
 
-    // @ts-ignore
-    if (contract.employer !== user.id) {
+    if (contract.employer.id !== user.id) {
       throw new Error(
         'You do not have permission to select the employee for this contract'
       );

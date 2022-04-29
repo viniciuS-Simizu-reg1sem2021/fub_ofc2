@@ -103,13 +103,30 @@ export class CouponRepository implements ICouponRepository {
       .execute();
   }
 
-  employeeRateEmployer(id: number): Promise<void> {
+  async employeeRateEmployer(id: number): Promise<void> {
     // TODO
     return Promise.resolve(undefined);
   }
 
-  employerRateEmployee(id: number): Promise<void> {
+  async employerRateEmployee(
+    id: number,
+    ratingId: number,
+    idEmployee: number
+  ): Promise<void> {
+    await this.repository
+      .createQueryBuilder('coupon')
+      .update()
+      .set({ rating: { id: ratingId } })
+      .where('id_coupon = :id', { id })
+      .execute();
+
     // TODO
-    return Promise.resolve(undefined);
+    await this.repository
+      .createQueryBuilder('coupon')
+      .leftJoin('id_contract', 'contracts')
+      .leftJoin('id_employee', 'users')
+      .insert()
+      .into('aux_users_default_rating')
+      .values({ id_user: 'employee', id_default_rating: ratingId });
   }
 }

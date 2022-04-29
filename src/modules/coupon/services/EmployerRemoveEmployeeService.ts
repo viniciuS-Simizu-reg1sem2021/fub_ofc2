@@ -23,7 +23,6 @@ export class EmployerRemoveEmployeeService {
       throw new Error('You cannot remove a employee since deadline is meet');
     }
 
-    // @ts-ignore
-    await this.couponRepository.employerRemoveEmployee(id, coupon.contract);
+    await this.couponRepository.employerRemoveEmployee(id, coupon.contract.id);
   }
 }
