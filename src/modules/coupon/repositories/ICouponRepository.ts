@@ -24,12 +24,15 @@ export interface ICouponRepository {
   employerRemoveEmployee(id: number, contractId?: number): Promise<void>;
 
   // TODO: IMPLEMENTAR NO SERVIÇO, CONTROLLER E ROTA
-  employeeRateEmployer(id: number): Promise<void>;
+  employeeRateEmployer(
+    id: number,
+    ratingId: number,
+    employerId: number
+  ): Promise<void>;
 
-  // TODO: IMPLEMENTAR NO SERVIÇO, CONTROLLER E ROTA
   employerRateEmployee(
     id: number,
     ratingId: number,
-    employeeId?: number
+    employeeId: number
   ): Promise<void>;
 }

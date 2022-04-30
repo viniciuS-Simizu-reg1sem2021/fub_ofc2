@@ -17,8 +17,18 @@ export class CouponEntity extends BaseEntity implements ICouponDTO {
   id?: number;
 
   @ManyToOne(() => DefaultRatingEntity)
-  @JoinColumn({ referencedColumnName: 'id', name: 'id_default_rating' })
-  rating: DefaultRatingEntity;
+  @JoinColumn({
+    referencedColumnName: 'id',
+    name: 'id_employee_default_rating',
+  })
+  employeeRating: DefaultRatingEntity;
+
+  @ManyToOne(() => DefaultRatingEntity)
+  @JoinColumn({
+    referencedColumnName: 'id',
+    name: 'id_employer_default_rating',
+  })
+  employerRating: DefaultRatingEntity;
 
   @ManyToOne(() => ContractEntity)
   @JoinColumn({ referencedColumnName: 'id', name: 'id_contract' })

@@ -3,6 +3,7 @@ import { celebrate, Segments } from 'celebrate';
 
 import { uploads } from '@shared/infra/middlewares/upload';
 import { loginSchema } from '@modules/user/schemas/login.schema';
+import { ensureAuth } from '@shared/infra/middlewares/ensureAuth';
 import { createUserSchema } from '@modules/user/schemas/createUser.schema';
 import { updateUserSchema } from '@modules/user/schemas/updateUser.schema';
 import { changePasswordSchema } from '@modules/user/schemas/changePassword.schema';
@@ -43,15 +44,16 @@ userRoutes.post('/change-password/:id/:token', [
 
 userRoutes.get('', userController.list);
 
-userRoutes.get('/:id', userController.findById);
+userRoutes.get('/:id', ensureAuth, userController.findById);
 
 userRoutes.put(
   '/:id',
   uploads.single('profilePicture'),
+  ensureAuth,
   [celebrate({ [Segments.BODY]: updateUserSchema }, { abortEarly: false })],
   userController.update
 );
 
-userRoutes.delete('/:id', userController.delete);
+userRoutes.delete('/:id', ensureAuth, userController.delete);
 
 export { userRoutes };

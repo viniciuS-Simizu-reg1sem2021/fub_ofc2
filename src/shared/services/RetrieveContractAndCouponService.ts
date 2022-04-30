@@ -1,15 +1,17 @@
 import { inject, injectable } from 'tsyringe';
 
 import { ICouponDTO } from '@modules/coupon/dtos/ICouponDTO';
+import { IContractDTO } from '@modules/contract/dtos/IContractDTO';
 import { ICouponRepository } from '@modules/coupon/repositories/ICouponRepository';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
 
-interface CouponHandlerRetrievedInfo {
+type ContractAndCoupon = {
   coupon: ICouponDTO;
-}
+  contract: IContractDTO;
+};
 
 @injectable()
-export class CouponHandlerHelper {
+export class RetrieveContractAndCouponService {
   constructor(
     @inject('CouponRepository')
     private couponRepository: ICouponRepository,
@@ -17,44 +19,25 @@ export class CouponHandlerHelper {
     private contractRepository: IContractRepository
   ) {}
 
-  public async execute(
-    id: number,
-    user: { id: number },
-    userType: string
-  ): Promise<CouponHandlerRetrievedInfo> {
+  public async execute(id: number): Promise<ContractAndCoupon> {
     const coupon = await this.couponRepository.findById(id);
 
     if (!coupon) {
-      throw new Error('Coupon not found');
+      throw new Error('Contract not found');
+    }
+
+    if (!coupon.isPaid) {
+      throw new Error('This coupon is not paid yet');
     }
 
     const contract = await this.contractRepository.findById(
-      coupon.contract.id ?? 0
+      Number(coupon.contract.id)
     );
 
     if (!contract) {
       throw new Error('Contract not found');
     }
 
-    switch (userType) {
-      case 'employee':
-        if (contract.employee.id !== user.id) {
-          throw new Error('You cannot finalize a job that is not yours');
-        }
-
-        break;
-
-      case 'employer':
-        if (contract.employer.id !== user.id) {
-          throw new Error('You cannot edit a job that is not yours');
-        }
-
-        break;
-
-      default:
-        throw new Error('User type not found');
-    }
-
-    return { coupon };
+    return { coupon, contract };
   }
 }

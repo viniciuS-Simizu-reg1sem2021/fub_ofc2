@@ -1,6 +1,6 @@
 import { container, inject, injectable } from 'tsyringe';
 
-import { CouponHandlerHelper } from '@shared/helpers/CouponHandlerHelper';
+import { CouponHandlerService } from '@shared/services/CouponHandlerService';
 import { ICouponRepository } from '@modules/coupon/repositories/ICouponRepository';
 
 @injectable()
@@ -11,9 +11,9 @@ export class EmployerRemoveEmployeeService {
   ) {}
 
   public async execute(id: number, user: { id: number }): Promise<void> {
-    const helper = container.resolve(CouponHandlerHelper);
+    const service = container.resolve(CouponHandlerService);
 
-    const { coupon } = await helper.execute(id, user, 'employer');
+    const { coupon } = await service.execute(id, user, 'employer');
 
     if (coupon.isFinished || coupon.isPaid) {
       throw new Error('You cannot remove a employee that finished the job');

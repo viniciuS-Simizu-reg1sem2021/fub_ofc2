@@ -14,6 +14,8 @@ notificationRoutes.post(
   notificationController.create
 );
 
+notificationRoutes.get('/user', notificationController.findByUser);
+
 notificationRoutes.get('', notificationController.list);
 
 notificationRoutes.get('/:id', notificationController.findById);

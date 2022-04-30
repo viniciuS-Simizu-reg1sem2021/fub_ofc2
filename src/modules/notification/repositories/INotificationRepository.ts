@@ -1,4 +1,5 @@
 import { INotificationDTO } from '@modules/notification/dtos/INotificationDTO';
+import { NotificationEntity } from '@modules/notification/infra/typeorm/entities/NotificationEntity';
 
 export interface INotificationRepository {
   create(data: INotificationDTO): Promise<void>;
@@ -12,4 +13,9 @@ export interface INotificationRepository {
   delete(id: number): Promise<void>;
 
   softDelete(id: number): Promise<void>;
+
+  findByUser(user: { id: number }): Promise<{
+    employeeNotifications: NotificationEntity[];
+    employerNotifications: NotificationEntity[];
+  }>;
 }

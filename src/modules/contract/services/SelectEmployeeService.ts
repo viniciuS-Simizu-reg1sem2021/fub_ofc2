@@ -1,6 +1,6 @@
 import { container, inject, injectable } from 'tsyringe';
 
-import { ContractApplicationHelper } from '@shared/helpers/ContractApplicationHelper';
+import { ContractApplicationService } from '@shared/services/ContractApplicationService';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
 
 @injectable()
@@ -15,9 +15,9 @@ export class SelectEmployeeService {
     user: { id: number },
     selectedUserId: number
   ): Promise<void> {
-    const helper = container.resolve(ContractApplicationHelper);
+    const service = container.resolve(ContractApplicationService);
 
-    const { contract, selectedUser } = await helper.execute(
+    const { contract, selectedUser } = await service.execute(
       id,
       user,
       selectedUserId

@@ -4,7 +4,7 @@ import { ICouponRepository } from '@modules/coupon/repositories/ICouponRepositor
 import { RetrieveContractAndCouponService } from '@shared/services/RetrieveContractAndCouponService';
 
 @injectable()
-export class EmployerRateService {
+export class EmployeeRateService {
   constructor(
     @inject('CouponRepository')
     private couponRepository: ICouponRepository
@@ -19,18 +19,18 @@ export class EmployerRateService {
 
     const { coupon, contract } = await service.execute(id);
 
-    if (contract.employer.id !== user.id) {
+    if (contract.employee.id !== user.id) {
       throw new Error('You can not rate this employee');
     }
 
-    if (coupon.employerRating) {
+    if (coupon.employeeRating) {
       throw new Error('You already rated this job');
     }
 
-    await this.couponRepository.employerRateEmployee(
+    await this.couponRepository.employeeRateEmployer(
       id,
       ratingId,
-      Number(contract.employee.id)
+      Number(contract.employer.id)
     );
   }
 }

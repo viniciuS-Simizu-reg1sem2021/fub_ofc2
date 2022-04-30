@@ -18,13 +18,16 @@ export class CouponRepository implements ICouponRepository {
   }
 
   async list(): Promise<CouponEntity[]> {
-    return this.repository.find();
+    return this.repository.find({
+      relations: ['employeeRating', 'employerRating'],
+    });
   }
 
   async findById(id: number): Promise<CouponEntity | null> {
     return this.repository.findOne({
       where: { id },
-      relations: ['contract', 'rating'],
+      relations: ['contract', 'employeeRating', 'employerRating'],
+      loadEagerRelations: true,
     });
   }
 
@@ -103,9 +106,26 @@ export class CouponRepository implements ICouponRepository {
       .execute();
   }
 
-  async employeeRateEmployer(id: number): Promise<void> {
-    // TODO
-    return Promise.resolve(undefined);
+  async employeeRateEmployer(
+    id: number,
+    ratingId: number,
+    idEmployer: number
+  ): Promise<void> {
+    await this.repository
+      .createQueryBuilder('coupon')
+      .update()
+      .set({ employeeRating: { id: ratingId } })
+      .where('id_coupon = :id', { id })
+      .execute();
+
+    await this.repository
+      .createQueryBuilder('coupon')
+      .leftJoin('id_contract', 'contracts')
+      .leftJoin('id_employer', 'users')
+      .insert()
+      .into('aux_users_default_rating')
+      .values({ id_user: idEmployer, id_default_rating: ratingId })
+      .execute();
   }
 
   async employerRateEmployee(
@@ -116,17 +136,17 @@ export class CouponRepository implements ICouponRepository {
     await this.repository
       .createQueryBuilder('coupon')
       .update()
-      .set({ rating: { id: ratingId } })
+      .set({ employerRating: { id: ratingId } })
       .where('id_coupon = :id', { id })
       .execute();
 
-    // TODO
     await this.repository
       .createQueryBuilder('coupon')
       .leftJoin('id_contract', 'contracts')
       .leftJoin('id_employee', 'users')
       .insert()
       .into('aux_users_default_rating')
-      .values({ id_user: 'employee', id_default_rating: ratingId });
+      .values({ id_user: idEmployee, id_default_rating: ratingId })
+      .execute();
   }
 }

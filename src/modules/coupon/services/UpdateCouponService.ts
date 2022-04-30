@@ -2,7 +2,7 @@ import { container, inject, injectable } from 'tsyringe';
 
 import { ICouponDTO } from '@modules/coupon/dtos/ICouponDTO';
 import { ICouponRepository } from '@modules/coupon/repositories/ICouponRepository';
-import { CouponHandlerHelper } from '@shared/helpers/CouponHandlerHelper';
+import { CouponHandlerService } from '@shared/services/CouponHandlerService';
 
 @injectable()
 export class UpdateCouponService {
@@ -16,9 +16,9 @@ export class UpdateCouponService {
     user: { id: number },
     data: Partial<ICouponDTO>
   ): Promise<void> {
-    const helper = container.resolve(CouponHandlerHelper);
+    const service = container.resolve(CouponHandlerService);
 
-    const { coupon } = await helper.execute(id, user, 'employer');
+    const { coupon } = await service.execute(id, user, 'employer');
 
     if (!coupon.isOutDeadline) {
       throw new Error('You cannot modify a contract since deadline is meet');

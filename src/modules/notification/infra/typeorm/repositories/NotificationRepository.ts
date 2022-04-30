@@ -39,4 +39,19 @@ export class NotificationRepository implements INotificationRepository {
   async softDelete(id: number): Promise<void> {
     await this.repository.softDelete(id);
   }
+
+  async findByUser(user: { id: number }): Promise<{
+    employeeNotifications: NotificationEntity[];
+    employerNotifications: NotificationEntity[];
+  }> {
+    const employeeNotifications = await this.repository.find({
+      where: { employee: { id: user.id } },
+    });
+
+    const employerNotifications = await this.repository.find({
+      where: { employer: { id: user.id } },
+    });
+
+    return { employeeNotifications, employerNotifications };
+  }
 }

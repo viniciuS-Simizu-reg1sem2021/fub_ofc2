@@ -1,6 +1,6 @@
 import { container, inject, injectable } from 'tsyringe';
 
-import { ContractApplicationHelper } from '@shared/helpers/ContractApplicationHelper';
+import { ContractApplicationService } from '@shared/services/ContractApplicationService';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
 
 @injectable()
@@ -11,9 +11,9 @@ export class ApplyToContractService {
   ) {}
 
   public async execute(id: number, user: { id: number }): Promise<void> {
-    const helper = container.resolve(ContractApplicationHelper);
+    const service = container.resolve(ContractApplicationService);
 
-    const { contract, userInfo } = await helper.execute(id, user);
+    const { contract, userInfo } = await service.execute(id, user);
 
     if (user.id === contract.employer.id) {
       throw new Error('You cannot apply to your own contract');

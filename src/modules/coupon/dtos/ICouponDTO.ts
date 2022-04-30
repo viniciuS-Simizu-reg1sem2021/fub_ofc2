@@ -3,7 +3,8 @@ import { IContractDTO } from '@modules/contract/dtos/IContractDTO';
 import { IDefaultRatingDTO } from '@modules/defaults/rating/dtos/IDefaultRatingDTO';
 
 export interface ICouponDTO extends IBaseDTO {
-  rating: IDefaultRatingDTO;
+  employeeRating: IDefaultRatingDTO;
+  employerRating: IDefaultRatingDTO;
   contract: IContractDTO;
   value: number;
   deadline: Date;

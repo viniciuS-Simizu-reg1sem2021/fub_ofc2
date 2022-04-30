@@ -20,7 +20,13 @@ export class CreateTableCoupon1650894197531 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'id_default_rating',
+            name: 'id_employee_default_rating',
+            type: 'integer',
+            isNullable: true,
+            default: null,
+          },
+          {
+            name: 'id_employer_default_rating',
             type: 'integer',
             isNullable: true,
             default: null,
@@ -81,9 +87,15 @@ export class CreateTableCoupon1650894197531 implements MigrationInterface {
             referencedColumnNames: ['id_contract'],
           },
           {
-            name: 'coupons_default_rating_FK',
+            name: 'coupons_employee_default_rating_FK',
             referencedTableName: 'default_rating',
-            columnNames: ['id_default_rating'],
+            columnNames: ['id_employee_default_rating'],
+            referencedColumnNames: ['id_default_rating'],
+          },
+          {
+            name: 'coupons_employer_default_rating_FK',
+            referencedTableName: 'default_rating',
+            columnNames: ['id_employer_default_rating'],
             referencedColumnNames: ['id_default_rating'],
           },
         ],

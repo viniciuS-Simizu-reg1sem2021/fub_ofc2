@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { celebrate, Segments } from 'celebrate';
 
+import { ratingSchema } from '@modules/coupon/schemas/rating.schema';
 import { createCouponSchema } from '@modules/coupon/schemas/createCoupon.schema';
 import { updateCouponSchema } from '@modules/coupon/schemas/updateCoupon.schema';
 import { CouponController } from '@modules/coupon/infra/http/controllers/CouponController';
@@ -12,6 +13,18 @@ couponRoutes.post('', [
   celebrate({ [Segments.BODY]: createCouponSchema }, { abortEarly: false }),
   couponController.create,
 ]);
+
+couponRoutes.post(
+  '/employer/:id',
+  celebrate({ [Segments.BODY]: ratingSchema }, { abortEarly: false }),
+  couponController.employerRateEmployee
+);
+
+couponRoutes.post(
+  '/employee/:id',
+  celebrate({ [Segments.BODY]: ratingSchema }, { abortEarly: false }),
+  couponController.employeeRateEmployer
+);
 
 couponRoutes.get('', couponController.list);
 
