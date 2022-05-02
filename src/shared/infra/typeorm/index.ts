@@ -10,7 +10,7 @@ config({ silent: true });
 const databaseConfig = database();
 
 const dataSource = new DataSource({
-  type: databaseConfig.DB_DIALECT ? 'mariadb' : 'mysql',
+  type: 'postgres',
   migrationsRun: true,
   host: databaseConfig.DB_HOST,
   port: databaseConfig.DB_PORT,
