@@ -8,7 +8,8 @@
     "start": "npm run build && node dist/src/shared/infra/http/server.js",
     "build": "rimraf dist/* && tsc -p tsconfig.json && tscpaths -p tsconfig.json -s . -o ./dist",
     "dev:server": "ts-node-dev -r tsconfig-paths/register --transpile-only --trace-warnings --inspect --ignore-watch node_modules src/shared/infra/http/server.ts",
-    "typeorm": "typeorm-ts-node-commonjs"
+    "typeorm": "typeorm-ts-node-commonjs",
+    "deploy": "git add . && git commit -m Heroku && git push heroku master"
   },
   "author": "Matheus Dantas Ricardo, Vinicius Simizu, Vinicius Bortolloti",
   "license": "ISC",
@@ -48,6 +49,7 @@
     "mysql": "^2.18.1",
     "nanoid": "^3.3.2",
     "nodemailer": "^6.7.3",
+    "pg": "^8.7.3",
     "postgres": "^3.1.0",
     "reflect-metadata": "^0.1.13",
     "tsc-node": "^0.0.3",
