@@ -26,7 +26,7 @@ export class CreateTableDefaultStatusContract1650894164387
     );
 
     await queryRunner.query(
-      'INSERT INTO default_status_contract(status_contract) VALUES ("No employee"), ("Waiting for approval"), ("Working on it"), ("Finished")'
+      "INSERT INTO default_status_contract (status_contract) VALUES ('No employee'), ('Waiting for approval'), ('Working on it'), ('Finished')"
     );
   }
 
