@@ -1,15 +1,15 @@
 import { IBaseDTO } from '@shared/dtos/IBaseDTO';
 import { IDefaultRatingDTO } from '@modules/defaults/rating/dtos/IDefaultRatingDTO';
-import { IDefaultCategoryDTO } from '@modules/defaults/category/dtos/IDefaultCategoryDTO';
 
 export interface IUserDTO extends IBaseDTO {
   email: string;
   password: string;
-  realName: string;
-  username: string;
+  name: string;
   phone: string;
+  description: string | null;
+  occupation: string;
+  birthDate: Date;
   imagePath: string | null;
-  categories: IDefaultCategoryDTO[];
   ratings: IDefaultRatingDTO[];
   street: string;
   district: string;

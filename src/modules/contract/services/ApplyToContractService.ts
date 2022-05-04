@@ -1,31 +1,26 @@
 import { container, inject, injectable } from 'tsyringe';
 
-import { IUserRepository } from '@modules/user/repositories/IUserRepository';
+import { ContractApplicationService } from '@shared/services/ContractApplicationService';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
-import { RetrieveUsersAndContractHelper } from '@shared/helpers/RetrieveUsersAndContractHelper';
 
 @injectable()
 export class ApplyToContractService {
   constructor(
     @inject('ContractRepository')
-    private contractRepository: IContractRepository,
-    @inject('UserRepository')
-    private userRepository: IUserRepository
+    private contractRepository: IContractRepository
   ) {}
 
   public async execute(id: number, user: { id: number }): Promise<void> {
-    const helper = container.resolve(RetrieveUsersAndContractHelper);
+    const service = container.resolve(ContractApplicationService);
 
-    const { contract, userInfo } = await helper.execute(id, user);
+    const { contract, userInfo } = await service.execute(id, user);
 
-    // @ts-ignore
-    if (user.id === contract.employer) {
+    if (user.id === contract.employer.id) {
       throw new Error('You cannot apply to your own contract');
     }
 
     contract.interested.forEach((interestedUser) => {
-      // @ts-ignore
-      if (interestedUser === user.id) {
+      if (interestedUser.id === user.id) {
         throw new Error('You already has applied to this job');
       }
     });

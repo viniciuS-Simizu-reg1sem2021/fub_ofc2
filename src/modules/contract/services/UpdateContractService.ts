@@ -21,13 +21,11 @@ export class UpdateContractService {
       throw new Error('Contract not found');
     }
 
-    // @ts-ignore
-    if (contract.statusContract === 2 || contract.statusContract === 3) {
+    if (contract.statusContract.id === 2 || contract.statusContract.id === 3) {
       throw new Error('You cannot modify this contract');
     }
 
-    // @ts-ignore
-    if (contract.employer !== user.id) {
+    if (contract.employer.id !== user.id) {
       throw new Error('You do not have permission to modify this contract');
     }
 

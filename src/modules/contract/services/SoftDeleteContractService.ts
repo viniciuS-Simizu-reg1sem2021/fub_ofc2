@@ -16,18 +16,15 @@ export class SoftDeleteContractService {
       throw new Error('Contract not found');
     }
 
-    // @ts-ignore
-    if (contract.statusContract === 2) {
-      throw new Error('You cannot delete a contract tha have an employee');
+    if (contract.statusContract.id === 2 || contract.statusContract.id === 3) {
+      throw new Error('You cannot delete a contract that have an employee');
     }
 
-    // @ts-ignore
-    if (contract.statusContract === 3) {
+    if (contract.statusContract.id === 4) {
       throw new Error('You cannot delete a finished contract');
     }
 
-    // @ts-ignore
-    if (contract.employer !== user.id) {
+    if (contract.employer.id !== user.id) {
       throw new Error(
         'You do not have permission to select the employee for this contract'
       );

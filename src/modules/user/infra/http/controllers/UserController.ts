@@ -6,7 +6,9 @@ import { LoginUserService } from '@modules/user/services/LoginUserService';
 import { UpdateUserService } from '@modules/user/services/UpdateUserService';
 import { CreateUserService } from '@modules/user/services/CreateUserService';
 import { FindUserByIdService } from '@modules/user/services/FindUserByIdService';
+import { ChangePasswordService } from '@modules/user/services/ChangePasswordService';
 import { SoftDeleteUserService } from '@modules/user/services/SoftDeleteUserService';
+import { RecoverPasswordService } from '@modules/user/services/RecoverPasswordService';
 
 @injectable()
 export class UserController {
@@ -38,6 +40,39 @@ export class UserController {
       const loginRequest = request.body;
 
       response.json({ auth: true, token: await service.execute(loginRequest) });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async recoverPassword(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const service = container.resolve(RecoverPasswordService);
+
+      const { email } = request.body;
+
+      response.json(await service.execute(email));
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async changePassword(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const service = container.resolve(ChangePasswordService);
+
+      const { id, token } = request.params;
+      const data = request.body;
+
+      response.json(await service.execute(Number(id), token, data));
     } catch (err) {
       next(err);
     }

@@ -13,7 +13,6 @@ import { IContractDTO } from '@modules/contract/dtos/IContractDTO';
 import { BaseEntity } from '@shared/infra/typeorm/entities/BaseEntity';
 import { UserEntity } from '@modules/user/infra/typeorm/entities/UserEntity';
 import { DefaultStatusContractEntity } from '@modules/defaults/statuscontract/infra/typeorm/entities/DefaultStatusContractEntity';
-import { DefaultCategoryEntity } from '@modules/defaults/category/infra/typeorm/entities/DefaultCategoryEntity';
 
 @Entity('contracts')
 export class ContractEntity extends BaseEntity implements IContractDTO {
@@ -49,18 +48,20 @@ export class ContractEntity extends BaseEntity implements IContractDTO {
   })
   statusContract: DefaultStatusContractEntity;
 
-  @ManyToOne(() => DefaultCategoryEntity)
-  @JoinColumn({ referencedColumnName: 'id', name: 'id_default_category' })
-  category: DefaultCategoryEntity;
-
   @Column({ name: 'title' })
   title: string;
 
   @Column({ name: 'description' })
   description: string;
 
-  @Column({ name: 'is_paid' })
-  isPaid: boolean;
+  @Column({ name: 'district' })
+  district: string;
+
+  @Column({ name: 'city' })
+  city: string;
+
+  @Column({ name: 'proposed_value' })
+  proposedValue: number;
 
   @Column({ name: 'generated_coupon' })
   generatedCoupon: boolean;

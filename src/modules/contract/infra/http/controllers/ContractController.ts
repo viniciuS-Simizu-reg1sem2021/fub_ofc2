@@ -10,7 +10,7 @@ import { SelectEmployeeService } from '@modules/contract/services/SelectEmployee
 import { ApplyToContractService } from '@modules/contract/services/ApplyToContractService';
 import { FindContractByIdService } from '@modules/contract/services/FindContractByIdService';
 import { SoftDeleteContractService } from '@modules/contract/services/SoftDeleteContractService';
-import { ConfirmPaymentService } from '@modules/contract/services/ConfirmPaymentService';
+import { EmployerRetrieveContactService } from '@modules/contract/services/EmployerRetrieveContactService';
 
 @injectable()
 export class ContractController {
@@ -74,6 +74,23 @@ export class ContractController {
       const { id } = request.params;
 
       response.json(await service.execute(Number(id)));
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async retrieveEmployeeInfo(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const service = container.resolve(EmployerRetrieveContactService);
+
+      const { user } = request.token.sub;
+      const { id } = request.params;
+
+      response.json(await service.execute(Number(id), user));
     } catch (err) {
       next(err);
     }
@@ -145,23 +162,6 @@ export class ContractController {
       response.json(
         await service.execute(Number(id), user, Number(selectedUserId))
       );
-    } catch (err) {
-      next(err);
-    }
-  }
-
-  public async confirmPayment(
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ): Promise<void> {
-    try {
-      const service = container.resolve(ConfirmPaymentService);
-
-      const { id } = request.params;
-      const { user } = request.token.sub;
-
-      response.json(await service.execute(Number(id), user));
     } catch (err) {
       next(err);
     }

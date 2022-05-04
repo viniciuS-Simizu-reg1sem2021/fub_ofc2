@@ -26,7 +26,7 @@ export class CreateTableDefaultRating1650894144347
     );
 
     await queryRunner.query(
-      'INSERT INTO default_rating(rating) VALUES (0.5), (1.0), (1.5), (2.0), (2.5), (3.0), (3.5), (4.0), (4.5), (5.0)'
+      'INSERT INTO default_rating (rating) VALUES (0.5), (1.0), (1.5), (2.0), (2.5), (3.0), (3.5), (4.0), (4.5), (5.0)'
     );
   }
 

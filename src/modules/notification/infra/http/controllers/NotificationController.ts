@@ -6,6 +6,7 @@ import { CreateNotificationService } from '@modules/notification/services/Create
 import { UpdateNotificationService } from '@modules/notification/services/UpdateNotificationService';
 import { FindNotificationByIdService } from '@modules/notification/services/FindNotificationByIdService';
 import { SoftDeleteNotificationService } from '@modules/notification/services/SoftDeleteNotificationService';
+import { FindNotificationByUserService } from '@modules/notification/services/FindNotificationByUserService';
 
 @injectable()
 export class NotificationController {
@@ -46,6 +47,22 @@ export class NotificationController {
       const { id } = request.params;
 
       response.json(await service.execute(Number(id)));
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async findByUser(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const service = container.resolve(FindNotificationByUserService);
+
+      const { user } = request.token.sub;
+
+      response.json(await service.execute(user));
     } catch (err) {
       next(err);
     }

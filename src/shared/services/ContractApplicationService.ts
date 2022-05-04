@@ -12,7 +12,7 @@ interface RetrievedInfo {
 }
 
 @injectable()
-export class RetrieveUsersAndContractHelper {
+export class ContractApplicationService {
   constructor(
     @inject('ContractRepository')
     private contractRepository: IContractRepository,
@@ -48,8 +48,11 @@ export class RetrieveUsersAndContractHelper {
         throw new Error('This user does not exists');
       }
 
-      // @ts-ignore
-      if (!contract.interested.includes(selectedUser.id)) {
+      if (
+        !contract.interested
+          .map((interestedUser) => interestedUser.id)
+          .includes(selectedUser.id)
+      ) {
         throw new Error('This user is not interested in your job');
       }
 

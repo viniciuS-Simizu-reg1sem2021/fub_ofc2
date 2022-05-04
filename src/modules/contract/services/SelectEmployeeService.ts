@@ -1,7 +1,7 @@
 import { container, inject, injectable } from 'tsyringe';
 
+import { ContractApplicationService } from '@shared/services/ContractApplicationService';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
-import { RetrieveUsersAndContractHelper } from '@shared/helpers/RetrieveUsersAndContractHelper';
 
 @injectable()
 export class SelectEmployeeService {
@@ -15,16 +15,15 @@ export class SelectEmployeeService {
     user: { id: number },
     selectedUserId: number
   ): Promise<void> {
-    const helper = container.resolve(RetrieveUsersAndContractHelper);
+    const service = container.resolve(ContractApplicationService);
 
-    const { contract, selectedUser } = await helper.execute(
+    const { contract, selectedUser } = await service.execute(
       id,
       user,
       selectedUserId
     );
 
-    // @ts-ignore
-    if (contract.employer !== user.id) {
+    if (contract.employer.id !== user.id) {
       throw new Error(
         'You do not have permission to select the employee for this contract'
       );

@@ -15,10 +15,9 @@ export class CreateTableUser1650894175279 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
-            name: 'username',
-            type: 'varchar(60)',
+            name: 'name',
+            type: 'varchar(240)',
             isNullable: false,
-            isUnique: true,
           },
           {
             name: 'email',
@@ -34,6 +33,21 @@ export class CreateTableUser1650894175279 implements MigrationInterface {
           {
             name: 'phone',
             type: 'varchar(20)',
+            isNullable: false,
+          },
+          {
+            name: 'description',
+            type: 'text',
+            isNullable: true,
+          },
+          {
+            name: 'occupation',
+            type: 'varchar(64)',
+            isNullable: false,
+          },
+          {
+            name: 'birth_date',
+            type: 'date',
             isNullable: false,
           },
           {
@@ -61,10 +75,28 @@ export class CreateTableUser1650894175279 implements MigrationInterface {
             type: 'char(2)',
             isNullable: false,
           },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+            isNullable: false,
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'now()',
+            onUpdate: 'now()',
+            isNullable: false,
+          },
+          {
+            name: 'deleted_at',
+            type: 'timestamp',
+            default: null,
+            isNullable: true,
+          },
         ],
       })
     );
-    // TODO: ADICIONAR OS TIMESTAMPS
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

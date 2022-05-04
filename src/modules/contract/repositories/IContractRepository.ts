@@ -6,7 +6,7 @@ export interface IContractRepository {
 
   list(): Promise<IContractDTO[]>;
 
-  findById(id: number): Promise<IContractDTO | undefined>;
+  findById(id: number): Promise<IContractDTO | null>;
 
   update(id: number, data: Partial<IContractDTO>): Promise<void>;
 
@@ -21,6 +21,4 @@ export interface IContractRepository {
   selectEmployee(id: number, employee: IUserDTO): Promise<void>;
 
   generateCoupon(id: number): Promise<void>;
-
-  confirmPayment(id: number): Promise<void>;
 }

@@ -1,17 +1,18 @@
+import { Repository } from 'typeorm';
 import { injectable } from 'tsyringe';
-import { getRepository, Repository } from 'typeorm';
 
+import dataSource from '@shared/infra/typeorm';
+import { IUserDTO } from '@modules/user/dtos/IUserDTO';
 import { UserEntity } from '@modules/user/infra/typeorm/entities/UserEntity';
 import { ContractEntity } from '@modules/contract/infra/typeorm/entities/ContractEntity';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
-import { IUserDTO } from '@modules/user/dtos/IUserDTO';
 
 @injectable()
 export class ContractRepository implements IContractRepository {
   private repository: Repository<ContractEntity>;
 
   constructor() {
-    this.repository = getRepository(ContractEntity);
+    this.repository = dataSource.getRepository(ContractEntity);
   }
 
   async create(data: ContractEntity): Promise<void> {
@@ -19,11 +20,16 @@ export class ContractRepository implements IContractRepository {
   }
 
   async list(): Promise<ContractEntity[]> {
-    return this.repository.find({ loadRelationIds: true });
+    return this.repository.find({
+      relations: ['employer'],
+    });
   }
 
-  async findById(id: number): Promise<ContractEntity | undefined> {
-    return this.repository.findOne(id, { loadRelationIds: true });
+  async findById(id: number): Promise<ContractEntity | null> {
+    return this.repository.findOne({
+      where: { id },
+      relations: ['employee', 'employer', 'interested', 'statusContract'],
+    });
   }
 
   async update(id: number, data: Partial<ContractEntity>): Promise<void> {
@@ -77,15 +83,6 @@ export class ContractRepository implements IContractRepository {
       .update()
       .set({ statusContract: { id: 3 }, generatedCoupon: true })
       .where('id_contract =:id', { id })
-      .execute();
-  }
-
-  async confirmPayment(id: number): Promise<void> {
-    await this.repository
-      .createQueryBuilder('contract')
-      .update()
-      .set({ statusContract: { id: 4 }, isPaid: true })
-      .where('id_contract = :id', { id })
       .execute();
   }
 }
