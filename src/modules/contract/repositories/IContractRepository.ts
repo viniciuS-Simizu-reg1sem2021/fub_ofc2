@@ -21,4 +21,6 @@ export interface IContractRepository {
   selectEmployee(id: number, employee: IUserDTO): Promise<void>;
 
   generateCoupon(id: number): Promise<void>;
+
+  findByTitle(title: string): Promise<IContractDTO[]>;
 }

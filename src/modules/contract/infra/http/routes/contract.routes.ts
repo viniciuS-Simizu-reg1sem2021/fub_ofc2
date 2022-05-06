@@ -23,6 +23,8 @@ contractRoutes.post(
 
 contractRoutes.get('', contractController.list);
 
+contractRoutes.get('/title', contractController.findByTitle);
+
 contractRoutes.get('/:id', contractController.findById);
 
 contractRoutes.get('/contact/:id', contractController.retrieveEmployeeInfo);
