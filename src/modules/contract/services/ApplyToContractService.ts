@@ -2,6 +2,7 @@ import { container, inject, injectable } from 'tsyringe';
 
 import { ContractApplicationService } from '@shared/services/ContractApplicationService';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
+import { GenerateNotificationOfContractService } from '@shared/services/GenerateNotificationOfContractService';
 
 @injectable()
 export class ApplyToContractService {
@@ -25,6 +26,20 @@ export class ApplyToContractService {
       }
     });
 
+    if (contract.employee) {
+      throw new Error('Contract already have employee');
+    }
+
     await this.contractRepository.applyToContract(id, userInfo);
+
+    const notificationService = container.resolve(
+      GenerateNotificationOfContractService
+    );
+
+    await notificationService.execute(
+      contract,
+      `The user ${userInfo.name} has applied to your contract: ${contract.title}`,
+      contract.employer.id as unknown as { id: number }
+    );
   }
 }

@@ -2,6 +2,7 @@ import { container, inject, injectable } from 'tsyringe';
 
 import { ICouponRepository } from '@modules/coupon/repositories/ICouponRepository';
 import { RetrieveContractAndCouponService } from '@shared/services/RetrieveContractAndCouponService';
+import { GenerateNotificationOfContractService } from '@shared/services/GenerateNotificationOfContractService';
 
 @injectable()
 export class EmployerRateService {
@@ -31,6 +32,16 @@ export class EmployerRateService {
       id,
       ratingId,
       Number(contract.employee.id)
+    );
+
+    const notificationService = container.resolve(
+      GenerateNotificationOfContractService
+    );
+
+    await notificationService.execute(
+      contract,
+      `The user ${contract.employer.name} has rated your service about the contract ${contract.title}`,
+      contract.employee.id as unknown as { id: number }
     );
   }
 }

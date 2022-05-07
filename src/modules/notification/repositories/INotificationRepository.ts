@@ -14,8 +14,5 @@ export interface INotificationRepository {
 
   softDelete(id: number): Promise<void>;
 
-  findByUser(user: { id: number }): Promise<{
-    employeeNotifications: NotificationEntity[];
-    employerNotifications: NotificationEntity[];
-  }>;
+  findByUser(user: { id: number }): Promise<INotificationDTO[]>;
 }

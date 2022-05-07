@@ -31,10 +31,6 @@ export class ContractApplicationService {
       throw new Error('Contract not found');
     }
 
-    if (contract.employee) {
-      throw new Error('Contract already have employee');
-    }
-
     const userInfo = await this.userRepository.findById(user.id);
 
     if (!userInfo) {

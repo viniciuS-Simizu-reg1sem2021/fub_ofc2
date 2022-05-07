@@ -1,6 +1,7 @@
 import { container, inject, injectable } from 'tsyringe';
 import { ICouponRepository } from '@modules/coupon/repositories/ICouponRepository';
 import { CouponHandlerService } from '@shared/services/CouponHandlerService';
+import { GenerateNotificationOfContractService } from '@shared/services/GenerateNotificationOfContractService';
 
 @injectable()
 export class EmployeeConfirmPaymentService {
@@ -22,5 +23,15 @@ export class EmployeeConfirmPaymentService {
     }
 
     await this.couponRepository.employeeConfirmPayment(id);
+
+    const notificationService = container.resolve(
+      GenerateNotificationOfContractService
+    );
+
+    await notificationService.execute(
+      coupon.contract,
+      `Your employee has confirmed that he received the payment about the ${coupon.contract.title} job, you can now finish the job`,
+      coupon.contract.employer.id as unknown as { id: number }
+    );
   }
 }

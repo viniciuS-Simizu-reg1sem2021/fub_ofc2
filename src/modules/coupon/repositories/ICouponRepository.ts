@@ -23,7 +23,6 @@ export interface ICouponRepository {
 
   employerRemoveEmployee(id: number, contractId?: number): Promise<void>;
 
-  // TODO: IMPLEMENTAR NO SERVIÇO, CONTROLLER E ROTA
   employeeRateEmployer(
     id: number,
     ratingId: number,

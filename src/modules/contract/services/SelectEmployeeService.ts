@@ -2,6 +2,7 @@ import { container, inject, injectable } from 'tsyringe';
 
 import { ContractApplicationService } from '@shared/services/ContractApplicationService';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
+import { GenerateNotificationOfContractService } from '@shared/services/GenerateNotificationOfContractService';
 
 @injectable()
 export class SelectEmployeeService {
@@ -30,5 +31,15 @@ export class SelectEmployeeService {
     }
 
     await this.contractRepository.selectEmployee(id, selectedUser);
+
+    const notificationService = container.resolve(
+      GenerateNotificationOfContractService
+    );
+
+    await notificationService.execute(
+      contract,
+      `Congratulations! you have been selected as the employee of the job ${contract.title}, now wait for the employer ${contract.employer.name} enter in contact with you`,
+      contract.employee.id as unknown as { id: number }
+    );
   }
 }
