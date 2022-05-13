@@ -11,6 +11,7 @@ import { ApplyToContractService } from '@modules/contract/services/ApplyToContra
 import { FindContractByIdService } from '@modules/contract/services/FindContractByIdService';
 import { SoftDeleteContractService } from '@modules/contract/services/SoftDeleteContractService';
 import { EmployerRetrieveContactService } from '@modules/contract/services/EmployerRetrieveContactService';
+import FindContractByTitleService from '@modules/contract/services/FindContractByTitleService';
 
 @injectable()
 export class ContractController {
@@ -91,6 +92,23 @@ export class ContractController {
       const { id } = request.params;
 
       response.json(await service.execute(Number(id), user));
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async findByTitle(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const service = container.resolve(FindContractByTitleService);
+
+      const { user } = request.token.sub;
+      const { title } = request.body;
+
+      response.json(await service.execute(title, user));
     } catch (err) {
       next(err);
     }
