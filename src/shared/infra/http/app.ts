@@ -1,3 +1,4 @@
+import cors from 'cors';
 import 'reflect-metadata';
 import express from 'express';
 import { errors } from 'celebrate';
@@ -18,5 +19,6 @@ app.use(express.json());
 
 app.use(apiConfig.API_BASE_URL, routes);
 app.use(errors());
+app.use(cors());
 
 export { app };
