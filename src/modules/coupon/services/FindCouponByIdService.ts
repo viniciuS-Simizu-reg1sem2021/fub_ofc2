@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 
 import { ICouponDTO } from '@modules/coupon/dtos/ICouponDTO';
 import { ICouponRepository } from '@modules/coupon/repositories/ICouponRepository';
+import { AppError } from '@shared/errors/AppError';
 
 @injectable()
 export class FindCouponByIdService {
@@ -14,7 +15,7 @@ export class FindCouponByIdService {
     const coupon = await this.couponRepository.findById(id);
 
     if (!coupon) {
-      throw new Error('coupon not found');
+      throw new AppError('coupon not found');
     }
 
     return coupon;

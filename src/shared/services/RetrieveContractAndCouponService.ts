@@ -4,6 +4,7 @@ import { ICouponDTO } from '@modules/coupon/dtos/ICouponDTO';
 import { IContractDTO } from '@modules/contract/dtos/IContractDTO';
 import { ICouponRepository } from '@modules/coupon/repositories/ICouponRepository';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
+import { AppError } from '@shared/errors/AppError';
 
 type ContractAndCoupon = {
   coupon: ICouponDTO;
@@ -23,11 +24,11 @@ export class RetrieveContractAndCouponService {
     const coupon = await this.couponRepository.findById(id);
 
     if (!coupon) {
-      throw new Error('Contract not found');
+      throw new AppError('Contract not found');
     }
 
     if (!coupon.isPaid) {
-      throw new Error('This coupon is not paid yet');
+      throw new AppError('This coupon is not paid yet');
     }
 
     const contract = await this.contractRepository.findById(
@@ -35,7 +36,7 @@ export class RetrieveContractAndCouponService {
     );
 
     if (!contract) {
-      throw new Error('Contract not found');
+      throw new AppError('Contract not found');
     }
 
     return { coupon, contract };

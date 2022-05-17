@@ -2,6 +2,7 @@ import { container, inject, injectable } from 'tsyringe';
 
 import { CouponHandlerService } from '@shared/services/CouponHandlerService';
 import { ICouponRepository } from '@modules/coupon/repositories/ICouponRepository';
+import { AppError } from '@shared/errors/AppError';
 
 @injectable()
 export class EmployerFinishJobService {
@@ -16,11 +17,11 @@ export class EmployerFinishJobService {
     const { coupon } = await service.execute(id, user, 'employer');
 
     if (!coupon.isFinished) {
-      throw new Error('Employee did not confirmed that job was done');
+      throw new AppError('Employee did not confirmed that job was done');
     }
 
     if (!coupon.isPaid) {
-      throw new Error('Employee did not confirmed the payment');
+      throw new AppError('Employee did not confirmed the payment');
     }
 
     await this.couponRepository.employerFinishJob(id, coupon.contract.id);

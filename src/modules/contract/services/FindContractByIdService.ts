@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 
 import { IContractDTO } from '@modules/contract/dtos/IContractDTO';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
+import { AppError } from '@shared/errors/AppError';
 
 @injectable()
 export class FindContractByIdService {
@@ -14,7 +15,7 @@ export class FindContractByIdService {
     const contract = await this.contractRepository.findById(id);
 
     if (!contract) {
-      throw new Error('Contract not found');
+      throw new AppError('Contract not found');
     }
 
     return contract;

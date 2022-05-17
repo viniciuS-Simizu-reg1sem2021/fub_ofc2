@@ -2,6 +2,7 @@ import { verify } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 
 import auth from '@config/auth';
+import { AppError } from '@shared/errors/AppError';
 import { IUserRepository } from '@modules/user/repositories/IUserRepository';
 import { IEncoderProvider } from '@shared/providers/EncoderProvider/IEncoderProvider';
 
@@ -28,11 +29,11 @@ export class ChangePasswordService {
     const user = await this.userRepository.findById(id);
 
     if (!user) {
-      throw new Error('User not found');
+      throw new AppError('User not found');
     }
 
     if (data.password !== data.passwordVerification) {
-      throw new Error('Passwords do not match');
+      throw new AppError('Passwords do not match');
     }
 
     verify(token, authConfig.JWT_SECRET + user.password);

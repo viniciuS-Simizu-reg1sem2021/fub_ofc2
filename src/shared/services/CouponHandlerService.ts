@@ -3,6 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import { ICouponDTO } from '@modules/coupon/dtos/ICouponDTO';
 import { ICouponRepository } from '@modules/coupon/repositories/ICouponRepository';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
+import { AppError } from '@shared/errors/AppError';
 
 interface CouponHandlerRetrievedInfo {
   coupon: ICouponDTO;
@@ -25,7 +26,7 @@ export class CouponHandlerService {
     const coupon = await this.couponRepository.findById(id);
 
     if (!coupon) {
-      throw new Error('Coupon not found');
+      throw new AppError('Coupon not found');
     }
 
     const contract = await this.contractRepository.findById(
@@ -33,26 +34,26 @@ export class CouponHandlerService {
     );
 
     if (!contract) {
-      throw new Error('Contract not found');
+      throw new AppError('Contract not found');
     }
 
     switch (userType) {
       case 'employee':
         if (contract.employee.id !== user.id) {
-          throw new Error('You cannot finalize a job that is not yours');
+          throw new AppError('You cannot finalize a job that is not yours');
         }
 
         break;
 
       case 'employer':
         if (contract.employer.id !== user.id) {
-          throw new Error('You cannot edit a job that is not yours');
+          throw new AppError('You cannot edit a job that is not yours');
         }
 
         break;
 
       default:
-        throw new Error('User type not found');
+        throw new AppError('User type not found');
     }
 
     return { coupon };

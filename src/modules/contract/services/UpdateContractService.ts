@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
+import { AppError } from '@shared/errors/AppError';
 import { IContractDTO } from '@modules/contract/dtos/IContractDTO';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
 
@@ -18,15 +19,15 @@ export class UpdateContractService {
     const contract = await this.contractRepository.findById(id);
 
     if (!contract) {
-      throw new Error('Contract not found');
+      throw new AppError('Contract not found');
     }
 
     if (contract.statusContract.id === 2 || contract.statusContract.id === 3) {
-      throw new Error('You cannot modify this contract');
+      throw new AppError('You cannot modify this contract');
     }
 
     if (contract.employer.id !== user.id) {
-      throw new Error('You do not have permission to modify this contract');
+      throw new AppError('You do not have permission to modify this contract');
     }
 
     await this.contractRepository.update(id, data);

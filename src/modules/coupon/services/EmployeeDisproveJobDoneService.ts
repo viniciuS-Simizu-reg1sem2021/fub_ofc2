@@ -2,6 +2,7 @@ import { container, inject, injectable } from 'tsyringe';
 
 import { CouponHandlerService } from '@shared/services/CouponHandlerService';
 import { ICouponRepository } from '@modules/coupon/repositories/ICouponRepository';
+import { AppError } from '@shared/errors/AppError';
 
 @injectable()
 export class EmployeeDisproveJobDoneService {
@@ -16,7 +17,7 @@ export class EmployeeDisproveJobDoneService {
     const { coupon } = await service.execute(id, user, 'employee');
 
     if (!coupon.isFinished) {
-      throw new Error('This job is not finished yet');
+      throw new AppError('This job is not finished yet');
     }
 
     await this.couponRepository.employeeDisproveJobDone(id);

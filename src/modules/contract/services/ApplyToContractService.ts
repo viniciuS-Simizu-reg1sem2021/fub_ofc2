@@ -3,6 +3,7 @@ import { container, inject, injectable } from 'tsyringe';
 import { ContractApplicationService } from '@shared/services/ContractApplicationService';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
 import { GenerateNotificationOfContractService } from '@shared/services/GenerateNotificationOfContractService';
+import { AppError } from '@shared/errors/AppError';
 
 @injectable()
 export class ApplyToContractService {
@@ -17,17 +18,17 @@ export class ApplyToContractService {
     const { contract, userInfo } = await service.execute(id, user);
 
     if (user.id === contract.employer.id) {
-      throw new Error('You cannot apply to your own contract');
+      throw new AppError('You cannot apply to your own contract');
     }
 
     contract.interested.forEach((interestedUser) => {
       if (interestedUser.id === user.id) {
-        throw new Error('You already has applied to this job');
+        throw new AppError('You already has applied to this job');
       }
     });
 
     if (contract.employee) {
-      throw new Error('Contract already have employee');
+      throw new AppError('Contract already have employee');
     }
 
     await this.contractRepository.applyToContract(id, userInfo);

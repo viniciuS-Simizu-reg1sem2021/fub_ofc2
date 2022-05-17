@@ -2,6 +2,7 @@ import { container, inject, injectable } from 'tsyringe';
 import { ICouponRepository } from '@modules/coupon/repositories/ICouponRepository';
 import { CouponHandlerService } from '@shared/services/CouponHandlerService';
 import { GenerateNotificationOfContractService } from '@shared/services/GenerateNotificationOfContractService';
+import { AppError } from '@shared/errors/AppError';
 
 @injectable()
 export class EmployeeConfirmPaymentService {
@@ -15,11 +16,13 @@ export class EmployeeConfirmPaymentService {
     const { coupon } = await service.execute(id, user, 'employee');
 
     if (!coupon.isFinished) {
-      throw new Error('This job is not finished yet');
+      throw new AppError('This job is not finished yet');
     }
 
     if (coupon.isPaid) {
-      throw new Error('You already confirmed that this contract has been paid');
+      throw new AppError(
+        'You already confirmed that this contract has been paid'
+      );
     }
 
     await this.couponRepository.employeeConfirmPayment(id);

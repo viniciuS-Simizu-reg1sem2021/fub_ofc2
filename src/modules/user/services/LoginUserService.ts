@@ -5,6 +5,7 @@ import auth from '@config/auth';
 import { IPayloadDTO } from '@modules/user/dtos/IPayloadDTO';
 import { IUserRepository } from '@modules/user/repositories/IUserRepository';
 import { IEncoderProvider } from '@shared/providers/EncoderProvider/IEncoderProvider';
+import { AppError } from '@shared/errors/AppError';
 
 interface ILoginRequest {
   email: string;
@@ -25,7 +26,7 @@ export class LoginUserService {
     const user = await this.userRepository.findByEmail(email);
 
     if (!user) {
-      throw new Error('Credentials incorrect');
+      throw new AppError('Credentials incorrect');
     }
 
     const passwordMatch = await this.encoderProvider.compare(
@@ -34,7 +35,7 @@ export class LoginUserService {
     );
 
     if (!passwordMatch) {
-      throw new Error('Credentials incorrect');
+      throw new AppError('Credentials incorrect');
     }
 
     const payload: IPayloadDTO = {

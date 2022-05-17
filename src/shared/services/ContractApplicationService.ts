@@ -4,6 +4,7 @@ import { IUserDTO } from '@modules/user/dtos/IUserDTO';
 import { IContractDTO } from '@modules/contract/dtos/IContractDTO';
 import { IUserRepository } from '@modules/user/repositories/IUserRepository';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
+import { AppError } from '@shared/errors/AppError';
 
 interface RetrievedInfo {
   contract: IContractDTO;
@@ -28,20 +29,20 @@ export class ContractApplicationService {
     const contract = await this.contractRepository.findById(id);
 
     if (!contract) {
-      throw new Error('Contract not found');
+      throw new AppError('Contract not found');
     }
 
     const userInfo = await this.userRepository.findById(user.id);
 
     if (!userInfo) {
-      throw new Error('Your user does not exists');
+      throw new AppError('Your user does not exists');
     }
 
     if (selectedUserId) {
       const selectedUser = await this.userRepository.findById(selectedUserId);
 
       if (!selectedUser) {
-        throw new Error('This user does not exists');
+        throw new AppError('This user does not exists');
       }
 
       if (
@@ -49,7 +50,7 @@ export class ContractApplicationService {
           .map((interestedUser) => interestedUser.id)
           .includes(selectedUser.id)
       ) {
-        throw new Error('This user is not interested in your job');
+        throw new AppError('This user is not interested in your job');
       }
 
       return { contract, userInfo, selectedUser };

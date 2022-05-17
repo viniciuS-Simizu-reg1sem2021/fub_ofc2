@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
+import { AppError } from '@shared/errors/AppError';
 import { INotificationDTO } from '@modules/notification/dtos/INotificationDTO';
 import { INotificationRepository } from '@modules/notification/repositories/INotificationRepository';
 
@@ -14,7 +15,7 @@ export class FindNotificationByIdService {
     const notification = await this.notificationRepository.findById(id);
 
     if (!notification) {
-      throw new Error('Notification not found');
+      throw new AppError('Notification not found');
     }
 
     return notification;

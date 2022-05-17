@@ -3,6 +3,7 @@ import { inject, injectable } from 'tsyringe';
 
 import api from '@config/api';
 import auth from '@config/auth';
+import { AppError } from '@shared/errors/AppError';
 import { IPayloadDTO } from '@modules/user/dtos/IPayloadDTO';
 import { IUserRepository } from '@modules/user/repositories/IUserRepository';
 import { IMailerProvider } from '@shared/providers/MailerProvider/IMailerProvider';
@@ -22,7 +23,7 @@ export class RecoverPasswordService {
     const user = await this.userRepository.findByEmail(email);
 
     if (!user) {
-      throw new Error('User not found');
+      throw new AppError('User not found');
     }
 
     const payload: IPayloadDTO = {
