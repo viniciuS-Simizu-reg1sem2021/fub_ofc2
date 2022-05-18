@@ -1,6 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
+import { AppError } from '@shared/errors/AppError';
 
 @injectable()
 export class SoftDeleteContractService {
@@ -13,19 +14,19 @@ export class SoftDeleteContractService {
     const contract = await this.contractRepository.findById(id);
 
     if (!contract) {
-      throw new Error('Contract not found');
+      throw new AppError('Contract not found');
     }
 
     if (contract.statusContract.id === 2 || contract.statusContract.id === 3) {
-      throw new Error('You cannot delete a contract that have an employee');
+      throw new AppError('You cannot delete a contract that have an employee');
     }
 
     if (contract.statusContract.id === 4) {
-      throw new Error('You cannot delete a finished contract');
+      throw new AppError('You cannot delete a finished contract');
     }
 
     if (contract.employer.id !== user.id) {
-      throw new Error(
+      throw new AppError(
         'You do not have permission to select the employee for this contract'
       );
     }

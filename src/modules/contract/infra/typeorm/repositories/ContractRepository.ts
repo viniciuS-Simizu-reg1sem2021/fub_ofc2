@@ -85,4 +85,8 @@ export class ContractRepository implements IContractRepository {
       .where('id_contract =:id', { id })
       .execute();
   }
+
+  async findByTitle(title: string): Promise<ContractEntity[]> {
+    return this.repository.find({ where: { title } });
+  }
 }

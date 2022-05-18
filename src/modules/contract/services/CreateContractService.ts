@@ -1,8 +1,9 @@
 import { inject, injectable } from 'tsyringe';
 
+import { AppError } from '@shared/errors/AppError';
 import { IContractDTO } from '@modules/contract/dtos/IContractDTO';
-import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
 import { IUserRepository } from '@modules/user/repositories/IUserRepository';
+import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
 
 @injectable()
 export class CreateContractService {
@@ -20,7 +21,7 @@ export class CreateContractService {
     const foundUser = await this.userRepository.findById(user.id);
 
     if (!foundUser) {
-      throw new Error('Your user does not exists');
+      throw new AppError('Your user does not exists');
     }
 
     await this.contractRepository.create({ ...data, employer: foundUser });

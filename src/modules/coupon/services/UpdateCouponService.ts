@@ -3,6 +3,7 @@ import { container, inject, injectable } from 'tsyringe';
 import { ICouponDTO } from '@modules/coupon/dtos/ICouponDTO';
 import { ICouponRepository } from '@modules/coupon/repositories/ICouponRepository';
 import { CouponHandlerService } from '@shared/services/CouponHandlerService';
+import { AppError } from '@shared/errors/AppError';
 
 @injectable()
 export class UpdateCouponService {
@@ -21,7 +22,7 @@ export class UpdateCouponService {
     const { coupon } = await service.execute(id, user, 'employer');
 
     if (!coupon.isOutDeadline) {
-      throw new Error('You cannot modify a contract since deadline is meet');
+      throw new AppError('You cannot modify a contract since deadline is meet');
     }
 
     return this.couponRepository.update(id, data);

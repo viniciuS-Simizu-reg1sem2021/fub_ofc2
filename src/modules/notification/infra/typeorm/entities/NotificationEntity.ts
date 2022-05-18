@@ -17,12 +17,8 @@ export class NotificationEntity extends BaseEntity implements INotificationDTO {
   id?: number;
 
   @ManyToOne(() => UserEntity)
-  @JoinColumn({ referencedColumnName: 'id', name: 'id_employee' })
-  employee: UserEntity;
-
-  @ManyToOne(() => UserEntity)
-  @JoinColumn({ referencedColumnName: 'id', name: 'id_employer' })
-  employer: UserEntity;
+  @JoinColumn({ referencedColumnName: 'id', name: 'id_user' })
+  user: UserEntity;
 
   @ManyToOne(() => ContractEntity)
   @JoinColumn({ referencedColumnName: 'id', name: 'id_contract' })

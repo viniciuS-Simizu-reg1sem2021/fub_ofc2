@@ -18,7 +18,7 @@ export class UserRepository implements IUserRepository {
   }
 
   async list(): Promise<UserEntity[]> {
-    return this.repository.find({ loadRelationIds: true });
+    return this.repository.find({ relations: ['ratings'] });
   }
 
   async findById(id: number): Promise<UserEntity | null> {

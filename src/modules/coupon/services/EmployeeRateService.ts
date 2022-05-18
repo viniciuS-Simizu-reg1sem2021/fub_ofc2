@@ -2,6 +2,8 @@ import { container, inject, injectable } from 'tsyringe';
 
 import { ICouponRepository } from '@modules/coupon/repositories/ICouponRepository';
 import { RetrieveContractAndCouponService } from '@shared/services/RetrieveContractAndCouponService';
+import { GenerateNotificationOfContractService } from '@shared/services/GenerateNotificationOfContractService';
+import { AppError } from '@shared/errors/AppError';
 
 @injectable()
 export class EmployeeRateService {
@@ -20,17 +22,27 @@ export class EmployeeRateService {
     const { coupon, contract } = await service.execute(id);
 
     if (contract.employee.id !== user.id) {
-      throw new Error('You can not rate this employee');
+      throw new AppError('You can not rate this employee');
     }
 
     if (coupon.employeeRating) {
-      throw new Error('You already rated this job');
+      throw new AppError('You already rated this job');
     }
 
     await this.couponRepository.employeeRateEmployer(
       id,
       ratingId,
       Number(contract.employer.id)
+    );
+
+    const notificationService = container.resolve(
+      GenerateNotificationOfContractService
+    );
+
+    await notificationService.execute(
+      contract,
+      `The user ${contract.employee.name} has rated your job on the contract ${contract.title}`,
+      contract.employer.id as unknown as { id: number }
     );
   }
 }

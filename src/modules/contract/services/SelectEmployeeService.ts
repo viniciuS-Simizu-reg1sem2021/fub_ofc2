@@ -2,6 +2,8 @@ import { container, inject, injectable } from 'tsyringe';
 
 import { ContractApplicationService } from '@shared/services/ContractApplicationService';
 import { IContractRepository } from '@modules/contract/repositories/IContractRepository';
+import { GenerateNotificationOfContractService } from '@shared/services/GenerateNotificationOfContractService';
+import { AppError } from '@shared/errors/AppError';
 
 @injectable()
 export class SelectEmployeeService {
@@ -24,11 +26,21 @@ export class SelectEmployeeService {
     );
 
     if (contract.employer.id !== user.id) {
-      throw new Error(
+      throw new AppError(
         'You do not have permission to select the employee for this contract'
       );
     }
 
     await this.contractRepository.selectEmployee(id, selectedUser);
+
+    const notificationService = container.resolve(
+      GenerateNotificationOfContractService
+    );
+
+    await notificationService.execute(
+      contract,
+      `Congratulations! you have been selected as the employee of the job ${contract.title}, now wait for the employer ${contract.employer.name} enter in contact with you`,
+      contract.employee.id as unknown as { id: number }
+    );
   }
 }

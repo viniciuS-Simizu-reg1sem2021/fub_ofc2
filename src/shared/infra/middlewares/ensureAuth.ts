@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 
 import auth from '@config/auth';
 import { IPayloadDTO } from '@modules/user/dtos/IPayloadDTO';
+import { AppError } from '@shared/errors/AppError';
 
 export function ensureAuth(
   request: Request,
@@ -14,7 +15,7 @@ export function ensureAuth(
 
   if (!authToken) {
     response.status(401).end();
-    throw new Error('You are not authenticated');
+    throw new AppError('You are not authenticated');
   }
 
   const [, token] = authToken.split(' ');
