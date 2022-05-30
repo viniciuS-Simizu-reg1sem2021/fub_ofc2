@@ -10,18 +10,13 @@ config({ silent: true });
 const databaseConfig = database();
 
 const dataSource = new DataSource({
-  type: 'postgres',
+  type: 'mysql',
   migrationsRun: true,
   host: databaseConfig.DB_HOST,
   port: databaseConfig.DB_PORT,
   username: databaseConfig.DB_USER,
   password: databaseConfig.DB_PASSWORD,
   database: databaseConfig.DB_NAME,
-  extra: {
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  },
   ssl: true,
   synchronize: false,
   logging: true,
